@@ -1,0 +1,48 @@
+{
+  "name": "nodejs-complete-guide",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./core/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node core/server.js",
+    "dev": "nodemon core/server.js",
+    "migrate": "knex migrate:latest --knexfile core/Database/knexfile.js",
+    "undo-migrate": "knex migrate:rollback --knexfile core/Database/knexfile.js",
+    "re-migrate": "npm run undo-migrate && npm run migrate",
+    "make-migrate": "knex --knexfile core/Database/knexfile.js migrate:make",
+    "seed": "knex seed:run --knexfile core/Database/knexfile.js",
+    "undo-seed": "knex seed:rollback --knexfile core/Database/knexfile.js",
+    "make-seed": "npx knex --knexfile core/Database/knexfile.js seed:make",
+    "init-db": "npm run undo-migrate && npm run migrate && npm run seed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/udemy-course-nodejs-complete"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.18.3",
+    "config": "^3.3.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.16.3",
+    "express-validator": "^5.3.1",
+    "http": "^0.0.1-security",
+    "jsonwebtoken": "^8.3.0",
+    "knex": "^0.95.1",
+    "mongodb": "^3.6.3",
+    "mongoose": "^5.3.2",
+    "multer": "^1.4.0",
+    "mysql": "^2.18.1",
+    "pg": "^8.5.1",
+    "query-string": "^6.14.1",
+    "socket.io": "^3.0.4",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  }
+}

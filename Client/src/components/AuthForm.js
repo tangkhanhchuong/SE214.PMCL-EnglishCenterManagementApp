@@ -1,0 +1,359 @@
+import logo200Image from 'assets/img/logo/logo_200.png';
+import PropTypes from 'prop-types';
+// <<<<<<< HEAD
+// import React from 'react';
+// import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
+
+// class AuthForm extends React.Component {
+//   get isLogin() {
+//     return this.props.authState === STATE_LOGIN;
+//   }
+
+//   get isSignup() {
+//     return this.props.authState === STATE_SIGNUP;
+//   }
+
+//   changeAuthState = authState => event => {
+//     event.preventDefault();
+
+//     this.props.onChangeAuthState(authState);
+//   };
+
+//   handleSubmit = event => {
+//     event.preventDefault();
+//   };
+
+//   renderButtonText() {
+//     const { buttonText } = this.props;
+
+//     if (!buttonText && this.isLogin) {
+//       return 'Login';
+//     }
+
+//     if (!buttonText && this.isSignup) {
+//       return 'Signup';
+//     }
+
+//     return buttonText;
+//   }
+
+//   render() {
+//     const {
+//       showLogo,
+//       usernameLabel,
+//       usernameInputProps,
+//       passwordLabel,
+//       passwordInputProps,
+//       confirmPasswordLabel,
+//       confirmPasswordInputProps,
+//       children,
+//       onLogoClick,
+//     } = this.props;
+
+//     return (
+//       <Form onSubmit={this.handleSubmit}>
+//         {showLogo && (
+//           <div className="text-center pb-4">
+//             <img
+//               src={logo200Image}
+//               className="rounded"
+//               style={{ width: 60, height: 60, cursor: 'pointer' }}
+//               alt="logo"
+//               onClick={onLogoClick}
+//             />
+//           </div>
+//         )}
+//         <FormGroup>
+//           <Label for={usernameLabel}>{usernameLabel}</Label>
+//           <Input {...usernameInputProps} />
+//         </FormGroup>
+//         <FormGroup>
+//           <Label for={passwordLabel}>{passwordLabel}</Label>
+//           <Input {...passwordInputProps} />
+//         </FormGroup>
+//         {this.isSignup && (
+//           <FormGroup>
+//             <Label for={confirmPasswordLabel}>{confirmPasswordLabel}</Label>
+//             <Input {...confirmPasswordInputProps} />
+//           </FormGroup>
+//         )}
+//         <FormGroup check>
+//           <Label check>
+//             <Input type="checkbox" />{' '}
+//             {this.isSignup ? 'Agree the terms and policy' : 'Remember me'}
+//           </Label>
+//         </FormGroup>
+//         <hr />
+//         <Button
+//           size="lg"
+//           className="bg-gradient-theme-left border-0"
+//           block
+//           onClick={this.handleSubmit}>
+//           {this.renderButtonText()}
+//         </Button>
+
+//         <div className="text-center pt-1">
+//           <h6>or</h6>
+//           <h6>
+//             {this.isSignup ? (
+//               <a href="#login" onClick={this.changeAuthState(STATE_LOGIN)}>
+//                 Login
+//               </a>
+//             ) : (
+//               <a href="#signup" onClick={this.changeAuthState(STATE_SIGNUP)}>
+//                 Signup
+//               </a>
+//             )}
+//           </h6>
+//         </div>
+
+//         {children}
+//       </Form>
+//     );
+//   }
+// =======
+import React, { useState } from 'react';
+import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
+import { useHttpClient } from '../hooks/http-hook';
+import { useDispatch } from 'react-redux';
+import { UpdateUserData } from '../Redux/Reducers/UserData/actions'
+
+const FormStatus = {
+  DEFAULT: 1,
+  LOADING: 2,
+  LOGIN_FAIL: 3,
+  LOGIN_SUCCESSFULLY: 4
+}
+
+const AuthForm = (props) => {
+
+  const dispatch = useDispatch();
+  const { sendRequest } = useHttpClient();
+
+  let [formStatus, setFormStatus] = useState(FormStatus.DEFAULT);
+
+  let isLogin = () => {
+    return props.authState === STATE_LOGIN;
+  }
+
+  let isSignup = () => {
+    return props.authState === STATE_SIGNUP;
+  }
+
+  let changeAuthState = authState => event => {
+    event.preventDefault();
+
+    props.onChangeAuthState(authState);
+  };
+
+  let LoginSuccessfully = async (userData) => {
+    localStorage.setItem("userData", JSON.stringify(userData));
+    dispatch(UpdateUserData({
+      token: userData.token,
+      roleId: userData.loadedAccount.roleId,
+      userId: userData.loadedAccount.id,
+      username: userData.loadedAccount.username,
+      name: userData.loadedAccount.name
+    }));
+
+  }
+
+  let handleSubmit = event => {
+    setFormStatus(FormStatus.LOADING);
+    event.preventDefault();
+    let username = event.target["username"].value;
+    let password = event.target["password"].value;
+    console.log(username, password);
+    let authType = isSignup() ? 'signup' : 'login';
+    sendRequest(
+      `http://localhost:5000/v1/auth/${authType}`,
+      'POST',
+      {
+        username, password
+      },
+      {
+        'Content-Type': 'application/json'
+      }
+    )
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw Error("Authentication Failed !!")
+        }
+      })
+      .then((response) => {
+        setTimeout(() => LoginSuccessfully(response), 1000);
+        setFormStatus(FormStatus.LOGIN_SUCCESSFULLY);
+      })
+      .catch((error) => {
+        console.log(error);
+        setFormStatus(FormStatus.LOGIN_FAIL);
+      });
+  };
+
+  let renderButtonText = () => {
+    const { buttonText } = props;
+
+    if (formStatus == FormStatus.LOADING)
+      return 'Loading...';
+
+    if (!buttonText && isLogin()) {
+      return 'Login';
+    }
+
+    if (!buttonText && isSignup()) {
+      return 'Signup';
+    }
+
+    return buttonText;
+  }
+
+
+  const {
+    showLogo,
+    usernameLabel,
+    usernameInputProps,
+    passwordLabel,
+    passwordInputProps,
+    confirmPasswordLabel,
+    confirmPasswordInputProps,
+    children,
+    onLogoClick,
+  } = props;
+
+  return (
+
+    <Form onSubmit={handleSubmit}>
+      {showLogo && (
+        <div className="text-center pb-4">
+          <img
+            src={logo200Image}
+            className="rounded"
+            style={{ width: 60, height: 60, cursor: 'pointer' }}
+            alt="logo"
+            onClick={onLogoClick}
+          />
+        </div>
+      )}
+      <FormGroup>
+        <Label for={usernameLabel}>{usernameLabel}</Label>
+        <Input {...usernameInputProps} />
+      </FormGroup>
+
+      <FormGroup>
+        <Label for={passwordLabel}>{passwordLabel}</Label>
+        <Input  {...passwordInputProps} />
+      </FormGroup>
+
+      {isSignup() && (
+        <FormGroup>
+          <Label for={confirmPasswordLabel}>{confirmPasswordLabel}</Label>
+          <Input {...confirmPasswordInputProps} />
+        </FormGroup>
+      )}
+
+      <FormGroup check>
+        <Label check>
+          <Input type="checkbox" />{' '}
+          {isSignup() ? 'Agree the terms and policy' : 'Remember me'}
+        </Label>
+      </FormGroup>
+      <div>
+        {formStatus === FormStatus.LOGIN_FAIL && <><br /><font color="red">Username or Password is incorrect !</font></>}
+        {formStatus === FormStatus.LOGIN_SUCCESSFULLY && <><br /><font color="green">Login successfully, please wait ...</font></>}
+      </div>
+      <hr />
+
+      <Button
+        size="lg"
+        className="bg-gradient-theme-left border-0"
+        block
+        type="submit"
+      >
+        {renderButtonText()}
+      </Button>
+
+      <div className="text-center pt-1">
+        <h6>or</h6>
+        <h6>
+          {isSignup() ? (
+            <a href="#login" onClick={changeAuthState(STATE_LOGIN)}>
+              Login
+            </a>
+          ) : (
+              <a href="#signup" onClick={changeAuthState(STATE_SIGNUP)}>
+                Signup
+              </a>
+            )}
+        </h6>
+      </div>
+
+      {children}
+    </Form>
+
+  );
+
+  // >>>>>>> restoreHistory
+}
+
+export const STATE_LOGIN = 'LOGIN';
+export const STATE_SIGNUP = 'SIGNUP';
+
+AuthForm.propTypes = {
+  authState: PropTypes.oneOf([STATE_LOGIN, STATE_SIGNUP]).isRequired,
+  showLogo: PropTypes.bool,
+  usernameLabel: PropTypes.string,
+  usernameInputProps: PropTypes.object,
+  passwordLabel: PropTypes.string,
+  passwordInputProps: PropTypes.object,
+  confirmPasswordLabel: PropTypes.string,
+  confirmPasswordInputProps: PropTypes.object,
+  onLogoClick: PropTypes.func,
+};
+
+AuthForm.defaultProps = {
+  authState: 'LOGIN',
+  showLogo: true,
+  // <<<<<<< HEAD
+  //   usernameLabel: 'Email',
+  //   usernameInputProps: {
+  //     type: 'email',
+  //     placeholder: 'your@email.com',
+  //   },
+  //   passwordLabel: 'Password',
+  //   passwordInputProps: {
+  //     type: 'password',
+  //     placeholder: 'your password',
+  //   },
+  //   confirmPasswordLabel: 'Confirm Password',
+  //   confirmPasswordInputProps: {
+  //     type: 'password',
+  //     placeholder: 'confirm your password',
+  // =======
+  usernameLabel: 'Username',
+  usernameInputProps: {
+    name: "username",
+    type: 'text',
+    placeholder: 'Username',
+    required: true
+  },
+  passwordLabel: 'Password',
+  passwordInputProps: {
+    name: "password",
+    type: 'password',
+    placeholder: 'Password',
+    required: true
+  },
+  confirmPasswordLabel: 'Confirm Password',
+  confirmPasswordInputProps: {
+    name: "repassword",
+    type: 'password',
+    placeholder: 'Confirm your password',
+    required: true
+    // >>>>>>> restoreHistory
+  },
+  onLogoClick: () => { },
+};
+
+export default AuthForm;

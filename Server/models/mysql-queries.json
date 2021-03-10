@@ -1,0 +1,177 @@
+{
+    "CREATE_DB": "CREATE DATABASE ",  
+    "USE_DB": "USE ",
+    
+    "LIST_ALL_STUDENTS": "SELECT * FROM Student, PersonalInformation, PersonalAddress WHERE Student.personalInformationId=PersonalInformation.id AND PersonalAddress.id=PersonalInformation.addressId",
+    "INSERT_STUDENT": "INSERT INTO Student(studentId, personalInformationId) VALUES",
+    "STUDENT_DETAIL":"SELECT * FROM Student, PersonalInformation, PersonalAddress WHERE Student.personalInformationId=PersonalInformation.id AND PersonalAddress.id=PersonalInformation.addressId AND Student.studentId=",
+    "UPDATE_STUDENT":
+    {
+        "MAIN_PART": "UPDATE Student SET ",
+        "STUDENT_ID": " studentId = ", 
+        "PERSONAL_INFO_ID": ", personalInformationId = "
+    },
+
+    
+    "LIST_ALL_LECTURERS": "SELECT * FROM Lecturer, PersonalInformation, PersonalAddress WHERE Lecturer.personalInformationId=PersonalInformation.id AND PersonalAddress.id=PersonalInformation.addressId",
+    "INSERT_LECTURER": "INSERT INTO Lecturer(lecturerId, personalInformationId) VALUES",
+    "LECTURER_DETAIL":"SELECT * FROM Lecturer, PersonalInformation, PersonalAddress WHERE Lecturer.personalInformationId=PersonalInformation.id AND PersonalAddress.id=PersonalInformation.addressId AND Lecturer.lecturerId=",
+    "UPDATE_LECTURER":
+    {
+        "MAIN_PART": "UPDATE Lecturer SET ",
+        "LECTURER_ID": " lecturerId = ", 
+        "PERSONAL_INFO_ID": ", personalInformationId = "
+    },
+
+    
+    "LIST_ALL_DEVICES": "SELECT * FROM Device",
+    "INSERT_DEVICE": "INSERT INTO Device(serial, name, brand, description, type) VALUES",
+    "DEVICE_DETAIL":"SELECT * FROM Device WHERE Device.serial=",
+    
+    "INOUT_DEVICE":
+    {
+        "MAIN_PART": "UPDATE Lecturer SET ",
+        "DEVICE_ID": " deviceId = ", 
+        "NAME": ", name = ",
+        "STATUS": ", status = "
+    },
+
+    
+    "LIST_ALL_STAFFS": "SELECT * FROM Staff, PersonalInformation, PersonalAddress WHERE Staff.personalInformationId=PersonalInformation.id AND PersonalAddress.id=PersonalInformation.addressId",
+    "INSERT_STAFF": "INSERT INTO Staff(staffId, personalInformationId) VALUES",
+    "STAFF_DETAIL":"SELECT * FROM Staff, PersonalInformation, PersonalAddress WHERE Staff.personalInformationId=PersonalInformation.id AND PersonalAddress.id=PersonalInformation.addressId AND Staff.id=",
+    "UPDATE_STAFF":
+    {
+        "MAIN_PART": "UPDATE Staff SET ",
+        "STAFF_ID": " staffId = ", 
+        "PERSONAL_INFO_ID": ", personalInformationId = "
+    },
+    
+    "LIST_ALL_PERSONAL_INFOS": "SELECT Info.name, Info.phone, Info.gender, Info.email, Info.dateOfBirth, Info.id, Info.addressId, Ad.streetDetails, Ad.ward, Ad.district, Ad.city, Ad.country FROM PersonalInformation as Info, PersonalAddress as Ad WHERE Info.addressId = Ad.id",
+    "INSERT_PERSONAL_INFO": "INSERT INTO PersonalInformation(name, phone, gender, dateOfBirth, email, addressId) VALUES",
+    "PERSONAL_INFO_DETAIL":"SELECT * FROM PersonalInformation WHERE id=",
+    "UPDATE_PERSONAL_INFO":
+    {
+        "MAIN_PART": "UPDATE PersonalInformation SET ",
+        "NAME": " name = ", 
+        "PHONE": ", phone = ",
+        "GENDER": ", gender = ",
+        "DOB": ", dataOfBirth = ",
+        "EMAIL": ", email = ",
+        "ADDRESS_ID": ", addressId = "
+    },
+
+    
+    "LIST_ALL_PERSONAL_ADDRESSES": "SELECT * FROM PersonalAddress",
+    "INSERT_PERSONAL_ADDRESS": "INSERT INTO PersonalAddress(addressId, streetDetails, ward, district, city, country) VALUES",
+    "PERSONAL_ADDRESS_DETAIL":"SELECT * FROM PersonalAddress WHERE id=",
+    "UPDATE_PERSONAL_ADDRESS":
+    {
+        "MAIN_PART": "UPDATE PersonalAddress SET ",
+        "ADDRESS_ID": "addressId = ",
+        "STREET_DETAILS": ", streetDetails = ", 
+        "WARD": ", ward = ",
+        "DISTRICT": ", district =",
+        "CITY": ", city = ",
+        "COUNTRY": ", country = "
+    },
+    
+    
+    "LIST_ALL_COURSES": "SELECT * FROM Course, Class WHERE Class.courseId=Course.id",
+    "LIST_ALL_CLASSES_IN_COURSE": "SELECT * FROM Course, Class WHERE Class.courseId=Course.id AND Course.id=",
+    "INSERT_COURSE": "INSERT INTO Course(courseId, courseName, description) VALUES",
+    "COURSE_DETAIL":"SELECT * FROM Course WHERE id=",
+    "UPDATE_COURSE":
+    {
+        "MAIN_PART": "UPDATE Course SET ",
+        "COURSE_ID": " courseId = ", 
+        "COURSE_NAME": ", courseName = ",
+        "DESCRIPTION": ", description = "
+    },
+
+    "LIST_ALL_ROOMS": "SELECT * FROM Room",
+    "INSERT_ROOM": "INSERT INTO Room(numOfSeat) VALUES",
+    "ROOM_DETAIL":"SELECT * FROM Room WHERE id=",
+    "UPDATE_ROOM":
+    {
+        "MAIN_PART": "UPDATE Room SET ",
+        "NUM_OF_SEAT": " numOfSeat = "
+    },
+    
+    "LIST_ALL_CLASSROOMS": "SELECT * FROM ClassRoom, Room WHERE ClassRoom.roomId = Room.id",
+    "INSERT_CLASSROOM": "INSERT INTO ClassRoom(roomId, roomName) VALUES",
+    "CLASSROOM_DETAIL":"SELECT * FROM ClassRoom, Room WHERE ClassRoom.roomId = Room.id AND ClassRoom.id=",
+    "UPDATE_CLASSROOM":
+    {
+        "MAIN_PART": "UPDATE ClassRoom SET ",
+        "ROOM_ID": " roomId=", 
+        "ROOM_NAME": ", roomName="
+    },
+    
+    "LIST_ALL_OFFICES": "SELECT * FROM Office, Room WHERE Office.roomId = Room.id",
+    "INSERT_OFFICE": "INSERT INTO Office(roomId, roomName) VALUES",
+    "OFFICE_DETAIL":"SELECT * FROM Office, Room WHERE Office.roomId = Room.id AND Office.id=",
+    "UPDATE_OFFICE":
+    {
+        "MAIN_PART": "UPDATE Office SET ",
+        "ROOM_ID": " roomId=", 
+        "ROOM_NAME": ", roomName = "
+    },
+    
+    "LIST_ALL_CLASSES": "SELECT *, Class.id FROM Class, Course WHERE Class.courseId=Course.id",
+    "INSERT_CLASS": "INSERT INTO Class(classId, className, courseId, beginDate, endDate, description) VALUES",
+    "CLASS_DETAIL":"SELECT * FROM Class, Course WHERE Class.courseId=Course.id AND Class.classId=",
+    "UPDATE_CLASS":
+    {
+        "MAIN_PART": "UPDATE Class SET ",
+        "CLASS_ID": " classId = ", 
+        "CLASS_NAME": ", className = ",
+        "COURSE_ID": ", courseId = ",
+        "BEGIN_DATE": ", beginDate = ",
+        "END_DATE": ", endDate = ",
+        "DESCRIPTION": ", description = "
+    },
+    "LIST_ALL_STUDENTS_IN_CLASS": "SELECT *, Student.studentId, ClassDetails.classId FROM Class, ClassDetails, PersonalInformation, PersonalAddress, Student, StudyResult WHERE ClassDetails.classId=Class.id AND ClassDetails.joinerId=PersonalInformation.id AND PersonalInformation.addressId= PersonalAddress.id AND PersonalInformation.id=Student.personalInformationId AND StudyResult.studentId = Student.id AND Class.classId=",    "LIST_ALL_LECTURERS_IN_CLASS": "SELECT * FROM Class, ClassDetails, PersonalInformation, PersonalAddress, Lecturer WHERE ClassDetails.classId=Class.id AND ClassDetails.joinerId=PersonalInformation.id AND PersonalInformation.addressId= PersonalAddress.id AND PersonalInformation.id=Lecturer.personalInformationId AND Class.classId=",
+    "LIST_ALL_JOINERS_IN_CLASS": "SELECT * FROM Class, ClassDetails, PersonalInformation, PersonalAddress, Lecturer WHERE ClassDetails.classId=Class.id AND ClassDetails.joinerId=PersonalInformation.id AND PersonalInformation.addressId= PersonalAddress.id AND PersonalInformation.id=Lecturer.personalInformationId AND Class.classId=",
+    
+
+    "LIST_ALL_CLASS_DETAILS": "SELECT * FROM Class, ClassDetails, PersonalInformation WHERE ClassDetails.classId=Class.id AND ClassDetails.joinerId=PersonalInformation.id",
+    "INSERT_CLASS_DETAIL": "INSERT INTO ClassDetails(classId, joinerId, role) VALUES",
+    "UPDATE_CLASS_DETAIL":
+    {
+        "MAIN_PART": "UPDATE ClassDetails SET ",
+        "CLASS_ID": " classId = ", 
+        "JOINER_ID": ", joinerId = ",
+        "ROLE": ", role="
+    },
+    "REMOVE_CLASS_DETAIL": {
+        "MAIN_PART": "DELETE FROM ClassDetails WHERE ",
+        "CONDITION": {
+            "JOINER_ID": "joinerId=",
+            "CLASS_ID": ", classId="
+        }
+    },
+    
+    "LIST_ALL_ROOM_SCHEDULES": "SELECT * FROM RoomSchedule, Room, Class, WeeklySchedule WHERE RoomSchedule.scheduleId = WeeklySchedule.id AND RoomSchedule.roomId=Room.id AND RoomSchedule.classId=Class.id",
+    "INSERT_ROOM_SCHEDULE": "INSERT INTO RoomSchedule(scheduleId, roomId, classId) VALUES",
+    "ROOM_SCHEDULE_DETAIL": "SELECT * FROM RoomSchedule, Room, Class, WeeklySchedule WHERE RoomSchedule.scheduleId = WeeklySchedule.id AND RoomSchedule.roomId=Room.id AND RoomSchedule.classId=Class.id AND RoomSchedule.id=",
+    "UPDATE_ROOM_SCHEDULE":
+    {
+        "MAIN_PART": "UPDATE RoomSchedule SET ",
+        "ROOM_ID": " roomId=", 
+        "CLASS_ID": ", classId=",
+        "SCHEDULE_ID": ", scheduleId="
+    },
+    
+    "LIST_ALL_WEEKLY_SCHEDULES": "SELECT * FROM WeeklySchedule",
+    "INSERT_WEEKLY_SCHEDULE": "INSERT INTO WeeklySchedule(roomId, roomName) VALUES",
+    "WEEKLY_SCHEDULE_DETAIL":"SELECT * FROM WeeklySchedule WHERE WeeklySchedule.id=",
+    "UPDATE_WEEKLY_SCHEDULE":
+    {
+        "MAIN_PART": "UPDATE WeeklySchedule SET ",
+        "DESCRIPTION": "description="
+    },
+    
+    "ACCOUNT_BY_USERNAME": "SELECT * FROM Account, Role WHERE Account.roleId = Role.id AND Account.username=",
+    "INSERT_ACCOUNT": "INSERT INTO Account(username, password, roleId) VALUES"
+}

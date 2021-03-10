@@ -1,0 +1,1 @@
+export const UPDATE_YEAR = 'UPDATE_YEAR';
