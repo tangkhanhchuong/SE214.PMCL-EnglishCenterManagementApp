@@ -1,46 +1,30 @@
-const statusCode = require('../../utils/config/statusCode');
-const SQLQuery = require('../query-syntaxes');
-const QueryStrings = require('../query-string');
+// const User = require("Database/Db/MongoDb/models/user")
+const { HttpStatusCode, HttpStatus } = require("../Http/index")
+const { throwError } = require("../Errors/error_handler")
 
-const getCourses = (req, res) => {
-    const queryString = QueryStrings.getAllCourses();
+const Course = require("./courses_model")
+const Class = require("../Classes/classes_model")
 
-    SQLQuery(queryString, (data) => {
-        res.status(statusCode.SUCCESSFUL).json({
-            count: data.length,
-            data: data
-        });
-    });
+const getAllCourses = async (req, res, next) => {
+    const courses = await Course.find()
+
+    HttpStatus.ok(res, {
+        message: "Successfully",
+        courses,
+        method: req.method
+    })
 }
 
-const insertCourse = (req, res) => {
-    const queryString = QueryStrings.insertCourse(req.body);
+const getCourseDetails = async (req, res, next) => {
+    const courseId = req.params.courseId
+    const [course] = await Course.find({ course_id: courseId })
+    const classesInCourse = await Class.find({ course_id: courseId })
 
-    SQLQuery(queryString, () => {
-        res.status(statusCode.CREATED).json({
-            message: "Created"
-        });
-    });
+    HttpStatus.ok(res, {
+        message: "Successfully",
+        course: { ...course, classesInCourse },
+        method: req.method
+    })
 }
 
-const getCourseDetail = (req, res) => {
-    const queryString = QueryStrings.getCourseDetail(req.params.id);
-    console.log(queryString);
-    SQLQuery(queryString, ([data]) => {
-        res.status(statusCode.SUCCESSFUL).json({
-            data: data
-        });
-    });
-}
-
-const getClassesInCourse = (req, res) => {
-    const queryString = QueryStrings.getAllClassesInCourse(req.params.id);
-    console.log(queryString);
-    SQLQuery(queryString, (data) => {
-        res.status(statusCode.SUCCESSFUL).json({
-            classes: data
-        });
-    });
-}
-
-module.exports = { getCourses, insertCourse, getCourseDetail, getClassesInCourse }
+module.exports = { getAllCourses, getCourseDetails }

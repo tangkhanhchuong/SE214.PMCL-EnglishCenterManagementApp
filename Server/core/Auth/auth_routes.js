@@ -13,6 +13,6 @@ router.delete('/logout', controller.logout);
 
 router.post('/login', controller.logIn);
 
-router.post('/register', userValidators.registerValidations, validatorMiddleware, controller.register);
+router.post('/signup', userValidators.registerValidations, validatorMiddleware, controller.register);
 
 module.exports = router;

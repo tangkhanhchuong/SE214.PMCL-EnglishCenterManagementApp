@@ -1,25 +1,15 @@
 const express = require('express');
 
-const { classController } = require('../../controllers');
-const authToken = require('../../utils/helpers/token-decoder');
+const classController = require('./classes_controller');
 
 const router = express.Router();
 
-router.get('/', classController.getClasses);
+router.get('/', classController.getAllClasses);
 
-router.post('/', classController.insertClass);
+// router.post('/', authToken, courseController.insertCourse);
 
-router.get('/:id/joiner', classController.getJoinersInClass);
+// router.get('/:id/classes', courseController.getClassesInCourse);
 
-router.get('/:id/students', classController.getStudentsInClass);
-
-router.get('/:id/lecturers', classController.getLecturersInClass);
-
-router.post('/:id/joiner', classController.insertPersonIntoClass);
-
-router.post('/:id/remove', classController.removeJoinersInClass);
-
-
-router.get('/:id', classController.getClassDetail);
+router.get('/:classId', classController.getClassDetails);
 
 module.exports = router;

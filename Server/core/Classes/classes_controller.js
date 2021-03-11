@@ -1,98 +1,35 @@
-const statusCode = require('../../utils/config/statusCode');
-const SQLQuery = require('../query-syntaxes');
-const QueryStrings = require('../query-string');
+// const User = require("Database/Db/MongoDb/models/user")
+const { HttpStatusCode, HttpStatus } = require("../Http/index")
+const { throwError } = require("../Errors/error_handler")
 
-const getClasses = (req, res) => {
-    const queryString = QueryStrings.getAllClasses();
+const Class = require("./classes_model")
+const Person = require("../Persons/persons_model")
 
-    SQLQuery(queryString, (data) => {
-        res.status(statusCode.SUCCESSFUL).json({
-            count: data.length,
-            data: data
-        });
-    });
+const getAllClasses = async (req, res, next) => {
+    const classes = await Class.find()
+
+    HttpStatus.ok(res, {
+        message: "Successfully",
+        classes,
+        method: req.method
+    })
 }
 
-const insertClass = (req, res) => {
-    const queryString = QueryStrings.insertClass(req.body);
+const getClassDetails = async (req, res, next) => {
+    const classId = req.params.classId
+    const [classDetail] = await Class.find({ class_id: classId })
+    const instructors = await Class.findAllInstructorsInClass(classId)
+    const students = await Class.findAllStudentsInClass(classId)
 
-    SQLQuery(queryString, () => {
-        res.status(statusCode.CREATED).json({
-            message: "Created"
-        });
-    });
+    HttpStatus.ok(res, {
+        message: "Successfully",
+        class: {
+            ...classDetail,
+            instructors,
+            students
+        },
+        method: req.method
+    })
 }
 
-const getClassDetail = (req, res) => {
-    const queryString = QueryStrings.getClassDetail(req.params.id);
-    console.log(queryString);
-    SQLQuery(queryString, ([data]) => {
-        res.status(statusCode.SUCCESSFUL).json({
-            data: data
-        });
-    });
-}
-
-
-const insertPersonIntoClass = (req, res) => {
-    console.log(req.body);
-    const queryString = QueryStrings.insertPersonIntoClass(req.body);
-
-    SQLQuery(queryString, () => {
-        res.status(statusCode.CREATED).json({
-            message: "Created"
-        });
-    });
-}
-
-
-const getStudentsInClass = (req, res) => {
-    const queryString = QueryStrings.getAllStudentsInClass(req.params.id);
-
-    SQLQuery(queryString, (data) => {
-        res.status(statusCode.SUCCESSFUL).json({
-            count: data.length,
-            data: data
-        });
-    });
-}
-
-const getLecturersInClass = (req, res) => {
-    const queryString = QueryStrings.getAllLecturersInClass(req.params.id);
-    SQLQuery(queryString, (data) => {
-        res.status(statusCode.SUCCESSFUL).json({
-            count: data.length,
-            data: data
-        });
-    });
-}
-
-
-const getJoinersInClass = (req, res) => {
-    const queryString = QueryStrings.getAllJoinersInClass(req.params.id);
-
-    SQLQuery(queryString, (data) => {
-        res.status(statusCode.SUCCESSFUL).json({
-            count: data.length,
-            data: data
-        });
-    });
-}
-
-const removeJoinersInClass = (req, res) => {
-    const classId = req.body.classId;
-    const removedJoinerArr = req.body.joiners;
-    let joinerConditionQuery = `joinerId = '${removedJoinerArr[0]}' `;
-    for (let i = 1; i < removedJoinerArr.length; i++) joinerConditionQuery += `OR joinerId = '${removedJoinerArr[i]}' `;
-    let kQuery = `DELETE FROM ClassDetails WHERE classId = '${classId}' AND (${joinerConditionQuery}) `;
-
-    console.log(kQuery);
-
-    SQLQuery(kQuery, () => {
-        res.status(statusCode.SUCCESSFUL).json({
-            message: "Removed successfully !"
-        });
-    });
-}
-
-module.exports = { getClasses, insertClass, getClassDetail, getStudentsInClass, getLecturersInClass, getJoinersInClass, insertPersonIntoClass, removeJoinersInClass }
+module.exports = { getAllClasses, getClassDetails }

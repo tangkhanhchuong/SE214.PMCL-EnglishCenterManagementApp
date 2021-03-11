@@ -1,17 +1,17 @@
 const express = require('express');
 
-const { courseController } = require('../../controllers');
+const courseController = require('./courses_controller');
 const authToken = require('../../utils/helpers/token-decoder');
 
 const router = express.Router();
 
-router.get('/', courseController.getCourses);
+router.get('/', courseController.getAllCourses);
 
-router.post('/', authToken, courseController.insertCourse);
+// router.post('/', authToken, courseController.insertCourse);
 
-router.get('/:id/classes', courseController.getClassesInCourse);
+// router.get('/:id/classes', courseController.getClassesInCourse);
 
-router.get('/:id', authToken, courseController.getCourseDetail);
+router.get('/:courseId', courseController.getCourseDetails);
 
 
 module.exports = router;

@@ -35,7 +35,7 @@ const logIn = async (req, res, next) => {
 
         res.header('authorization', `Bearer ${accessToken} ${refreshToken}`)
         HttpStatus.ok(res, {
-            message: "Login successfully",
+            message: "Successfully",
             user: {
                 accountId: foundUser._id,
                 email: foundUser.email,
@@ -51,16 +51,11 @@ const logIn = async (req, res, next) => {
 
 const register = async (req, res, next) => {
     const { email, username, password } = req.body
-    // const fileName = req.file.path.split("\\")[2]
-    // const avatar = req.file ? `/${fileName}` : null
 
     try {
         await checkIfEmailExisted(email)
 
         const hashedPassword = await hashPassword(password)
-
-        // const newUser = new User({ email: email, username: username, password: hashedPassword })
-        // await newUser.save()
         const newUser = await Account.create({ email, username, password: hashedPassword })
         HttpStatus.created(res, newUser)
 

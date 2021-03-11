@@ -40,8 +40,8 @@ import PropTypes from 'prop-types';
 //   render() {
 //     const {
 //       showLogo,
-//       usernameLabel,
-//       usernameInputProps,
+//       emailLabel,
+//       emailInputProps,
 //       passwordLabel,
 //       passwordInputProps,
 //       confirmPasswordLabel,
@@ -64,8 +64,8 @@ import PropTypes from 'prop-types';
 //           </div>
 //         )}
 //         <FormGroup>
-//           <Label for={usernameLabel}>{usernameLabel}</Label>
-//           <Input {...usernameInputProps} />
+//           <Label for={emailLabel}>{emailLabel}</Label>
+//           <Input {...emailInputProps} />
 //         </FormGroup>
 //         <FormGroup>
 //           <Label for={passwordLabel}>{passwordLabel}</Label>
@@ -152,24 +152,23 @@ const AuthForm = (props) => {
       token: userData.token,
       roleId: userData.loadedAccount.roleId,
       userId: userData.loadedAccount.id,
-      username: userData.loadedAccount.username,
+      email: userData.loadedAccount.email,
       name: userData.loadedAccount.name
     }));
-
   }
 
   let handleSubmit = event => {
     setFormStatus(FormStatus.LOADING);
     event.preventDefault();
-    let username = event.target["username"].value;
+    let email = event.target["email"].value;
     let password = event.target["password"].value;
-    console.log(username, password);
+    console.log(email, password);
     let authType = isSignup() ? 'signup' : 'login';
     sendRequest(
-      `http://localhost:5000/v1/auth/${authType}`,
+      `http://localhost:5000/auth/${authType}`,
       'POST',
       {
-        username, password
+        email, password
       },
       {
         'Content-Type': 'application/json'
@@ -212,8 +211,8 @@ const AuthForm = (props) => {
 
   const {
     showLogo,
-    usernameLabel,
-    usernameInputProps,
+    emailLabel,
+    emailInputProps,
     passwordLabel,
     passwordInputProps,
     confirmPasswordLabel,
@@ -237,8 +236,8 @@ const AuthForm = (props) => {
         </div>
       )}
       <FormGroup>
-        <Label for={usernameLabel}>{usernameLabel}</Label>
-        <Input {...usernameInputProps} />
+        <Label for={emailLabel}>{emailLabel}</Label>
+        <Input {...emailInputProps} />
       </FormGroup>
 
       <FormGroup>
@@ -260,7 +259,7 @@ const AuthForm = (props) => {
         </Label>
       </FormGroup>
       <div>
-        {formStatus === FormStatus.LOGIN_FAIL && <><br /><font color="red">Username or Password is incorrect !</font></>}
+        {formStatus === FormStatus.LOGIN_FAIL && <><br /><font color="red">Email or Password is incorrect !</font></>}
         {formStatus === FormStatus.LOGIN_SUCCESSFULLY && <><br /><font color="green">Login successfully, please wait ...</font></>}
       </div>
       <hr />
@@ -282,10 +281,10 @@ const AuthForm = (props) => {
               Login
             </a>
           ) : (
-              <a href="#signup" onClick={changeAuthState(STATE_SIGNUP)}>
-                Signup
-              </a>
-            )}
+            <a href="#signup" onClick={changeAuthState(STATE_SIGNUP)}>
+              Signup
+            </a>
+          )}
         </h6>
       </div>
 
@@ -303,8 +302,8 @@ export const STATE_SIGNUP = 'SIGNUP';
 AuthForm.propTypes = {
   authState: PropTypes.oneOf([STATE_LOGIN, STATE_SIGNUP]).isRequired,
   showLogo: PropTypes.bool,
-  usernameLabel: PropTypes.string,
-  usernameInputProps: PropTypes.object,
+  emailLabel: PropTypes.string,
+  emailInputProps: PropTypes.object,
   passwordLabel: PropTypes.string,
   passwordInputProps: PropTypes.object,
   confirmPasswordLabel: PropTypes.string,
@@ -316,8 +315,8 @@ AuthForm.defaultProps = {
   authState: 'LOGIN',
   showLogo: true,
   // <<<<<<< HEAD
-  //   usernameLabel: 'Email',
-  //   usernameInputProps: {
+  //   emailLabel: 'Email',
+  //   emailInputProps: {
   //     type: 'email',
   //     placeholder: 'your@email.com',
   //   },
@@ -331,11 +330,11 @@ AuthForm.defaultProps = {
   //     type: 'password',
   //     placeholder: 'confirm your password',
   // =======
-  usernameLabel: 'Username',
-  usernameInputProps: {
-    name: "username",
+  emailLabel: 'Email',
+  emailInputProps: {
+    name: "email",
     type: 'text',
-    placeholder: 'Username',
+    placeholder: 'Email',
     required: true
   },
   passwordLabel: 'Password',

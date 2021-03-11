@@ -9,7 +9,6 @@ const SQLQuery = async ({ query, options }) => {
         console.log(err);
         throw err
     }
-
 }
 
 module.exports = {
