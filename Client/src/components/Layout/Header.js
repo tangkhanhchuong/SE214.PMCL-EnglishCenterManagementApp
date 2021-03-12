@@ -1,15 +1,11 @@
-import Avatar from 'components/Avatar';
-import { UserCard } from 'components/Card';
-import Notifications from 'components/Notifications';
-import SearchInput from 'components/SearchInput';
-import { notificationsData } from 'demos/header';
-import withBadge from 'hocs/withBadge';
-// <<<<<<< HEAD
-// import React from 'react';
-// =======
-import React, { useState } from 'react';
+import Avatar from 'components/Avatar'
+import { UserCard } from 'components/Card'
+import Notifications from 'components/Notifications'
+import SearchInput from 'components/SearchInput'
+import { notificationsData } from 'demos/header'
+import withBadge from 'hocs/withBadge'
+import React, { useState } from 'react'
 
-// >>>>>>> restoreHistory
 import {
   MdClearAll,
   MdExitToApp,
@@ -20,7 +16,7 @@ import {
   MdNotificationsNone,
   MdPersonPin,
   MdSettingsApplications,
-} from 'react-icons/md';
+} from 'react-icons/md'
 import {
   Button,
   ListGroup,
@@ -32,17 +28,13 @@ import {
   NavLink,
   Popover,
   PopoverBody,
-} from 'reactstrap';
-import bn from 'utils/bemnames';
-// <<<<<<< HEAD
-// =======
-import { useDispatch } from 'react-redux';
+} from 'reactstrap'
+import bn from 'utils/bemnames'
+import { useDispatch } from 'react-redux'
 import { RemoveUserData } from '../../Redux/Reducers/UserData/actions'
-import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux'
 
-// >>>>>>> restoreHistory
-
-const bem = bn.create('header');
+const bem = bn.create('header')
 
 const MdNotificationsActiveWithBadge = withBadge({
   size: 'md',
@@ -55,7 +47,7 @@ const MdNotificationsActiveWithBadge = withBadge({
     alignItems: 'center',
   },
   children: <small>5</small>,
-})(MdNotificationsActive);
+})(MdNotificationsActive)
 
 // <<<<<<< HEAD
 // class Header extends React.Component {
@@ -63,33 +55,33 @@ const MdNotificationsActiveWithBadge = withBadge({
 //     isOpenNotificationPopover: false,
 //     isNotificationConfirmed: false,
 //     isOpenUserCardPopover: false,
-//   };
+//   }
 
 //   toggleNotificationPopover = () => {
 //     this.setState({
 //       isOpenNotificationPopover: !this.state.isOpenNotificationPopover,
-//     });
+//     })
 
 //     if (!this.state.isNotificationConfirmed) {
-//       this.setState({ isNotificationConfirmed: true });
+//       this.setState({ isNotificationConfirmed: true })
 //     }
-//   };
+//   }
 
 //   toggleUserCardPopover = () => {
 //     this.setState({
 //       isOpenUserCardPopover: !this.state.isOpenUserCardPopover,
-//     });
-//   };
+//     })
+//   }
 
 //   handleSidebarControlButton = event => {
-//     event.preventDefault();
-//     event.stopPropagation();
+//     event.preventDefault()
+//     event.stopPropagation()
 
-//     document.querySelector('.cr-sidebar').classList.toggle('cr-sidebar--open');
-//   };
+//     document.querySelector('.cr-sidebar').classList.toggle('cr-sidebar--open')
+//   }
 
 //   render() {
-//     const { isNotificationConfirmed } = this.state;
+//     const { isNotificationConfirmed } = this.state
 
 //     return (
 //       <Navbar light expand className={bem.b('bg-white')}>
@@ -179,62 +171,62 @@ const MdNotificationsActiveWithBadge = withBadge({
 //           </NavItem>
 //         </Nav>
 //       </Navbar>
-//     );
+//     )
 //   }
 // =======
 const Header = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const userData = useSelector(state => state.userData);
+  const userData = useSelector(state => state.userData)
 
 
   let [state, setState] = useState({
     isOpenNotificationPopover: false,
     isNotificationConfirmed: false,
     isOpenUserCardPopover: false,
-  });
+  })
 
   let toggleNotificationPopover = () => {
     setState({
       isOpenNotificationPopover: !state.isOpenNotificationPopover,
-    });
+    })
 
     if (!state.isNotificationConfirmed) {
-      setState({ isNotificationConfirmed: true });
+      setState({ isNotificationConfirmed: true })
     }
-  };
+  }
 
   let toggleUserCardPopover = () => {
     setState({
       isOpenUserCardPopover: !state.isOpenUserCardPopover,
-    });
-  };
+    })
+  }
 
   let handleSidebarControlButton = event => {
-    event.preventDefault();
-    event.stopPropagation();
+    event.preventDefault()
+    event.stopPropagation()
 
-    document.querySelector('.cr-sidebar').classList.toggle('cr-sidebar--open');
-  };
+    document.querySelector('.cr-sidebar').classList.toggle('cr-sidebar--open')
+  }
 
   let SignOut = async () => {
-    await localStorage.removeItem("userData");
-    dispatch(RemoveUserData());
+    await localStorage.removeItem("userData")
+    dispatch(RemoveUserData())
 
   }
 
   let GetRoleName = (roleId) => {
     switch (roleId) {
-      case 1: return "Student";
-      case 2: return "Lecturer";
-      case 3: return "Manager";
-      case 9: return "Student";
+      case 1: return "Student"
+      case 2: return "Lecturer"
+      case 3: return "Manager"
+      case 9: return "Student"
 
-      default: return "Guest";
+      default: return "Guest"
     }
   }
 
-  const { isNotificationConfirmed } = state;
+  const { isNotificationConfirmed } = state
 
   return (
     <Navbar light expand className={bem.b('bg-white')}>
@@ -257,12 +249,12 @@ const Header = () => {
                 onClick={toggleNotificationPopover}
               />
             ) : (
-                <MdNotificationsActiveWithBadge
-                  size={25}
-                  className="text-secondary can-click animated swing infinite"
-                  onClick={toggleNotificationPopover}
-                />
-              )}
+              <MdNotificationsActiveWithBadge
+                size={25}
+                className="text-secondary can-click animated swing infinite"
+                onClick={toggleNotificationPopover}
+              />
+            )}
           </NavLink>
           <Popover
             placement="bottom"
@@ -324,8 +316,8 @@ const Header = () => {
         </NavItem>
       </Nav>
     </Navbar>
-  );
+  )
   // >>>>>>> restoreHistory
 }
 
-export default Header;
+export default Header

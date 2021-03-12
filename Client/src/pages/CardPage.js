@@ -104,9 +104,8 @@ const CardPage = () => {
           <Col key={index} md={6} sm={6} xs={12} className="mb-3">
             <Card
               inverse
-              className={`border-0 bg-gradient-theme${
-                !!color ? '-' : ''
-              }${color}`}
+              className={`border-0 bg-gradient-theme${!!color ? '-' : ''
+                }${color}`}
               style={{
                 height: 200,
               }}
