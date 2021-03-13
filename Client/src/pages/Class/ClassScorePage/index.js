@@ -182,9 +182,7 @@ const TablePage = (props) => {
                         </NavLink>
                     </Col>
                     <Col md="6" sm="12" xs="12" className="text-right">
-
                         <Button color="primary" onClick={() => { setChartMode((prev) => !prev) }}>Chart</Button>
-
                         <Button outline color="success" className="kMargin-LeftRight-5 kBtn-WSize-75" onClick={toggleIsEdit}>
                             {isEdit ? "Save" : "Edit"}
                         </Button>

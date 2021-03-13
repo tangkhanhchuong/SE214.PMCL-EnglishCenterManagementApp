@@ -5,8 +5,8 @@ import Page from 'components/Page';
 import { NavLink } from 'react-router-dom';
 
 import ClassCardItem from "./ClassCardItem"
-import useAxios from '../../../hooks/useAxios';
-import courseApi from '../../../api/apis/courseApi';
+import useAxios from 'hooks/useAxios';
+import courseApi from 'api/apis/courseApi';
 
 import classImg1 from 'assets/img/class-img/class-img-1.svg'
 import classImg2 from 'assets/img/class-img/class-img-2.svg'

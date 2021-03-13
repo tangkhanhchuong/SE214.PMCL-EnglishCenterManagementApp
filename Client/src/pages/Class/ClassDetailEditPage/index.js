@@ -5,7 +5,7 @@ import { Card, CardBody, CardHeader, Col, Row, Table, Button } from 'reactstrap'
 import { NavLink } from 'react-router-dom';
 import KButtonRemove from 'components/KButtonRemove'
 
-import { useHttpClient, SYSTEM_URL } from '../../hooks/http-hook';
+import { useHttpClient, SYSTEM_URL } from 'hooks/http-hook';
 
 
 const TablePage = (props) => {
@@ -22,38 +22,38 @@ const TablePage = (props) => {
     const [students, setStudents] = useState([]);
     const [removedStudents, setRemovedStudents] = useState([]);
 
-    
-    let GetAllJoinersInClass = (type, callback) =>{
+
+    let GetAllJoinersInClass = (type, callback) => {
         sendRequest(
             `${SYSTEM_URL}/v1/class/${classId}/${type}`,
             'GET',
         )
-        .then((response) => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw Error("Get data failed !!")
-            }
-        })
-        .then((response) => {
-            console.log(response.data);
-            callback(response.data);
-            
-        })
-        .catch((error) => {
-            console.log(error);
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw Error("Get data failed !!")
+                }
+            })
+            .then((response) => {
+                console.log(response.data);
+                callback(response.data);
 
-        });
+            })
+            .catch((error) => {
+                console.log(error);
+
+            });
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         GetAllJoinersInClass("students", setStudents);
         GetAllJoinersInClass("lecturers", setLecturers);
 
-    },[]);
-    
+    }, []);
 
-   
+
+
     const MoveAToB = (fromArr, toArr, fromIndex, fromFunc, toFunc) => {
         let a = [...fromArr];
         let b = [...toArr, a[fromIndex]];
@@ -80,20 +80,20 @@ const TablePage = (props) => {
                 'Content-Type': 'application/json'
             }
         )
-        .then((response) => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw Error("Authentication Failed !!")
-            }
-        })
-        .then((response) => {
-            console.log(response);
-        })
-        .catch((error) => {
-            console.log(error);
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw Error("Authentication Failed !!")
+                }
+            })
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
 
-        });
+            });
     }
 
     return (
@@ -215,7 +215,7 @@ const TablePage = (props) => {
             <Row>
                 <Col md="12" sm="12" xs="12" className="text-right">
                     <NavLink to={goBackUrl} style={{ textDecoration: 'none' }}>
-                        <Button color="primary" onClick={(e)=>ProcessRemove(e, removedLecturers, setRemovedLecturers)}>Remove</Button>
+                        <Button color="primary" onClick={(e) => ProcessRemove(e, removedLecturers, setRemovedLecturers)}>Remove</Button>
                     </NavLink>
                 </Col>
 
@@ -327,13 +327,13 @@ const TablePage = (props) => {
             <Row>
                 <Col md="12" sm="12" xs="12" className="text-right">
                     <NavLink to={goBackUrl} style={{ textDecoration: 'none' }}>
-                        <Button color="primary" onClick={(e)=>ProcessRemove(e, removedStudents, setRemovedStudents)}>Remove</Button>
+                        <Button color="primary" onClick={(e) => ProcessRemove(e, removedStudents, setRemovedStudents)}>Remove</Button>
                     </NavLink>
                 </Col>
 
             </Row>
 
-            
+
         </Page>
     );
 };

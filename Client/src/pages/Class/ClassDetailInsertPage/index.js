@@ -1,23 +1,22 @@
 import Page from 'components/Page';
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Col,
-  Form,
-  FormFeedback,
-  FormGroup,
-  FormText,
-  Input,
-  Label,
-  Row,
+    Button,
+    Card,
+    CardBody,
+    CardHeader,
+    Col,
+    Form,
+    FormFeedback,
+    FormGroup,
+    FormText,
+    Input,
+    Label,
+    Row,
 } from 'reactstrap';
-import { NavLink ,useHistory} from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
-import { useHttpClient } from '../../hooks/http-hook';
-import { useSelector } from 'react-redux';
+import { useHttpClient } from 'hooks/http-hook';
 
 const FORMSTATUS = {
     DEFAULT: 1,
@@ -35,12 +34,12 @@ const FormPage = (props) => {
     let kClassId = 1;
     let [formStatus, setFormStatus] = useState(FORMSTATUS.DEFAULT);
     const { sendRequest } = useHttpClient();
-    
+
     let [searchType, setSearchType] = useState("Student");
     let [personId, setPersonId] = useState("");
     let [personInfo, setPersonInfo] = useState({});
 
-    useEffect(()=>{
+    useEffect(() => {
         sendRequest(
             `http://localhost:5000/v1/class/${classId}`,
             'GET',
@@ -54,17 +53,17 @@ const FormPage = (props) => {
             })
             .then((response) => {
                 console.log(response.data);
-                if(response.data)
+                if (response.data)
                     kClassId = response.data.id;
                 else
                     throw Error("Get Person Info Failed !!")
-                
+
             })
             .catch((error) => {
                 console.log(error);
-                
+
             });
-    },[])
+    }, [])
 
     let GetPersonInfo = (event) => {
         const kPersonId = event.target.value
@@ -84,11 +83,11 @@ const FormPage = (props) => {
                 })
                 .then((response) => {
                     console.log(response.data);
-                    if(response.data)
+                    if (response.data)
                         setPersonInfo(response.data);
                     else
                         throw Error("Get Person Info Failed !!")
-                    
+
                 })
                 .catch((error) => {
                     console.log(error);
@@ -115,26 +114,26 @@ const FormPage = (props) => {
                 'Content-Type': 'application/json'
             }
         )
-        .then((response) => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw Error("Return device Failed !!")
-            }
-        })
-        .then((response) => {
-            console.log(response);
-            setTimeout(() => {
-                setFormStatus(FORMSTATUS.REQUEST_SUCCESSFULLY);
-                alert("Insert to class successfully !");
-                history.push(goBackUrl);
-            }, 1000);
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw Error("Return device Failed !!")
+                }
+            })
+            .then((response) => {
+                console.log(response);
+                setTimeout(() => {
+                    setFormStatus(FORMSTATUS.REQUEST_SUCCESSFULLY);
+                    alert("Insert to class successfully !");
+                    history.push(goBackUrl);
+                }, 1000);
 
-        })
-        .catch((error) => {
-            console.log(error);
-            setFormStatus(FORMSTATUS.REQUEST_FAIL);
-        });
+            })
+            .catch((error) => {
+                console.log(error);
+                setFormStatus(FORMSTATUS.REQUEST_FAIL);
+            });
     }
 
     return (
@@ -142,47 +141,47 @@ const FormPage = (props) => {
             <Row>
                 <Col md="6" sm="12" xs="12">
                     <NavLink to={goBackUrl} style={{ textDecoration: 'none' }}>
-                    <Button color="primary">Back</Button>
+                        <Button color="primary">Back</Button>
                     </NavLink>
                 </Col>
-                
+
             </Row>
             <h2>{`Insert participant to ${classId}`}</h2>
             <Row>
                 <Col xl={6} lg={12} md={12}>
-            <Card>
-                <CardHeader>Form Validation</CardHeader>
-                <CardBody>
-                <Form onSubmit={handleSubmit}>
-                    <FormGroup>
-                        <Label for="exampleSelectMulti">Type of participant</Label>
-                        <Input onChange={(e)=>{setSearchType(e.target.value); setPersonId(""); setPersonInfo({})}} type="select" name="select">
-                            <option value="Student">Student</option>
-                            <option value="Lecturer">Lecturer</option>
-                        </Input>
-                    </FormGroup>
+                    <Card>
+                        <CardHeader>Form Validation</CardHeader>
+                        <CardBody>
+                            <Form onSubmit={handleSubmit}>
+                                <FormGroup>
+                                    <Label for="exampleSelectMulti">Type of participant</Label>
+                                    <Input onChange={(e) => { setSearchType(e.target.value); setPersonId(""); setPersonInfo({}) }} type="select" name="select">
+                                        <option value="Student">Student</option>
+                                        <option value="Lecturer">Lecturer</option>
+                                    </Input>
+                                </FormGroup>
 
-                    <FormGroup>
-                    <Label>{`${searchType} ID`}</Label>
-                        <Input invalid={personInfo.fail ? true : false} valid={personInfo.id ? true : false} value={personId} onChange={(e)=>GetPersonInfo(e)} placeholder={`${searchType} ID`} maxLength={8} />
-                    </FormGroup>
-                    
-                    
+                                <FormGroup>
+                                    <Label>{`${searchType} ID`}</Label>
+                                    <Input invalid={personInfo.fail ? true : false} valid={personInfo.id ? true : false} value={personId} onChange={(e) => GetPersonInfo(e)} placeholder={`${searchType} ID`} maxLength={8} />
+                                </FormGroup>
 
-                    <FormGroup>
-                        <Label>Full Name</Label>
-                        <Input value={personInfo.name || ""} disabled invalid={personInfo.fail ? true : false} valid={personInfo.id ? true : false} />
-                        <FormText>The name field is generated automatically</FormText>
-                    </FormGroup>
-                    
-                    <FormGroup style={{textAlign : 'right'}}>
-                        <Button color="success">Insert</Button>
-                    </FormGroup>
-                    
-                </Form>
-                </CardBody>
-            </Card>
-            </Col>
+
+
+                                <FormGroup>
+                                    <Label>Full Name</Label>
+                                    <Input value={personInfo.name || ""} disabled invalid={personInfo.fail ? true : false} valid={personInfo.id ? true : false} />
+                                    <FormText>The name field is generated automatically</FormText>
+                                </FormGroup>
+
+                                <FormGroup style={{ textAlign: 'right' }}>
+                                    <Button color="success">Insert</Button>
+                                </FormGroup>
+
+                            </Form>
+                        </CardBody>
+                    </Card>
+                </Col>
 
             </Row>
         </Page>
