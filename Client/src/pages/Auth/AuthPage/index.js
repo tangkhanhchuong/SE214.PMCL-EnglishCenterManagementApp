@@ -1,7 +1,7 @@
-import AuthForm, { STATE_LOGIN } from 'components/AuthForm'
 import React from 'react'
 import { Card, Col, Row } from 'reactstrap'
 
+import AuthForm, { STATE_LOGIN } from '../AuthForm'
 class AuthPage extends React.Component {
     handleAuthState = authState => {
         if (authState === STATE_LOGIN) {

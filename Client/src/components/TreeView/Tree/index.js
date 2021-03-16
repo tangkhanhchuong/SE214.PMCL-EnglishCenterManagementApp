@@ -5,7 +5,6 @@ import {
 } from 'react-icons/fa'
 
 import React, { useState } from "react";
-import { CardText } from "reactstrap"
 import "./index.css";
 
 
@@ -48,7 +47,7 @@ const TreeNode = ({ node }) => {
     return (
         <li className="d-tree-node border-0">
             <div className="d-flex" onClick={(e) => setChildVisiblity((v) => !v)}>
-                <div className="col d-tree-head">
+                <div className="col d-tree-head" style={{ "cursor": "pointer" }} >
                     {generateContent({ file: node })}
                 </div>
             </div>

@@ -1,12 +1,12 @@
-import React from 'react';
+import React from 'react'
 
-import { Row, Col } from 'reactstrap';
-import Page from 'components/Page';
-import { NavLink } from 'react-router-dom';
+import { Row, Col } from 'reactstrap'
+import Page from 'components/Page'
+import { NavLink } from 'react-router-dom'
 
 import ClassCardItem from "./ClassCardItem"
-import useAxios from 'hooks/useAxios';
-import courseApi from 'api/apis/courseApi';
+import useAxios from 'hooks/useAxios'
+import courseApi from 'api/apis/courseApi'
 
 import classImg1 from 'assets/img/class-img/class-img-1.svg'
 import classImg2 from 'assets/img/class-img/class-img-2.svg'
@@ -16,13 +16,13 @@ import classImg5 from 'assets/img/class-img/class-img-5.svg'
 import classImg6 from 'assets/img/class-img/class-img-6.svg'
 import classImg7 from 'assets/img/class-img/class-img-7.svg'
 
-const WidgetPage = () => {
+const ClassesPage = () => {
 
-    const groupByKey = (list, key) => list.reduce((hash, obj) => ({ ...hash, [obj[key]]: (hash[obj[key]] || []).concat(obj) }), {});
+    const groupByKey = (list, key) => list.reduce((hash, obj) => ({ ...hash, [obj[key]]: (hash[obj[key]] || []).concat(obj) }), {})
 
-    const [courseList] = useAxios([], courseApi.getAll);
+    const [courseList] = useAxios([], courseApi.getAll)
 
-    const groupedClassesListByCourseId = Object.values(groupByKey(courseList, "courseId"));
+    const groupedClassesListByCourseId = Object.values(groupByKey(courseList, "courseId"))
 
     const classes = [
         { classId: "ENG1", className: "English1", instructor: "Chuong", description: "Hi, this is english course", img: classImg1 },
@@ -42,7 +42,7 @@ const WidgetPage = () => {
                 {classes.map((classItem, index) =>
                 (<div key={`groupCourse_${index}`}>
                     <Col key={`course_${index}`} className="mb-3">
-                        <NavLink to={`/my-classes/${classItem.classId}`} style={{ textDecoration: 'none' }}>
+                        <NavLink to={`/classes/${classItem.classId}`} style={{ textDecoration: 'none' }}>
                             <ClassCardItem classItem={classItem} />
                         </NavLink>
                     </Col>
@@ -50,7 +50,7 @@ const WidgetPage = () => {
                 )}
             </Row>
         </Page>
-    );
-};
+    )
+}
 
-export default WidgetPage;
+export default ClassesPage

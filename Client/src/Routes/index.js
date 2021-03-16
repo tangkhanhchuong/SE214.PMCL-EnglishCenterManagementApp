@@ -42,7 +42,6 @@ export default () => {
 
 
     let GetRoute = () => {
-
         if (initStatus === SYSTEMSTATUS.NON_INIT) {
             console.log("Loading");
             return <div>Loading</div>

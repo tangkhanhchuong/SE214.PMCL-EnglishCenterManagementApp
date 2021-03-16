@@ -11,7 +11,7 @@ import ScoreChart from './ScoreChart';
 
 const tableTypes = ['', ''];
 
-const TablePage = (props) => {
+const ClassScorePage = (props) => {
     const [chartMode, setChartMode] = useState(false)
     const currentUrl = props.match.url.split("/");
     const classId = props.match.params.classId;
@@ -174,7 +174,6 @@ const TablePage = (props) => {
             <Page
                 className="TablePage"
                 breadcrumbs={[{ name: 'My Classes' }, { name: currentUrl[2] }, { name: 'Score' }]} >
-
                 <Row>
                     <Col md="6" sm="12" xs="12">
                         <NavLink to={goBackUrl} style={{ textDecoration: 'none' }}>
@@ -199,4 +198,4 @@ const TablePage = (props) => {
     );
 };
 
-export default TablePage;
+export default ClassScorePage;

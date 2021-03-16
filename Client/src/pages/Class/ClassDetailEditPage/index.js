@@ -8,7 +8,7 @@ import KButtonRemove from 'components/KButtonRemove'
 import { useHttpClient, SYSTEM_URL } from 'hooks/http-hook';
 
 
-const TablePage = (props) => {
+const ClassDetailEditPage = (props) => {
 
     const { sendRequest } = useHttpClient();
 
@@ -338,4 +338,4 @@ const TablePage = (props) => {
     );
 };
 
-export default TablePage;
+export default ClassDetailEditPage;

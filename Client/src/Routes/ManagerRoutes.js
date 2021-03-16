@@ -1,9 +1,7 @@
-import { STATE_LOGIN, STATE_SIGNUP } from 'components/AuthForm'
 import GAListener from 'components/GAListener'
-import { EmptyLayout, LayoutRoute, MainLayout } from 'components/Layout'
+import { MainLayout } from 'components/Layout'
 import PageSpinner from 'components/PageSpinner'
-import AuthPage from 'pages/AuthPage'
-import React, { useEffect } from 'react'
+import React from 'react'
 import componentQueries from 'react-component-queries'
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 
@@ -24,27 +22,25 @@ const TablePage = React.lazy(() => import('pages/TablePage'))
 const TypographyPage = React.lazy(() => import('pages/TypographyPage'))
 const WidgetPage = React.lazy(() => import('pages/WidgetPage'))
 
-const ClassPage = React.lazy(() => import('pages/Class/ClassPage'))
-const ClassDetailPage = React.lazy(() => import('pages/Class/ClassDetailPage'))
-const ClassDetailEditPage = React.lazy(() => import('pages/Class/ClassDetailEditPage'))
-const ClassScorePage = React.lazy(() => import('pages/Class/ClassScorePage'))
-
-const ClassDetailInsertPage = React.lazy(() => import('pages/Class/ClassDetailInsertPage'))
+const ClassPages = React.lazy(() => import('pages/Class'))
 
 const PersonPage = React.lazy(() => import('pages/Person'))
 const PersonManagementPage = React.lazy(() => import('pages/Person/PersonManagementPage'))
 const PersonEditPage = React.lazy(() => import('pages/Person/PersonEditPage'))
 const PersonCreatePage = React.lazy(() => import('pages/Person/PersonCreatePage'))
 
-
 const DevicePage = React.lazy(() => import('pages/Device'))
 const DeviceManagementPage = React.lazy(() => import('pages/Device/DeviceManagementPage'))
 const DeviceBorrowPage = React.lazy(() => import('pages/Device/DeviceBorrowPage'))
 const DeviceBorrowDetailPage = React.lazy(() => import('pages/Device/DeviceBorrowDetailPage'))
-const DeviceBorrowConfirmPage = React.lazy(() => import('pages/Device/DeviceBorrowConfirmPage'))
-
 const DeviceReturnPage = React.lazy(() => import('pages/Device/DeviceReturnPage'))
 const DeviceInsertPage = React.lazy(() => import('pages/Device/DeviceInsertPage'))
+
+const PaymentPages = React.lazy(() => import('pages/Payment'))
+const ExamsPages = React.lazy(() => import('pages/Exams'))
+const AssignmentsPages = React.lazy(() => import('pages/Assignments'))
+const AccountPages = React.lazy(() => import('pages/Account'))
+const NotificationsPages = React.lazy(() => import('pages/Notifications'))
 
 
 const getBasename = () => {
@@ -59,27 +55,29 @@ const App = (props) => {
         <Switch>
           <MainLayout breakpoint={props.breakpoint}>
             <React.Suspense fallback={<PageSpinner />}>
-              <Route path="/Class" component={ClassPage} />
-              <Route exact path="/Class_Detail/:classId" component={ClassDetailPage} />
-              <Route path="/Class_Detail/:classId/Edit" component={ClassDetailEditPage} />
-              <Route exact path="/Class_Detail/:classId/Score" component={ClassScorePage} />
-              <Route path="/Class_Detail/:classId/Insert" component={ClassDetailInsertPage} />
+              <Route path="/classes" component={ClassPages} />
+
+              <Route path="/exams" component={ExamsPages} />
 
               <Route path="/Person" component={PersonPage} />
 
               <Route exact path="/Person_Management/:type/All" component={PersonManagementPage} />
-              <Route exact path="/Person_Management/:type/:personId/Edit" component={PersonEditPage} />
+              <Route exact path="/Person_Management/:personId/Edit" component={PersonEditPage} />
               <Route path="/Person_Management/:type/Create" component={PersonCreatePage} />
 
 
               <Route path="/Device" component={DevicePage} />
-              <Route path="/Device_Management/Borrow/:CategoryName/:DeviceId" component={DeviceBorrowConfirmPage} />
-              <Route exact path="/Device_Management/Borrow/:CategoryName" component={DeviceBorrowDetailPage} />
+              <Route path="/Device_Management/Borrow/:CategoryName" component={DeviceBorrowDetailPage} />
               <Route exact path="/Device_Management/Borrow" component={DeviceBorrowPage} />
               <Route exact path="/Device_Management" component={DeviceManagementPage} />
               <Route exact path="/Device_Management/Return" component={DeviceReturnPage} />
               <Route exact path="/Device_Management/Insert" component={DeviceInsertPage} />
 
+
+              <Route path="/payment" component={PaymentPages} />
+              <Route path="/assignments" component={AssignmentsPages} />
+              <Route path="/account" component={AccountPages} />
+              <Route path="/notifications" component={NotificationsPages} />
 
               <Route exact path="/" component={DashboardPage} />
               <Route exact path="/login-modal" component={AuthModalPage} />
@@ -102,9 +100,9 @@ const App = (props) => {
               <Route exact path="/input-groups" component={InputGroupPage} />
               <Route exact path="/charts" component={ChartPage} />
 
-              <Route path="/">
+              {/* <Route path="/">
                 <Redirect to="/" />
-              </Route>
+              </Route> */}
 
             </React.Suspense>
           </MainLayout>

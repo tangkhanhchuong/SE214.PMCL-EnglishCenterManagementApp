@@ -22,18 +22,12 @@ const TablePage = React.lazy(() => import('pages/TablePage'))
 const TypographyPage = React.lazy(() => import('pages/TypographyPage'))
 const WidgetPage = React.lazy(() => import('pages/WidgetPage'))
 
-const ClassPage = React.lazy(() => import('pages/Class/ClassPage'))
-const ClassDetailPage = React.lazy(() => import('pages/Class/ClassDetailPage'))
-const ClassDetailEditPage = React.lazy(() => import('pages/Class/ClassDetailEditPage'))
-const ClassScorePage = React.lazy(() => import('pages/Class/ClassScorePage'))
-
-const ClassDetailInsertPage = React.lazy(() => import('pages/Class/ClassDetailInsertPage'))
+const ClassPages = React.lazy(() => import('pages/Class'))
 
 const PersonPage = React.lazy(() => import('pages/Person'))
 const PersonManagementPage = React.lazy(() => import('pages/Person/PersonManagementPage'))
 const PersonEditPage = React.lazy(() => import('pages/Person/PersonEditPage'))
 const PersonCreatePage = React.lazy(() => import('pages/Person/PersonCreatePage'))
-
 
 const DevicePage = React.lazy(() => import('pages/Device'))
 const DeviceManagementPage = React.lazy(() => import('pages/Device/DeviceManagementPage'))
@@ -41,6 +35,11 @@ const DeviceBorrowPage = React.lazy(() => import('pages/Device/DeviceBorrowPage'
 const DeviceBorrowDetailPage = React.lazy(() => import('pages/Device/DeviceBorrowDetailPage'))
 const DeviceReturnPage = React.lazy(() => import('pages/Device/DeviceReturnPage'))
 const DeviceInsertPage = React.lazy(() => import('pages/Device/DeviceInsertPage'))
+
+const PaymentPage = React.lazy(() => import('pages/Payment'))
+const ExamsPage = React.lazy(() => import('pages/Exams'))
+const Assignments = React.lazy(() => import('pages/Assignments'))
+const AccountPage = React.lazy(() => import('pages/Account'))
 
 
 const getBasename = () => {
@@ -55,11 +54,8 @@ const App = (props) => {
         <Switch>
           <MainLayout breakpoint={props.breakpoint}>
             <React.Suspense fallback={<PageSpinner />}>
-              <Route exact path="/my-classes" component={ClassPage} />
-              <Route exact path="/my-classes/:classId" component={ClassDetailPage} />
-              <Route path="/my-classes/:classId/Edit" component={ClassDetailEditPage} />
-              <Route exact path="/my-classes/:classId/Score" component={ClassScorePage} />
-              <Route path="/my-classes/:classId/Insert" component={ClassDetailInsertPage} />
+
+              <Route path="/classes" component={ClassPages} />
 
               <Route path="/Person" component={PersonPage} />
 
@@ -75,6 +71,11 @@ const App = (props) => {
               <Route exact path="/Device_Management/Return" component={DeviceReturnPage} />
               <Route exact path="/Device_Management/Insert" component={DeviceInsertPage} />
 
+
+              <Route path="/payment" component={PaymentPage} />
+              <Route path="/exams" component={ExamsPage} />
+              <Route path="/assignments" component={Assignments} />
+              <Route path="/account" component={AccountPage} />
 
               <Route exact path="/" component={DashboardPage} />
               <Route exact path="/login-modal" component={AuthModalPage} />
@@ -97,9 +98,9 @@ const App = (props) => {
               <Route exact path="/input-groups" component={InputGroupPage} />
               <Route exact path="/charts" component={ChartPage} />
 
-              <Route path="/">
+              {/* <Route path="/">
                 <Redirect to="/" />
-              </Route>
+              </Route> */}
 
             </React.Suspense>
           </MainLayout>

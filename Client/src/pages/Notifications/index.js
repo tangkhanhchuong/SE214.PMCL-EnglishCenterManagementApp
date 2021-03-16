@@ -3,20 +3,20 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom'
 
 import PageSpinner from 'components/PageSpinner'
 
-import AccountPage from './AccountPage'
+import AllNotificationsPage from './AllNotificationsPage'
 
-const AccountRoutes = () => {
+const ClassRoutes = () => {
     let { path } = useRouteMatch();
 
     return (
         <div>
             <Switch>
                 <React.Suspense fallback={<PageSpinner />}>
-                    <Route exact path={`${path}`} component={AccountPage} />
+                    <Route exact path={`${path}`} component={AllNotificationsPage} />
                 </React.Suspense>
             </Switch>
         </div>
     )
 }
 
-export default AccountRoutes
+export default ClassRoutes

@@ -5,18 +5,18 @@ import { NavLink } from 'react-router-dom'
 const tableTypes = ['', '']
 
 const studentsInClass = [
-    { id: "18520010", fullName: "TK Chuong", email: "chuong@gmail.com", phone: "11111" }
-]
-
-const instructorInClass = [
     { id: "18520010", fullName: "TK Chuong", email: "chuong@gmail.com", phone: "11111" },
     { id: "18520010", fullName: "TK Chuong", email: "chuong@gmail.com", phone: "11112" },
     { id: "18520010", fullName: "TK Chuong", email: "chuong@gmail.com", phone: "11113" },
     { id: "18520010", fullName: "TK Chuong", email: "chuong@gmail.com", phone: "11114" }
 ]
 
+const instructorInClass = [
+    { id: "18520010", fullName: "TK Chuong", email: "chuong@gmail.com", phone: "11111" }
+]
 
-const ClassJoiners = ({ classId, currentUrl }) => {
+
+const ClassAttendees = ({ classId, currentUrl }) => {
     const userRoleId = localStorage.getItem("roleId")
 
     let GetJoinersRows = (kIndex) => {
@@ -96,4 +96,4 @@ const ClassJoiners = ({ classId, currentUrl }) => {
     )
 }
 
-export default ClassJoiners
+export default ClassAttendees

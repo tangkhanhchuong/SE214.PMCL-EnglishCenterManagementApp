@@ -1,5 +1,5 @@
-import Page from 'components/Page';
-import React, { useState, useEffect } from 'react';
+import Page from 'components/Page'
+import React, { useState, useEffect } from 'react'
 import {
     Button,
     Card,
@@ -13,10 +13,10 @@ import {
     Input,
     Label,
     Row,
-} from 'reactstrap';
-import { NavLink, useHistory } from 'react-router-dom';
+} from 'reactstrap'
+import { NavLink, useHistory } from 'react-router-dom'
 
-import { useHttpClient } from 'hooks/http-hook';
+import { useHttpClient } from 'hooks/http-hook'
 
 const FORMSTATUS = {
     DEFAULT: 1,
@@ -26,18 +26,18 @@ const FORMSTATUS = {
 }
 
 
-const FormPage = (props) => {
-    const currentUrl = props.match.url.split("/");
-    const goBackUrl = `/${currentUrl[1]}/${currentUrl[2]}`;
-    const classId = props.match.params.classId;
-    const history = useHistory();
-    let kClassId = 1;
-    let [formStatus, setFormStatus] = useState(FORMSTATUS.DEFAULT);
-    const { sendRequest } = useHttpClient();
+const ClassDetailInsertPage = (props) => {
+    const currentUrl = props.match.url.split("/")
+    const goBackUrl = `/${currentUrl[1]}/${currentUrl[2]}`
+    const classId = props.match.params.classId
+    const history = useHistory()
+    let kClassId = 1
+    let [formStatus, setFormStatus] = useState(FORMSTATUS.DEFAULT)
+    const { sendRequest } = useHttpClient()
 
-    let [searchType, setSearchType] = useState("Student");
-    let [personId, setPersonId] = useState("");
-    let [personInfo, setPersonInfo] = useState({});
+    let [searchType, setSearchType] = useState("Student")
+    let [personId, setPersonId] = useState("")
+    let [personInfo, setPersonInfo] = useState({})
 
     useEffect(() => {
         sendRequest(
@@ -46,29 +46,29 @@ const FormPage = (props) => {
         )
             .then((response) => {
                 if (response.ok) {
-                    return response.json();
+                    return response.json()
                 } else {
                     throw Error("Get Person Info Failed !!")
                 }
             })
             .then((response) => {
-                console.log(response.data);
+                console.log(response.data)
                 if (response.data)
-                    kClassId = response.data.id;
+                    kClassId = response.data.id
                 else
                     throw Error("Get Person Info Failed !!")
 
             })
             .catch((error) => {
-                console.log(error);
+                console.log(error)
 
-            });
+            })
     }, [])
 
     let GetPersonInfo = (event) => {
         const kPersonId = event.target.value
-        setPersonId(kPersonId);
-        let kSearchType = searchType.toLowerCase();
+        setPersonId(kPersonId)
+        let kSearchType = searchType.toLowerCase()
         if (kPersonId.length === 8) {
             sendRequest(
                 `http://localhost:5000/v1/${kSearchType}/${kPersonId}`,
@@ -76,31 +76,31 @@ const FormPage = (props) => {
             )
                 .then((response) => {
                     if (response.ok) {
-                        return response.json();
+                        return response.json()
                     } else {
                         throw Error("Get Person Info Failed !!")
                     }
                 })
                 .then((response) => {
-                    console.log(response.data);
+                    console.log(response.data)
                     if (response.data)
-                        setPersonInfo(response.data);
+                        setPersonInfo(response.data)
                     else
                         throw Error("Get Person Info Failed !!")
 
                 })
                 .catch((error) => {
-                    console.log(error);
+                    console.log(error)
                     setPersonInfo({ fail: true })
-                });
+                })
         } else {
-            setPersonInfo({});
+            setPersonInfo({})
         }
     }
 
     let handleSubmit = event => {
-        setFormStatus(FORMSTATUS.LOADING);
-        event.preventDefault();
+        setFormStatus(FORMSTATUS.LOADING)
+        event.preventDefault()
 
         sendRequest(
             `http://localhost:5000/v1/class/${classId}/joiner`,
@@ -116,24 +116,24 @@ const FormPage = (props) => {
         )
             .then((response) => {
                 if (response.ok) {
-                    return response.json();
+                    return response.json()
                 } else {
                     throw Error("Return device Failed !!")
                 }
             })
             .then((response) => {
-                console.log(response);
+                console.log(response)
                 setTimeout(() => {
-                    setFormStatus(FORMSTATUS.REQUEST_SUCCESSFULLY);
-                    alert("Insert to class successfully !");
-                    history.push(goBackUrl);
-                }, 1000);
+                    setFormStatus(FORMSTATUS.REQUEST_SUCCESSFULLY)
+                    alert("Insert to class successfully !")
+                    history.push(goBackUrl)
+                }, 1000)
 
             })
             .catch((error) => {
-                console.log(error);
-                setFormStatus(FORMSTATUS.REQUEST_FAIL);
-            });
+                console.log(error)
+                setFormStatus(FORMSTATUS.REQUEST_FAIL)
+            })
     }
 
     return (
@@ -185,7 +185,7 @@ const FormPage = (props) => {
 
             </Row>
         </Page>
-    );
-};
+    )
+}
 
-export default FormPage;
+export default ClassDetailInsertPage

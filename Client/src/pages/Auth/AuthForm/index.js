@@ -35,9 +35,9 @@ const AuthForm = (props) => {
 
     let LoginSuccessfully = async (userData) => {
 
-        const fakeUserData = { ...userData, roleId: 2, userId: 1 }
+        const fakeUserData = { ...userData, roleId: 3, userId: 1 }
+        console.log("Hi");
         localStorage.setItem("userData", JSON.stringify(fakeUserData));
-        console.log(userData);
         dispatch(UpdateUserData({
             token: fakeUserData.token,
             roleId: fakeUserData.roleId,

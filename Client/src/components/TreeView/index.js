@@ -8,8 +8,8 @@ const TreeList = () => {
         <div className="row">
             <div className="col text-center">
                 <div className="mt-3">
-                    <div className="row mt-3 d-flex">
-                        <div className="col-lg-8 text-left text-dark">
+                    <div className="row mt-3 d-flex justify-content-center">
+                        <div className="col-lg-8 text-left text-dark border rounded">
                             <Tree data={treeData} />
                         </div>
                     </div>

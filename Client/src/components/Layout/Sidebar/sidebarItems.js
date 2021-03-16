@@ -27,11 +27,11 @@ const generateStudentSidebar = () => {
 
     const sidebarItems = [
         { to: '/', name: 'Dashboard', exact: true, Icon: MdDashboard },
-        { to: '/my-classes', name: 'My Classes', exact: true, Icon: MdClass },
+        { to: '/all-classes', name: 'My Classes', exact: true, Icon: MdClass },
         {
             to: '/my-exams', name: 'Exams', exact: true, Icon: MdAlbum, children: [
-                { to: '/my-exams/exam-schedule', name: 'Exam Schedule', exact: true },
-                { to: '/my-exams/exam-grades', name: 'Exam Grades', exact: true },
+                { to: '/my-exams/all', name: 'Exam Grades', exact: true },
+                { to: '/my-exams/schedule', name: 'Exam Schedule', exact: true },
             ]
         },
         { to: '/assignment', name: 'Assignments', exact: true, Icon: MdAssignment },
@@ -48,17 +48,17 @@ const generateStudentSidebar = () => {
 const generateInstructorSidebar = () => {
     const sidebarItems = [
         { to: '/', name: 'Dashboard', exact: true, Icon: MdDashboard },
-        { to: '/my-classes', name: 'My Classes', exact: true, Icon: MdBook },
+        { to: '/all-classes', name: 'My Classes', exact: true, Icon: MdBook },
         {
             to: '/my-exams', name: 'Exams', exact: true, Icon: MdAlbum, children: [
-                { to: '/my-exams/exam-schedule', name: 'Exam Schedule', exact: true, Icon: MdBook },
-                { to: '/my-exams/exam-grades', name: 'Exam Grades', exact: true, Icon: MdBook },
+                { to: '/my-exams/all', name: 'Exam Grades', exact: true },
+                { to: '/my-exams/schedule', name: 'Exam Schedule', exact: true },
             ]
         },
-        { to: '/assignment', name: 'Assignments', exact: true, Icon: MdAssignment },
+        { to: '/assignments', name: 'Assignments', exact: true, Icon: MdAssignment },
+        { to: '/payment', name: 'Payment', exact: true, Icon: MdPayment },
+        { to: '/notifications', name: 'Notification', exact: true, Icon: MdNotifications },
         { to: '/message', name: 'Message', exact: true, Icon: MdChatBubble },
-        { to: '/notification', name: 'Notification', exact: true, Icon: MdNotifications },
-        { to: '/payment', name: 'Tuition', exact: true, Icon: MdPayment },
         { to: '/account', name: 'Account', exact: false, Icon: MdAccountCircle }
     ]
 
@@ -66,23 +66,15 @@ const generateInstructorSidebar = () => {
 }
 
 const generateManagerSidebar = () => {
-
     const sidebarItems = [
-        {
-            to: '/', name: 'Dashboard', exact: true, Icon: MdDashboard, children: [
-                { to: '/Class', name: 'Dashboard', exact: true, Icon: MdDashboard },
-                { to: '/Class', name: 'Dashboard', exact: true, Icon: MdDashboard }
-            ]
-        },
-        {
-            to: '/Class', name: 'All Classes', exact: false, Icon: MdSchool, children: [
-                { to: '/Class', name: 'Dashboard', exact: true, Icon: MdDashboard },
-                { to: '/Class', name: 'Dashboard', exact: true, Icon: MdDashboard }
-            ]
-        },
-        { to: '/Device', name: 'All Devices', exact: false, Icon: MdInsertChart },
-        { to: '/Person', name: 'All Person', exact: false, Icon: MdInsertChart },
-        { to: '/Manager_Area', name: 'Manager Area', exact: false, Icon: MdWork }
+        { to: '/', name: 'Dashboard', exact: true, Icon: MdDashboard },
+        { to: '/classes', name: 'My Classes', exact: true, Icon: MdBook },
+        { to: '/exams', name: 'Exams', exact: true, Icon: MdAlbum },
+        { to: '/assignments', name: 'Assignments', exact: true, Icon: MdAssignment },
+        { to: '/payment', name: 'Payment', exact: true, Icon: MdPayment },
+        { to: '/notifications', name: 'Notification', exact: true, Icon: MdNotifications },
+        { to: '/message', name: 'Message', exact: true, Icon: MdChatBubble },
+        { to: '/account', name: 'Account', exact: false, Icon: MdAccountCircle }
     ]
 
     return sidebarItems
