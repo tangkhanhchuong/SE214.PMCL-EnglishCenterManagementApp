@@ -1,0 +1,24 @@
+.account-area {
+    position: relative
+}
+
+.contact-card {
+
+    width: 450px;
+    height: 300px;
+
+    position: absolute;
+    left: 20px;
+    top: 120px;
+    z-index: 1
+}
+
+.about-card {
+    width: 700px;
+    height: 300px;
+
+    position: absolute;
+    left: 500px;
+    top: 120px;
+    z-index: 1
+}

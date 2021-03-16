@@ -23,7 +23,7 @@ const ClassDetailEditPage = (props) => {
     const [removedStudents, setRemovedStudents] = useState([]);
 
 
-    let GetAllJoinersInClass = (type, callback) => {
+    let getAllAttendeesInClass = (type, callback) => {
         sendRequest(
             `${SYSTEM_URL}/v1/class/${classId}/${type}`,
             'GET',
@@ -47,9 +47,8 @@ const ClassDetailEditPage = (props) => {
     }
 
     useEffect(() => {
-        GetAllJoinersInClass("students", setStudents);
-        GetAllJoinersInClass("lecturers", setLecturers);
-
+        getAllAttendeesInClass("students", setStudents);
+        getAllAttendeesInClass("lecturers", setLecturers);
     }, []);
 
 

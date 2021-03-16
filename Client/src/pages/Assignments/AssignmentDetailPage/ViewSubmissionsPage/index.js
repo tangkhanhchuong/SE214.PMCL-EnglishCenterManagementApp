@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Card, Table, Button } from 'reactstrap'
+import { Card, Table, CardHeader, CardBody, Row, Col } from 'reactstrap'
 import { NavLink, useRouteMatch } from 'react-router-dom'
 import { FaFile } from 'react-icons/fa'
 
@@ -85,22 +85,31 @@ const ViewSubmissionsPage = () => {
 
     return (
         <>
-            <Card body>
-                <Table hover>
-                    <thead>
-                        <tr>
-                            <th>Submitter Id</th>
-                            <th>Submitter Name</th>
-                            <th>Submit Time</th>
-                            <th>Submission</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            getAllSubmissions()
-                        }
-                    </tbody>
-                </Table>
+            <Card className="mb-3">
+                <CardHeader><h2>Submissions</h2></CardHeader>
+                <CardBody>
+                    <Row>
+                        <Col>
+                            <Card body>
+                                <Table hover>
+                                    <thead>
+                                        <tr>
+                                            <th>Submitter Id</th>
+                                            <th>Submitter Name</th>
+                                            <th>Submit Time</th>
+                                            <th>Submission</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            getAllSubmissions()
+                                        }
+                                    </tbody>
+                                </Table>
+                            </Card>
+                        </Col>
+                    </Row >
+                </CardBody >
             </Card>
         </>
     )

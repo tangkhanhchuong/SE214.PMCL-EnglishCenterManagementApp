@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Card, Table, Button } from 'reactstrap';
+import { Card, Table, Button, CardHeader, CardBody, Col, Row } from 'reactstrap';
 import Page from 'components/Page';
 import { NavLink } from 'react-router-dom';
 
@@ -43,27 +43,37 @@ const AllAssignmentsPage = () => {
             className="allAssignments"
             breadcrumbs={[{ name: 'Assignments' }]}
         >
-            <NavLink to='/assignments/'><Button>Add Assignment</Button></NavLink>
-            <Card body className="mt-3">
-                <Table hover>
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Class Id</th>
-                            <th>Class Name</th>
-                            <th>Semester</th>
-                            <th>Academic Year</th>
-                            <th>Time</th>
-                            <th>Created At</th>
-                            <th>Creator</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            getAllAssignments()
-                        }
-                    </tbody>
-                </Table>
+            <NavLink to='/assignments'><Button>Add Assignment</Button></NavLink>
+            <Card className="m-3">
+                <CardHeader><h2>All Assignments</h2></CardHeader>
+                <CardBody>
+                    <Row>
+                        <Col>
+                            <Card body>
+                                <Table hover>
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Class Id</th>
+                                            <th>Class Name</th>
+                                            <th>Semester</th>
+                                            <th>Academic Year</th>
+                                            <th>Time</th>
+                                            <th>Created At</th>
+                                            <th>Creator</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            getAllAssignments()
+                                        }
+                                    </tbody>
+                                </Table>
+                            </Card>
+                            <Card body></Card>
+                        </Col>
+                    </Row>
+                </CardBody>
             </Card>
         </Page>
     );

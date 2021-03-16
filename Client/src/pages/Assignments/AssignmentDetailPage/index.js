@@ -20,12 +20,13 @@ const AssignmentDetailPage = () => {
     return (
         <Page
             className="AssignmentDetailPage"
-            breadcrumbs={[{ name: 'My Classes' }, { name: params.assignmentId }]}>
-            <Button onClick={onChangeViewMode}>{viewContent ? "View Submission" : "View Content"}</Button>
+            breadcrumbs={[{ name: 'Assignments' }, { name: params.assignmentId }]}>
+            <NavLink to="/assignments"><Button outline className="mr-3" color="success">Back</Button></NavLink>
+            <Button outline onClick={onChangeViewMode}>{viewContent ? "View Submission" : "View Content"}</Button>
             <div className="mt-3">
                 {viewContent ? <AssignmentContentPage /> : <SubmissionsPage />}
             </div>
-        </Page>
+        </Page >
     )
 }
 

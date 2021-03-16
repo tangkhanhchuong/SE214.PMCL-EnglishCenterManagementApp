@@ -22,8 +22,8 @@ const ClassDetailPage = (props) => {
                 <NavLink to="/classes" style={{ textDecoration: 'none' }}>
                     <Button className="mb-3 mr-3" color="success">Back</Button>
                 </NavLink>
-                <Button className="mb-3" color='primary' onClick={() => { setIsInWorkSpace(prev => !prev) }}>{isInWorkSpace ? "Joiners" : "Work Space"}</Button >
-                <h2>{isInWorkSpace ? "Work Space" : "Joiners List"}</h2>
+                <Button className="mb-3" color='primary' onClick={() => { setIsInWorkSpace(prev => !prev) }}>{isInWorkSpace ? "Attendees" : "Work Space"}</Button >
+                <h2>{isInWorkSpace ? "Work Space" : "Attendees List"}</h2>
                 {
                     isInWorkSpace ? <WorkSpace /> : <ClassAttendees classId={classId} currentUrl={currentUrl} />
                 }

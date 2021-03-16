@@ -19,7 +19,7 @@ const instructorInClass = [
 const ClassAttendees = ({ classId, currentUrl }) => {
     const userRoleId = localStorage.getItem("roleId")
 
-    let GetJoinersRows = (kIndex) => {
+    let getAttendeesRows = (kIndex) => {
         let joinerArr = kIndex === 0 ? studentsInClass : instructorInClass
         return (
             joinerArr.map((row, index) => {
@@ -80,7 +80,7 @@ const ClassAttendees = ({ classId, currentUrl }) => {
                                                 </thead>
                                                 <tbody>
                                                     {
-                                                        GetJoinersRows(index)
+                                                        getAttendeesRows(index)
                                                     }
                                                 </tbody>
                                             </Table>

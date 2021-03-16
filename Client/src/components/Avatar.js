@@ -40,8 +40,7 @@ Avatar.defaultProps = {
   rounded: false,
   circle: true,
   size: 40,
-  src: userImage,
-  style: {},
+  src: userImage
 };
 
 export default Avatar;
