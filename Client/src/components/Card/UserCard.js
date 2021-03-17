@@ -7,16 +7,8 @@ import { Card, CardTitle, CardSubtitle, CardText, CardBody } from 'reactstrap';
 
 import Avatar from '../Avatar';
 
-const UserCard = ({
-  avatar,
-  avatarSize,
-  title,
-  subtitle,
-  text,
-  children,
-  className,
-  ...restProps
-}) => {
+const UserCard = ({ avatar, avatarSize, title, subtitle, text, children, className, ...restProps }) => {
+
   const classes = classNames('bg-gradient-theme', className);
 
   return (
