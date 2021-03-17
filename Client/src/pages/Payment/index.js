@@ -1,22 +1,21 @@
-import React, { useState } from 'react'
-import { Button } from 'reactstrap'
-import { NavLink } from 'react-router-dom'
+import React from 'react'
+import { Route, Switch, useRouteMatch } from 'react-router-dom'
 
-import Page from 'components/Page'
+import PageSpinner from 'components/PageSpinner'
+import PaymentHistoriesPage from './PaymentHistoriesPage'
 
-const PaymentPage = (props) => {
-    // const [isInWorkSpace, setIsInWorkSpace] = useState(true)
-
+const PaymentRoutes = () => {
+    let { path } = useRouteMatch();
 
     return (
-        <>
-            <Page
-                className="TablePage"
-                breadcrumbs={[{ name: 'Payment' }]} >
-
-            </Page>
-        </>
+        <div>
+            <Switch>
+                <React.Suspense fallback={<PageSpinner />}>
+                    <Route exact path={`${path}`} component={PaymentHistoriesPage} />
+                </React.Suspense>
+            </Switch>
+        </div>
     )
 }
 
-export default PaymentPage
+export default PaymentRoutes
