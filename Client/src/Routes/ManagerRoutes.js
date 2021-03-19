@@ -40,8 +40,8 @@ const PaymentPages = React.lazy(() => import('pages/Payment'))
 const ExamsPages = React.lazy(() => import('pages/Exams'))
 const AssignmentsPages = React.lazy(() => import('pages/Assignments'))
 const AccountPages = React.lazy(() => import('pages/Account'))
+const MessagesPages = React.lazy(() => import('pages/Messages'))
 const NotificationsPages = React.lazy(() => import('pages/Notifications'))
-
 
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`
@@ -55,9 +55,8 @@ const App = (props) => {
         <Switch>
           <MainLayout breakpoint={props.breakpoint}>
             <React.Suspense fallback={<PageSpinner />}>
-              <Route path="/classes" component={ClassPages} />
 
-              <Route path="/exams" component={ExamsPages} />
+              <Route path="/classes" component={ClassPages} />
 
               <Route path="/Person" component={PersonPage} />
 
@@ -75,9 +74,11 @@ const App = (props) => {
 
 
               <Route path="/payment" component={PaymentPages} />
+              <Route path="/exams" component={ExamsPages} />
               <Route path="/assignments" component={AssignmentsPages} />
-              <Route path="/account" component={AccountPages} />
+              <Route path="/messages" component={MessagesPages} />
               <Route path="/notifications" component={NotificationsPages} />
+              <Route path="/account" component={AccountPages} />
 
               <Route exact path="/" component={DashboardPage} />
               {/* <Route exact path="/login-modal" component={AuthModalPage} />

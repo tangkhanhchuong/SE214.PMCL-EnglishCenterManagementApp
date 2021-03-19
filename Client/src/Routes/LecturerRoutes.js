@@ -36,10 +36,11 @@ const DeviceBorrowDetailPage = React.lazy(() => import('pages/Device/DeviceBorro
 const DeviceReturnPage = React.lazy(() => import('pages/Device/DeviceReturnPage'))
 const DeviceInsertPage = React.lazy(() => import('pages/Device/DeviceInsertPage'))
 
-const PaymentPage = React.lazy(() => import('pages/Payment'))
-const ExamsPage = React.lazy(() => import('pages/Exams'))
-const Assignments = React.lazy(() => import('pages/Assignments'))
-const AccountPage = React.lazy(() => import('pages/Account'))
+const PaymentPages = React.lazy(() => import('pages/Payment'))
+const ExamsPages = React.lazy(() => import('pages/Exams'))
+const AssignmentsPages = React.lazy(() => import('pages/Assignments'))
+const AccountPages = React.lazy(() => import('pages/Account'))
+const MessagesPages = React.lazy(() => import('pages/Messages'))
 
 
 const getBasename = () => {
@@ -72,10 +73,11 @@ const App = (props) => {
               <Route exact path="/Device_Management/Insert" component={DeviceInsertPage} />
 
 
-              <Route path="/payment" component={PaymentPage} />
-              <Route path="/exams" component={ExamsPage} />
-              <Route path="/assignments" component={Assignments} />
-              <Route path="/account" component={AccountPage} />
+              <Route path="/payment" component={PaymentPages} />
+              <Route path="/exams" component={ExamsPages} />
+              <Route path="/assignments" component={AssignmentsPages} />
+              <Route path="/messages" component={MessagesPages} />
+              <Route path="/account" component={AccountPages} />
 
               <Route exact path="/" component={DashboardPage} />
               {/* <Route exact path="/login-modal" component={AuthModalPage} />

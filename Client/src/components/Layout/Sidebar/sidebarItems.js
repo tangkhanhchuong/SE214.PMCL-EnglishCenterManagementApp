@@ -35,9 +35,9 @@ const generateStudentSidebar = () => {
             ]
         },
         { to: '/assignment', name: 'Assignments', exact: true, Icon: MdAssignment },
-        { to: '/message', name: 'Message', exact: true, Icon: MdChatBubble },
-        { to: '/notification', name: 'Notification', exact: true, Icon: MdNotifications },
-        { to: '/tuition', name: 'Tuition', exact: true, Icon: MdPayment },
+        { to: '/messages', name: 'Message', exact: true, Icon: MdChatBubble },
+        { to: '/notification', name: 'Notifications', exact: true, Icon: MdNotifications },
+        { to: '/payment', name: 'Payment', exact: true, Icon: MdPayment },
         { to: '/library', name: 'Library', exact: true, Icon: MdLibraryBooks },
         { to: '/account', name: 'Account', exact: false, Icon: MdAccountCircle }
     ]
@@ -57,8 +57,8 @@ const generateInstructorSidebar = () => {
         },
         { to: '/assignments', name: 'Assignments', exact: true, Icon: MdAssignment },
         { to: '/payment', name: 'Payment', exact: true, Icon: MdPayment },
-        { to: '/notifications', name: 'Notification', exact: true, Icon: MdNotifications },
-        { to: '/message', name: 'Message', exact: true, Icon: MdChatBubble },
+        { to: '/notifications', name: 'Notifications', exact: true, Icon: MdNotifications },
+        { to: '/messages', name: 'Message', exact: true, Icon: MdChatBubble },
         { to: '/account', name: 'Account', exact: false, Icon: MdAccountCircle }
     ]
 
@@ -72,8 +72,8 @@ const generateManagerSidebar = () => {
         { to: '/exams', name: 'Exams', exact: true, Icon: MdAlbum },
         { to: '/assignments', name: 'Assignments', exact: true, Icon: MdAssignment },
         { to: '/payment', name: 'Payment', exact: true, Icon: MdPayment },
-        { to: '/notifications', name: 'Notification', exact: true, Icon: MdNotifications },
-        { to: '/message', name: 'Message', exact: true, Icon: MdChatBubble },
+        { to: '/notifications', name: 'Notifications', exact: true, Icon: MdNotifications },
+        { to: '/messages', name: 'Message', exact: true, Icon: MdChatBubble },
         { to: '/account', name: 'Account', exact: false, Icon: MdAccountCircle }
     ]
 

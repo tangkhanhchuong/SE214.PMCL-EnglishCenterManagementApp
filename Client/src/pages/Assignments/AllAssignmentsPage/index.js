@@ -43,7 +43,7 @@ const AllAssignmentsPage = () => {
             className="allAssignments"
             breadcrumbs={[{ name: 'Assignments' }]}
         >
-            <NavLink to='/assignments'><Button>Add Assignment</Button></NavLink>
+            <NavLink to='/assignments/add'><Button>Add Assignment</Button></NavLink>
             <Card className="m-3">
                 <CardHeader><h2>All Assignments</h2></CardHeader>
                 <CardBody>

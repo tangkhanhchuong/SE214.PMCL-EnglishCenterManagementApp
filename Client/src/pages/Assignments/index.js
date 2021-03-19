@@ -11,13 +11,13 @@ const AssignmentsRoutes = () => {
 
     return (
         <div>
-            <Switch>
-                <React.Suspense fallback={<PageSpinner />}>
+            <React.Suspense fallback={<PageSpinner />}>
+                <Switch>
                     <Route exact path={`${path}/add`} component={AddAssignmentPage} />
                     <Route exact path={`${path}`} component={AllAssignmentsPage} />
                     <Route exact path={`${path}/:assignmentId`} component={AssignmentDetailPage} />
-                </React.Suspense>
-            </Switch>
+                </Switch>
+            </React.Suspense>
         </div>
     )
 }

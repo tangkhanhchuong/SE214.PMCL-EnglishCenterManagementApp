@@ -2,18 +2,15 @@ import React, { useState } from 'react'
 import { Button } from 'reactstrap'
 
 const PaidButton = ({ status }) => {
-    const [paid, setPaid] = useState(status === "PAID")
-    const onClickHandler = () => { setPaid(true) }
+    const paid = status === "PAID"
 
-    return (paid ?
-        <Button color='success' onClick={onClickHandler}>PAID</Button>
-        :
-        <Button color='danger' onClick={onClickHandler}>UNPAID</Button>)
+    return (
+        paid ? <Button color='success'>PAID</Button>
+            : <Button color='danger'>UNPAID</Button>
+    )
 }
 
 const PaymentHistoryRow = ({ history }) => {
-
-
     return (
         <tr >
             <th scope="row" >{history.id}</th>

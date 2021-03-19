@@ -1,10 +1,12 @@
-import logo200Image from 'assets/img/logo/logo_200.png';
-import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
-import { useHttpClient } from '../hooks/http-hook';
-import { useDispatch } from 'react-redux';
-import { UpdateUserData } from '../Redux/Reducers/UserData/actions'
+import logo200Image from 'assets/img/logo/logo_200.png'
+import PropTypes from 'prop-types'
+import React, { useState } from 'react'
+import { Button, Form, FormGroup, Input, Label } from 'reactstrap'
+import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+
+import { useHttpClient } from 'hooks/http-hook'
+import { UpdateUserData } from 'Redux/Reducers/UserData/actions'
 
 const FormStatus = {
   DEFAULT: 1,
@@ -15,46 +17,51 @@ const FormStatus = {
 
 const AuthForm = (props) => {
 
-  const dispatch = useDispatch();
-  const { sendRequest } = useHttpClient();
+  const dispatch = useDispatch()
+  const history = useHistory()
+  const { sendRequest } = useHttpClient()
 
-  let [formStatus, setFormStatus] = useState(FormStatus.DEFAULT);
+  let [formStatus, setFormStatus] = useState(FormStatus.DEFAULT)
 
   let isLogin = () => {
-    return props.authState === STATE_LOGIN;
+    return props.authState === STATE_LOGIN
   }
 
   let isSignup = () => {
-    return props.authState === STATE_SIGNUP;
+    return props.authState === STATE_SIGNUP
   }
 
   let changeAuthState = authState => event => {
-    event.preventDefault();
-    props.onChangeAuthState(authState);
-  };
+    event.preventDefault()
+    props.onChangeAuthState(authState)
+  }
 
   let LoginSuccessfully = async (userData) => {
 
     const fakeUserData = { ...userData, roleId: 2, userId: 1 }
-    localStorage.setItem("userData", JSON.stringify(fakeUserData));
-    console.log(userData);
+    localStorage.setItem("userData", JSON.stringify(fakeUserData))
+
+
+    console.log("Login", "AuthForm", 45);
     dispatch(UpdateUserData({
       token: fakeUserData.token,
       roleId: fakeUserData.roleId,
       userId: fakeUserData.userId,
       email: fakeUserData.user.email,
       name: fakeUserData.user.name
-    }));
+    }))
+
+    console.log("Login", "AuthForm", 52);
   }
 
 
   let handleSubmit = event => {
-    setFormStatus(FormStatus.LOADING);
-    event.preventDefault();
-    let email = event.target["email"].value;
-    let password = event.target["password"].value;
-    console.log(email, password);
-    let authType = isSignup() ? 'signup' : 'login';
+    setFormStatus(FormStatus.LOADING)
+    event.preventDefault()
+    let email = event.target["email"].value
+    let password = event.target["password"].value
+    console.log(email, password)
+    let authType = isSignup() ? 'signup' : 'login'
     sendRequest(
       `${process.env.REACT_APP_SERVER_BASE_URL}/auth/${authType}`,
       'POST',
@@ -67,36 +74,36 @@ const AuthForm = (props) => {
     )
       .then((response) => {
         if (response.ok) {
-          return response.json();
+          return response.json()
         } else {
           throw Error("Authentication Failed !!")
         }
       })
       .then((response) => {
-        setTimeout(() => LoginSuccessfully(response), 1000);
-        setFormStatus(FormStatus.LOGIN_SUCCESSFULLY);
+        setTimeout(() => LoginSuccessfully(response), 1000)
+        setFormStatus(FormStatus.LOGIN_SUCCESSFULLY)
       })
       .catch((error) => {
-        console.log(error);
-        setFormStatus(FormStatus.LOGIN_FAIL);
-      });
-  };
+        console.log(error)
+        setFormStatus(FormStatus.LOGIN_FAIL)
+      })
+  }
 
   let renderButtonText = () => {
-    const { buttonText } = props;
+    const { buttonText } = props
 
     if (formStatus == FormStatus.LOADING)
-      return 'Loading...';
+      return 'Loading...'
 
     if (!buttonText && isLogin()) {
-      return 'Login';
+      return 'Login'
     }
 
     if (!buttonText && isSignup()) {
-      return 'Signup';
+      return 'Signup'
     }
 
-    return buttonText;
+    return buttonText
   }
 
 
@@ -110,7 +117,7 @@ const AuthForm = (props) => {
     confirmPasswordInputProps,
     children,
     onLogoClick,
-  } = props;
+  } = props
 
   return (
 
@@ -182,12 +189,12 @@ const AuthForm = (props) => {
       {children}
     </Form>
 
-  );
+  )
 
 }
 
-export const STATE_LOGIN = 'LOGIN';
-export const STATE_SIGNUP = 'SIGNUP';
+export const STATE_LOGIN = 'LOGIN'
+export const STATE_SIGNUP = 'SIGNUP'
 
 AuthForm.propTypes = {
   authState: PropTypes.oneOf([STATE_LOGIN, STATE_SIGNUP]).isRequired,
@@ -199,7 +206,7 @@ AuthForm.propTypes = {
   confirmPasswordLabel: PropTypes.string,
   confirmPasswordInputProps: PropTypes.object,
   onLogoClick: PropTypes.func,
-};
+}
 
 AuthForm.defaultProps = {
   authState: 'LOGIN',
@@ -226,6 +233,6 @@ AuthForm.defaultProps = {
     required: true
   },
   onLogoClick: () => { },
-};
+}
 
-export default AuthForm;
+export default AuthForm

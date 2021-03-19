@@ -3,22 +3,21 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom'
 
 import PageSpinner from 'components/PageSpinner'
 
-import AllNotificationsPage from './AllNotificationsPage'
-import AddNotificationPage from './AddNotificationPage'
+import ChatPage from './ChatPage'
 
-const ClassRoutes = () => {
+const MessagesRoute = () => {
     let { path } = useRouteMatch();
 
     return (
         <div>
             <Switch>
                 <React.Suspense fallback={<PageSpinner />}>
-                    <Route exact path={`${path}`} component={AllNotificationsPage} />
-                    <Route exact path={`${path}/add`} component={AddNotificationPage} />
+                    <Route exact path={`${path}`} component={ChatPage} />
+                    {/* <Route exact path={`${path}/schedules`} component={ExamsSchedulePage} /> */}
                 </React.Suspense>
             </Switch>
         </div>
     )
 }
 
-export default ClassRoutes
+export default MessagesRoute
