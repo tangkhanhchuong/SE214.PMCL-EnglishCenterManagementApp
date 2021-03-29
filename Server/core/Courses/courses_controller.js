@@ -2,23 +2,24 @@
 const { HttpStatusCode, HttpStatus } = require("../Http/index")
 const { throwError } = require("../Errors/error_handler")
 
-const Course = require("./courses_model")
-const Class = require("../Classes/classes_model")
+const ClassServices = require("../Classes/classes_services")
+const CourseServices = require("./courses_services")
 
-const getAllCourses = async (req, res, next) => {
-    const courses = await Course.find()
+const GetAllCourses = async (req, res, next) => {
+    const courses = await CourseServices.FindCourses()
 
     HttpStatus.ok(res, {
         message: "Successfully",
+        count: courses.length,
         courses,
         method: req.method
     })
 }
 
-const getCourseDetails = async (req, res, next) => {
+const GetCourseDetails = async (req, res, next) => {
     const courseId = req.params.courseId
-    const [course] = await Course.find({ course_id: courseId })
-    const classesInCourse = await Class.find({ course_id: courseId })
+    const [course] = await CourseServices.FindCourses({ course_id: courseId })
+    const classesInCourse = await ClassServices.FindClasses({ course_id: courseId })
 
     HttpStatus.ok(res, {
         message: "Successfully",
@@ -27,4 +28,40 @@ const getCourseDetails = async (req, res, next) => {
     })
 }
 
-module.exports = { getAllCourses, getCourseDetails }
+const CreateCourse = async (req, res) => {
+    const { courseId, courseName, description } = req.body
+
+    const createdCourse = await CourseServices.CreateCourse({ courseId, courseName, description })
+
+    HttpStatus.ok(res, {
+        message: "Successfully",
+        createdCourse,
+        method: req.method
+    })
+}
+
+const UpdateCourse = async (req, res) => {
+    const { courseId, courseName, description } = req.body
+
+    const updatedCourse = await CourseServices.UpdateCourse(courseId, {
+        courseName, description
+    })
+
+    HttpStatus.ok(res, {
+        message: "Successfully",
+        updatedCourse,
+        method: req.method
+    })
+}
+
+const DeleteCourse = async (req, res) => {
+
+}
+
+module.exports = {
+    GetAllCourses,
+    GetCourseDetails,
+    CreateCourse,
+    DeleteCourse,
+    UpdateCourse
+}

@@ -4,9 +4,12 @@ const cors = require("cors")
 const http = require("http")
 
 const APP_PORT = 5000;
-const app = express()
+const app = require("./app")
+const { initiateApp } = require("./app")
 const server = http.createServer(app)
 
-app.listen(APP_PORT, () => {
-    console.log(`Listen to post ${PORT}`);
+initiateApp()
+
+server.listen(APP_PORT, () => {
+    console.log(`Listen to post ${APP_PORT}`);
 })

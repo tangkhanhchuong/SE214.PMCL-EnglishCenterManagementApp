@@ -1,30 +1,30 @@
-const { SQLQuery } = require("../Database")
-const queries = require("./queries.json")
 const { HttpStatus } = require("../Http")
-const Person = require("./persons_model")
+const PersonServices = require("./persons_services")
 
-const getAllInstructors = async (req, res, next) => {
-    const instructors = await Person.findAllInstructors()
+const GetAllInstructors = async (req, res, next) => {
+    const instructors = await PersonServices.GetAllInstructors()
 
     HttpStatus.ok(res, {
         message: "Successfully",
+        count: instructors.length,
         instructors,
         method: req.method
     })
 }
 
-const getAllStudents = async (req, res, next) => {
-    const students = await Person.findAllStudents()
+const GetAllStudents = async (req, res, next) => {
+    const students = await PersonServices.GetAllStudents()
 
     HttpStatus.ok(res, {
         message: "Successfully",
+        count: students.length,
         students,
         method: req.method
     })
 }
 
 module.exports = {
-    getAllInstructors,
-    getAllStudents
+    GetAllInstructors,
+    GetAllStudents
 
 }

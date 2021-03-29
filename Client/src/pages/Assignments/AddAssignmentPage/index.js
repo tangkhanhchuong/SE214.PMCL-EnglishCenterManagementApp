@@ -9,7 +9,7 @@ const AddAssignmentPage = () => {
         <div>
             <Page
                 className="allAssignments"
-                breadcrumbs={[{ name: 'Assignment' }]}
+                breadcrumbs={[{ name: 'Assignments' }]}
             >
                 <NavLink to='/assignments'><Button>All Assignments</Button></NavLink>
                 <div className="mt-3 row d-flex justify-content-center">

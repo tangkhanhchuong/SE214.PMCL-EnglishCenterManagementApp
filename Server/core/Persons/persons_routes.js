@@ -4,12 +4,8 @@ const classController = require('./persons_controller');
 
 const router = express.Router();
 
-router.get('/students', classController.getAllStudents);
+router.get('/students', classController.GetAllStudents);
 
-// router.post('/', authToken, courseController.insertCourse);
-
-// router.get('/:id/classes', courseController.getClassesInCourse);
-
-router.get('/instructors', classController.getAllInstructors);
+router.get('/instructors', classController.GetAllInstructors);
 
 module.exports = router;

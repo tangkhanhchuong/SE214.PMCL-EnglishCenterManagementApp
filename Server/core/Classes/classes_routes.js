@@ -1,15 +1,22 @@
-const express = require('express');
+const express = require('express')
 
-const classController = require('./classes_controller');
+const classController = require('./classes_controller')
 
-const router = express.Router();
+const router = express.Router()
 
-router.get('/', classController.getAllClasses);
+router.route('/')
+    .get(classController.GetAllClasses)
+    .post(classController.CreateClass)
 
-// router.post('/', authToken, courseController.insertCourse);
+router.route('/:classId')
+    .get(classController.GetClassDetails)
+    .patch(classController.UpdateClass)
+    .delete(classController.DeleteClass)
 
-// router.get('/:id/classes', courseController.getClassesInCourse);
+router.route('/:classId/students')
+    .get(classController.GetStudentsInClass)
 
-router.get('/:classId', classController.getClassDetails);
+router.route('/:classId/instructors')
+    .get(classController.GetInstructorsInClass)
 
-module.exports = router;
+module.exports = router

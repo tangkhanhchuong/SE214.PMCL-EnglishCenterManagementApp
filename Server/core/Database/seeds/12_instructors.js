@@ -5,7 +5,7 @@ exports.seed = function (knex) {
     .then(function () {
       // Inserts seed entries
       return knex('instructors').insert([
-        { joiner_id: "18520383", information_id: '333' }
+        { joiner_id: "18520383", information_id: '222' }
       ]);
     });
 };

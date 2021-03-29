@@ -1,4 +1,0 @@
-{
-    "ALL_PERSONS": "select * from Persons",
-    "ALL_PERSONAL_INFO": "select * from PersonalInformation"
-}

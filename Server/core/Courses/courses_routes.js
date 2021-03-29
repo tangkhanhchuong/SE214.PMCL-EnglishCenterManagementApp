@@ -1,17 +1,20 @@
-const express = require('express');
+const express = require('express')
 
-const courseController = require('./courses_controller');
-const authToken = require('../../utils/helpers/token-decoder');
+const courseController = require('./courses_controller')
+const authToken = require('../../utils/helpers/token-decoder')
 
-const router = express.Router();
+const router = express.Router()
 
-router.get('/', courseController.getAllCourses);
-
-// router.post('/', authToken, courseController.insertCourse);
-
-// router.get('/:id/classes', courseController.getClassesInCourse);
-
-router.get('/:courseId', courseController.getCourseDetails);
+router.route('/')
+    .get(courseController.GetAllCourses)
+    .post(courseController.CreateCourse)
 
 
-module.exports = router;
+
+router.route('/:courseId')
+    .get(courseController.GetCourseDetails)
+    .patch(courseController.UpdateCourse)
+    .delete(courseController.DeleteCourse)
+
+
+module.exports = router
