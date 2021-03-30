@@ -2,11 +2,11 @@
 const { HttpStatusCode, HttpStatus } = require("../Http/index")
 const { throwError } = require("../Errors/error_handler")
 
-const ClassServices = require("../Classes/classes_services")
-const CourseServices = require("./courses_services")
+const classesServices = require("../Classes/classes_services")
+const coursesServices = require("./courses_services")
 
 const GetAllCourses = async (req, res, next) => {
-    const courses = await CourseServices.FindCourses()
+    const courses = await coursesServices.FindCourses()
 
     HttpStatus.ok(res, {
         message: "Successfully",
@@ -18,8 +18,8 @@ const GetAllCourses = async (req, res, next) => {
 
 const GetCourseDetails = async (req, res, next) => {
     const courseId = req.params.courseId
-    const [course] = await CourseServices.FindCourses({ course_id: courseId })
-    const classesInCourse = await ClassServices.FindClasses({ course_id: courseId })
+    const [course] = await coursesServices.FindCourses({ course_id: courseId })
+    const classesInCourse = await classesServices.FindClasses({ course_id: courseId })
 
     HttpStatus.ok(res, {
         message: "Successfully",
@@ -31,7 +31,7 @@ const GetCourseDetails = async (req, res, next) => {
 const CreateCourse = async (req, res) => {
     const { courseId, courseName, description } = req.body
 
-    const createdCourse = await CourseServices.CreateCourse({ courseId, courseName, description })
+    const createdCourse = await coursesServices.CreateCourse({ courseId, courseName, description })
 
     HttpStatus.ok(res, {
         message: "Successfully",
@@ -43,7 +43,7 @@ const CreateCourse = async (req, res) => {
 const UpdateCourse = async (req, res) => {
     const { courseId, courseName, description } = req.body
 
-    const updatedCourse = await CourseServices.UpdateCourse(courseId, {
+    const updatedCourse = await coursesServices.UpdateCourse(courseId, {
         courseName, description
     })
 

@@ -1,22 +1,22 @@
 const express = require('express')
 
-const classController = require('./classes_controller')
+const classesController = require('./classes_controller')
 
 const router = express.Router()
 
 router.route('/')
-    .get(classController.GetAllClasses)
-    .post(classController.CreateClass)
+    .get(classesController.GetAllClasses)
+    .post(classesController.CreateClass)
 
 router.route('/:classId')
-    .get(classController.GetClassDetails)
-    .patch(classController.UpdateClass)
-    .delete(classController.DeleteClass)
+    .get(classesController.GetClassDetails)
+    .patch(classesController.UpdateClass)
+    .delete(classesController.DeleteClass)
 
 router.route('/:classId/students')
-    .get(classController.GetStudentsInClass)
+    .get(classesController.GetStudentsInClass)
 
 router.route('/:classId/instructors')
-    .get(classController.GetInstructorsInClass)
+    .get(classesController.GetInstructorsInClass)
 
 module.exports = router

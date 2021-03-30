@@ -1,20 +1,20 @@
 const express = require('express')
 
-const courseController = require('./courses_controller')
+const coursesController = require('./courses_controller')
 const authToken = require('../../utils/helpers/token-decoder')
 
 const router = express.Router()
 
 router.route('/')
-    .get(courseController.GetAllCourses)
-    .post(courseController.CreateCourse)
+    .get(coursesController.GetAllCourses)
+    .post(coursesController.CreateCourse)
 
 
 
 router.route('/:courseId')
-    .get(courseController.GetCourseDetails)
-    .patch(courseController.UpdateCourse)
-    .delete(courseController.DeleteCourse)
+    .get(coursesController.GetCourseDetails)
+    .patch(coursesController.UpdateCourse)
+    .delete(coursesController.DeleteCourse)
 
 
 module.exports = router

@@ -5,8 +5,9 @@ const http = require("http")
 
 const { personsRoutes } = require("./Persons")
 const { authRoutes } = require("./Auth")
-const { courseRoutes } = require("./Courses")
-const { classRoutes } = require("./Classes")
+const { coursesRoutes } = require("./Courses")
+const { classesRoutes } = require("./Classes")
+const { addressesRoutes } = require("./Address")
 const { errorHandler } = require("./Errors/error_handler")
 
 const APP_PORT = 5000;
@@ -18,8 +19,10 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use("/persons", personsRoutes)
 app.use("/auth", authRoutes)
-app.use("/courses", courseRoutes)
-app.use("/classes", classRoutes)
+app.use("/courses", coursesRoutes)
+app.use("/classes", classesRoutes)
+app.use("/addresses", addressesRoutes)
+
 app.use(errorHandler)
 
 app.listen(APP_PORT, () => {

@@ -1,3 +1,3 @@
 module.exports = {
-    classRoutes: require("./classes_routes")
+    classesRoutes: require("./classes_routes")
 }

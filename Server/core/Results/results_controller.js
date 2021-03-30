@@ -2,10 +2,10 @@
 const { HttpStatusCode, HttpStatus } = require("../Http/index")
 const { throwError } = require("../Errors/error_handler")
 
-const classesServices = require("./classes_services")
+const resultsServices = require("./classes_services")
 
 const GetAllClasses = async (req, res, next) => {
-    const classes = await classesServices.FindClasses()
+    const classes = await resultsServices.FindClasses()
 
     HttpStatus.ok(res, {
         message: "Successfully",
@@ -17,9 +17,9 @@ const GetAllClasses = async (req, res, next) => {
 
 const GetClassDetails = async (req, res, next) => {
     const classId = req.params.classId
-    const [classDetail] = await classesServices.FindClasses({ classId })
-    const instructors = await classesServices.GetAllInstructorsInClass(classId)
-    const students = await classesServices.GetAllStudentsInClass(classId)
+    const [classDetail] = await resultsServices.FindClasses({ classId })
+    const instructors = await resultsServices.GetAllInstructorsInClass(classId)
+    const students = await resultsServices.GetAllStudentsInClass(classId)
 
     HttpStatus.ok(res, {
         message: "Successfully",
@@ -35,7 +35,7 @@ const GetClassDetails = async (req, res, next) => {
 const GetStudentsInClass = async (req, res) => {
     const classId = req.params.classId
 
-    const students = await classesServices.GetAllInstructorsInClass(classId)
+    const students = await resultsServices.GetAllInstructorsInClass(classId)
     HttpStatus.ok(res, {
         message: "Successfully",
         class: {
@@ -50,7 +50,7 @@ const GetStudentsInClass = async (req, res) => {
 const GetInstructorsInClass = async (req, res) => {
     const classId = req.params.classId
 
-    const instructors = await classesServices.GetAllInstructorsInClass(classId)
+    const instructors = await resultsServices.GetAllInstructorsInClass(classId)
     HttpStatus.ok(res, {
         message: "Successfully",
         class: {
@@ -65,7 +65,7 @@ const GetInstructorsInClass = async (req, res) => {
 const CreateClass = async (req, res) => {
     const { classId, className, courseId, description } = req.body
 
-    const createdClass = await classesServices.CreateClass({
+    const createdClass = await resultsServices.CreateClass({
         classId, className, courseId, description
     })
 
@@ -79,7 +79,7 @@ const CreateClass = async (req, res) => {
 const UpdateClass = async (req, res) => {
     const { classId, className, courseId, description } = req.body
 
-    const updatedClass = await classesServices.UpdateClass(classId, {
+    const updatedClass = await resultsServices.UpdateClass(classId, {
         className, courseId, description
     })
 

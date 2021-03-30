@@ -1,24 +1,28 @@
+const db = require('../Database/postgres_connector')
 const KnexSyntax = require('../Database/postgres_query_syntax')
 
-const FindCourses = (queryObject) => {
-    return KnexSyntax.Find({ table: "courses", queryObject })
+const FindResults = (queryObject) => {
+    return KnexSyntax.Find({ table: "results", queryObject })
 }
 
-const CreateCourse = (newCourse) => {
-    return KnexSyntax.Create({ table: "courses", createdRow: newCourse })
+const ViewResultDetailsByStudentId = (studentId, query) => {
+
 }
 
-const UpdateCourse = (courseId, updatedCourse) => {
+const CreateResult = (newCourse) => {
+    return KnexSyntax.Create({ table: "results", createdRow: newCourse })
+}
+
+const UpdateResult = (courseId, updatedCourse) => {
     return KnexSyntax.Update({
-        table: "courses",
-        condition: {
+        table: "courses", condition: {
             courseId,
-        },
-        updatedRow: updatedCourse
+            updatedRow: updatedCourse
+        }
     })
 }
 
-const DeleteCourse = () => {
+const DeleteResult = () => {
 
 }
 
@@ -41,8 +45,8 @@ const DeleteCourse = () => {
 
 
 module.exports = {
-    FindCourses,
-    CreateCourse,
-    UpdateCourse,
-    DeleteCourse
+    FindResults,
+    CreateResult,
+    UpdateResult,
+    DeleteResult
 }

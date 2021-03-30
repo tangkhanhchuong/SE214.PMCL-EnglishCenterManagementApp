@@ -11,10 +11,11 @@ const CreateClass = (newClass) => {
 
 const UpdateClass = (classId, updatedClass) => {
     return KnexSyntax.Update({
-        table: "classes", condition: {
-            classId,
-            updatedRow: updatedClass
-        }
+        table: "classes",
+        condition: {
+            classId
+        },
+        updatedRow: updatedClass
     })
 }
 

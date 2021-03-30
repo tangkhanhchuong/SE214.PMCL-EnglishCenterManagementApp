@@ -1,11 +1,15 @@
 const express = require('express');
 
-const classController = require('./persons_controller');
+const personsController = require('./persons_controller');
 
 const router = express.Router();
 
-router.get('/students', classController.GetAllStudents);
+router.get('/students', personsController.GetAllStudents);
 
-router.get('/instructors', classController.GetAllInstructors);
+router.get('/instructors', personsController.GetAllInstructors);
+
+router.get('/attendees', personsController.GetAllAttendees);
+
+router.get('/information', personsController.GetAllPersonalInformation);
 
 module.exports = router;
