@@ -2,6 +2,7 @@ import React from 'react'
 
 import treeData from "./three_data"
 import Tree from "./Tree"
+import ShadowCard from 'components/Card/ShadowCard'
 
 const TreeList = () => {
     return (
@@ -9,9 +10,9 @@ const TreeList = () => {
             <div className="col text-center">
                 <div className="mt-3">
                     <div className="row mt-3 d-flex justify-content-center">
-                        <div className="col-lg-8 text-left text-dark border rounded">
+                        <ShadowCard className="col-lg-8 text-left text-dark border rounded">
                             <Tree data={treeData} />
-                        </div>
+                        </ShadowCard>
                     </div>
                 </div>
             </div>

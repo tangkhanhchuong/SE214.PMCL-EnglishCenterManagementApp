@@ -8,8 +8,8 @@ import { Get_LocalStorage } from '../utils/KLocalStorage'
 
 
 const StudentRoutes = React.lazy(() => import('./StudentRoutes'));
-const LecturerRoutes = React.lazy(() => import('./LecturerRoutes'));
-const ManagerRoutes = React.lazy(() => import('./ManagerRoutes'));
+const InstructorRoutes = React.lazy(() => import('./InstructorRoutes'));
+const AdminRoutes = React.lazy(() => import('./AdminRoutes'));
 const AuthRoutes = React.lazy(() => import('./AuthRoutes'));
 
 
@@ -53,12 +53,12 @@ export default () => {
                 return <StudentRoutes />
             }
             else if (userData.roleId === 2) {
-                console.log("Lecrurer Routes");
-                return <LecturerRoutes />
+                console.log("Instructor Routes");
+                return <InstructorRoutes />
             }
             else if (userData.roleId === 3) {
                 console.log("Manager Routes");
-                return <ManagerRoutes />
+                return <AdminRoutes />
             }
             else {
                 console.log("Auth Routes");

@@ -87,7 +87,7 @@ const AuthForm = (props) => {
     let renderButtonText = () => {
         const { buttonText } = props
 
-        if (formStatus == FormStatus.LOADING)
+        if (formStatus === FormStatus.LOADING)
             return 'Loading...'
 
         if (!buttonText && isLogin()) {

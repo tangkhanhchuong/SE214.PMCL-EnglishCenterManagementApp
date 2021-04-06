@@ -5,11 +5,12 @@ const { generateAuthToken, verifyToken } = require("./authentication/jwt")
 const { comparePassword, hashPassword } = require("./authentication/hashing")
 
 const Account = require("./accounts_model")
+const AuthServices = require("./auth_services")
 
 let refreshTokens = []
 
 const checkIfEmailNotExisted = async (email) => {
-    let user = await Account.find({ email })
+    let user = await AuthServices.FindAccounts({ email })
     if (user.length === 0)
         throwError(HttpStatusCode.CONFLICT, "User with this email could not be found !")
     return user
@@ -56,7 +57,8 @@ const register = async (req, res, next) => {
         await checkIfEmailExisted(email)
 
         const hashedPassword = await hashPassword(password)
-        const newUser = await Account.create({ email, username, password: hashedPassword })
+        // const newUser = await Account.create({ email, username, password: hashedPassword })
+        const newAccount = await AuthServices.CreateAccount({ email, username, password: hashedPassword })
         HttpStatus.created(res, newUser)
 
         // const receiverMail = ["chuongbro2104@gmail.com", "tangkhanhchuong@gmail.com"]

@@ -1,31 +1,30 @@
 import React from 'react'
+import { Button, Form, Input, Label, FormGroup } from 'reactstrap'
 
-import { Button, Form, Input, Label, FormGroup } from 'reactstrap';
-import Page from 'components/Page';
-import { NavLink } from 'react-router-dom';
+import Page from 'components/Page'
+import ShadowCard from 'components/Card/ShadowCard'
+import FileUploads from 'components/FileUploads/MultipleFileUpload'
 
 const AddPaymentPage = () => {
     return (
         <div>
             <Page
-                className="allAssignments"
-                breadcrumbs={[{ name: 'Payment' }]}
+                breadcrumbs={[{ name: 'Notifications' }, { name: 'Add Notifications' }]}
             >
-                <NavLink to='/notifications'><Button>Add Notification</Button></NavLink>
                 <div className="mt-3 row d-flex justify-content-center">
-                    <div className="col-lg-8 text-left text-dark border rounded p-3">
+                    <ShadowCard className="col-lg-8 text-left text-dark border rounded p-3">
                         <Form >
-                            <h2>Add Notification</h2>
+                            <div className="d-flex flex-row justify-content-between"><h4>ADD NOTIFICATIONS</h4></div>
                             <FormGroup>
                                 <Label>Title</Label>
                                 <Input />
                                 <Label>Content</Label>
                                 <Input type="textarea" />
                                 <Label>File</Label>
-                                <Input type="file" />
+                                <FileUploads />
                             </FormGroup>
                         </Form >
-                    </div >
+                    </ShadowCard >
                 </div>
             </Page>
         </div>

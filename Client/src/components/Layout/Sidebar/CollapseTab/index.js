@@ -97,7 +97,7 @@ const CollapseTab = ({ sidebarItem, index }) => {
                 onClick={handleClick('Contents')}>
                 <RSNavLink className={bem.e('nav-item-collapse')}>
                     <div className="d-flex">
-                        <MdPerson className={bem.e('nav-item-icon')} />
+                        <Icon className={bem.e('nav-item-icon')} />
                         <span className="">{name}</span>
                     </div>
                     {generateArrowBtn()}

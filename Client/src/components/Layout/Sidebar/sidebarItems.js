@@ -1,19 +1,23 @@
 
 import {
     MdDashboard,
-    MdInsertChart,
-    MdWork,
-    MdSchool,
     MdAccountCircle,
     MdPayment,
     MdAssignment,
     MdBook,
     MdAlbum,
     MdNotifications,
+    MdSchool,
     MdChatBubble,
     MdClass,
     MdLibraryBooks
 } from 'react-icons/md'
+
+import {
+    FaChalkboardTeacher,
+    FaUserGraduate,
+    FaGraduationCap
+} from 'react-icons/fa'
 
 const RoleId = {
     STUDENT: 1,
@@ -68,11 +72,30 @@ const generateInstructorSidebar = () => {
 const generateManagerSidebar = () => {
     const sidebarItems = [
         { to: '/', name: 'Dashboard', exact: true, Icon: MdDashboard },
-        { to: '/classes', name: 'My Classes', exact: true, Icon: MdBook },
-        { to: '/exams', name: 'Exams', exact: true, Icon: MdAlbum },
-        { to: '/assignments', name: 'Assignments', exact: true, Icon: MdAssignment },
-        { to: '/payment', name: 'Payment', exact: true, Icon: MdPayment },
-        { to: '/notifications', name: 'Notifications', exact: true, Icon: MdNotifications },
+        {
+            to: '/students', name: 'Students', exact: true, Icon: FaUserGraduate, children: [
+                { to: '/students', name: 'View Students', exact: true, Icon: FaUserGraduate },
+                { to: '/students/add', name: 'Add Student', exact: true, Icon: FaUserGraduate },
+            ]
+        },
+        {
+            to: '/instructors', name: 'Instructors', exact: true, Icon: FaChalkboardTeacher, children: [
+                { to: '/instructors', name: 'View Instructors', exact: true, Icon: FaChalkboardTeacher },
+                { to: '/instructors/add', name: 'Add Instructor', exact: true, Icon: FaChalkboardTeacher },
+            ]
+        },
+        {
+            to: '/classes', name: 'Classes', exact: true, Icon: FaGraduationCap, children: [
+                { to: '/classes', name: 'View Classes', exact: true, Icon: FaGraduationCap },
+                { to: '/classes/add', name: 'Add Class', exact: true, Icon: FaGraduationCap },
+            ]
+        },
+        {
+            to: '/notifications', name: 'Notifications', exact: true, Icon: MdNotifications, children: [
+                { to: '/notifications', name: 'View Notifications', exact: true, Icon: MdBook },
+                { to: '/notifications/add', name: 'Add Notification', exact: true, Icon: MdBook },
+            ]
+        },
         { to: '/messages', name: 'Message', exact: true, Icon: MdChatBubble },
         { to: '/account', name: 'Account', exact: false, Icon: MdAccountCircle }
     ]

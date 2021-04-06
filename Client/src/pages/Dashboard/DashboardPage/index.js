@@ -43,6 +43,9 @@ import {
     Row,
 } from 'reactstrap'
 import { getColor } from 'utils/colors'
+import DBStatisticCard from './DBStatisticCard'
+import DBTotalExpenseChart from './DBTotalExpenseChart'
+import DBTotalRevenueChart from './DBTotalRevenueChart'
 
 const today = new Date()
 const lastWeek = new Date(
@@ -66,98 +69,14 @@ class DashboardPage extends React.Component {
                 className="DashboardPage"
                 breadcrumbs={[{ name: 'Dashboard', active: true }]}
             >
-                <Row>
-                    <Col lg={3} md={6} sm={6} xs={12}>
-                        <NumberWidget
-                            title="Total Profit"
-                            subtitle="This month"
-                            number="9.8k"
-                            color="secondary"
-                            progress={{
-                                value: 75,
-                                label: 'Last month',
-                            }}
-                        />
-                    </Col>
-
-                    <Col lg={3} md={6} sm={6} xs={12}>
-                        <NumberWidget
-                            title="Monthly Visitors"
-                            subtitle="This month"
-                            number="5,400"
-                            color="secondary"
-                            progress={{
-                                value: 45,
-                                label: 'Last month',
-                            }}
-                        />
-                    </Col>
-
-                    <Col lg={3} md={6} sm={6} xs={12}>
-                        <NumberWidget
-                            title="New Users"
-                            subtitle="This month"
-                            number="3,400"
-                            color="secondary"
-                            progress={{
-                                value: 90,
-                                label: 'Last month',
-                            }}
-                        />
-                    </Col>
-
-                    <Col lg={3} md={6} sm={6} xs={12}>
-                        <NumberWidget
-                            title="Bounce Rate"
-                            subtitle="This month"
-                            number="38%"
-                            color="secondary"
-                            progress={{
-                                value: 60,
-                                label: 'Last month',
-                            }}
-                        />
-                    </Col>
-                </Row>
+                <DBStatisticCard />
 
                 <Row>
                     <Col lg="8" md="12" sm="12" xs="12">
-                        <Card>
-                            <CardHeader>
-                                Total Revenue{' '}
-                                <small className="text-muted text-capitalize">This year</small>
-                            </CardHeader>
-                            <CardBody>
-                                <Line data={chartjs.line.data} options={chartjs.line.options} />
-                            </CardBody>
-                        </Card>
+                        <DBTotalRevenueChart />
                     </Col>
-
                     <Col lg="4" md="12" sm="12" xs="12">
-                        <Card>
-                            <CardHeader>Total Expense</CardHeader>
-                            <CardBody>
-                                <Bar data={chartjs.bar.data} options={chartjs.bar.options} />
-                            </CardBody>
-                            <ListGroup flush>
-                                <ListGroupItem>
-                                    <MdInsertChart size={25} color={primaryColor} /> Cost of sales{' '}
-                                    <Badge color="secondary">$3000</Badge>
-                                </ListGroupItem>
-                                <ListGroupItem>
-                                    <MdBubbleChart size={25} color={primaryColor} /> Management
-                  costs <Badge color="secondary">$1200</Badge>
-                                </ListGroupItem>
-                                <ListGroupItem>
-                                    <MdShowChart size={25} color={primaryColor} /> Financial costs{' '}
-                                    <Badge color="secondary">$800</Badge>
-                                </ListGroupItem>
-                                <ListGroupItem>
-                                    <MdPieChart size={25} color={primaryColor} /> Other operating
-                  costs <Badge color="secondary">$2400</Badge>
-                                </ListGroupItem>
-                            </ListGroup>
-                        </Card>
+                        <DBTotalExpenseChart />
                     </Col>
                 </Row>
 
@@ -303,7 +222,7 @@ class DashboardPage extends React.Component {
                             >
                                 <CardTitle>
                                     <MdInsertChart /> Profit
-                </CardTitle>
+                                </CardTitle>
                             </CardBody>
                         </Card>
                     </Col>
@@ -346,7 +265,7 @@ class DashboardPage extends React.Component {
                     </Col>
                 </Row>
 
-                <CardDeck style={{ marginBottom: '1rem' }}>
+                {/* <CardDeck style={{ marginBottom: '1rem' }}>
                     <Card body style={{ overflowX: 'auto', 'paddingBottom': '15px', 'height': 'fit-content', 'paddingTop': 'inherit' }}>
                         <HorizontalAvatarList
                             avatars={avatarsData}
@@ -361,7 +280,7 @@ class DashboardPage extends React.Component {
                             reversed
                         />
                     </Card>
-                </CardDeck>
+                </CardDeck> */}
 
                 <Row>
                     <Col lg="4" md="12" sm="12" xs="12">
