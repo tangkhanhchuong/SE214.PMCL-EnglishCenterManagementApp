@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from 'reactstrap'
+import { Card, CardBody, CardHeader } from 'reactstrap'
 
 import ViewAssignments from './ViewAssignments'
 
@@ -12,10 +12,14 @@ const AssignmentsTab = ({ classId, currentUrl }) => {
     const userRoleId = localStorage.getItem("roleId")
 
     return (
-        <div>
-            <h2>{classId}</h2>
-            <ViewAssignments />
-        </div>
+        <Card>
+            <CardHeader>
+                <h4>All Assignments</h4>
+            </CardHeader>
+            <CardBody>
+                <ViewAssignments />
+            </CardBody>
+        </Card>
     )
 }
 

@@ -33,7 +33,9 @@ const ClassesPage = () => {
     return (
         <Page
             className="WidgetPage"
-            breadcrumbs={[{ name: 'My Classes' }]}>
+            breadcrumbs={[{ name: 'My Classes' }]}
+            title="All Classes"
+        >
             <Row>
                 {classes.map((classItem, index) =>
                 (<div key={`groupCourse_${index}`}>

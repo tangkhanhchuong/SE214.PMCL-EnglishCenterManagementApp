@@ -1,18 +1,14 @@
-import Page from 'components/Page'
 import React, { useState, useEffect } from 'react'
 import {
     Button,
     Card,
     CardBody,
     CardHeader,
-    Col,
     Form,
-    FormFeedback,
     FormGroup,
     FormText,
     Input,
     Label,
-    Row,
 } from 'reactstrap'
 import { NavLink, useHistory } from 'react-router-dom'
 
@@ -26,11 +22,9 @@ const FORMSTATUS = {
 }
 
 
-const ClassDetailInsertPage = (props) => {
-    const currentUrl = props.match.url.split("/")
-    const goBackUrl = `/${currentUrl[1]}/${currentUrl[2]}`
-    const classId = props.match.params.classId
-    const history = useHistory()
+const AddInstructors = (props) => {
+    const { classId } = props
+
     let kClassId = 1
     let [formStatus, setFormStatus] = useState(FORMSTATUS.DEFAULT)
     const { sendRequest } = useHttpClient()
@@ -126,7 +120,7 @@ const ClassDetailInsertPage = (props) => {
                 setTimeout(() => {
                     setFormStatus(FORMSTATUS.REQUEST_SUCCESSFULLY)
                     alert("Insert to class successfully !")
-                    history.push(goBackUrl)
+                    // history.push(goBackUrl)
                 }, 1000)
 
             })
@@ -137,55 +131,36 @@ const ClassDetailInsertPage = (props) => {
     }
 
     return (
-        <Page>
-            <Row>
-                <Col md="6" sm="12" xs="12">
-                    <NavLink to={goBackUrl} style={{ textDecoration: 'none' }}>
-                        <Button color="primary">Back</Button>
-                    </NavLink>
-                </Col>
+        <Card className="flex-grow-1 ml-3" style={{ maxHeight: "440px" }}>
+            <CardHeader><h4>Add Student</h4></CardHeader>
+            <CardBody>
+                <Form onSubmit={handleSubmit}>
+                    <FormGroup>
+                        <Label for="exampleSelectMulti">Role in class</Label>
+                        <Input disabled value="Student" />
+                    </FormGroup>
 
-            </Row>
-            <h2>{`Insert participant to ${classId}`}</h2>
-            <Row>
-                <Col xl={6} lg={12} md={12}>
-                    <Card>
-                        <CardHeader>Form Validation</CardHeader>
-                        <CardBody>
-                            <Form onSubmit={handleSubmit}>
-                                <FormGroup>
-                                    <Label for="exampleSelectMulti">Type of participant</Label>
-                                    <Input onChange={(e) => { setSearchType(e.target.value); setPersonId(""); setPersonInfo({}) }} type="select" name="select">
-                                        <option value="Student">Student</option>
-                                        <option value="Lecturer">Lecturer</option>
-                                    </Input>
-                                </FormGroup>
-
-                                <FormGroup>
-                                    <Label>{`${searchType} ID`}</Label>
-                                    <Input invalid={personInfo.fail ? true : false} valid={personInfo.id ? true : false} value={personId} onChange={(e) => GetPersonInfo(e)} placeholder={`${searchType} ID`} maxLength={8} />
-                                </FormGroup>
+                    <FormGroup>
+                        <Label>Student ID</Label>
+                        <Input invalid={personInfo.fail ? true : false} valid={personInfo.id ? true : false} value={personId} onChange={(e) => GetPersonInfo(e)} placeholder="Student ID" maxLength={8} />
+                    </FormGroup>
 
 
 
-                                <FormGroup>
-                                    <Label>Full Name</Label>
-                                    <Input value={personInfo.name || ""} disabled invalid={personInfo.fail ? true : false} valid={personInfo.id ? true : false} />
-                                    <FormText>The name field is generated automatically</FormText>
-                                </FormGroup>
+                    <FormGroup>
+                        <Label>Full Name</Label>
+                        <Input value={personInfo.name || ""} disabled invalid={personInfo.fail ? true : false} valid={personInfo.id ? true : false} />
+                        <FormText>This field is generated automatically</FormText>
+                    </FormGroup>
 
-                                <FormGroup style={{ textAlign: 'right' }}>
-                                    <Button color="success">Insert</Button>
-                                </FormGroup>
+                    <FormGroup style={{ textAlign: 'right' }}>
+                        <Button color="success">Add</Button>
+                    </FormGroup>
 
-                            </Form>
-                        </CardBody>
-                    </Card>
-                </Col>
-
-            </Row>
-        </Page>
+                </Form>
+            </CardBody>
+        </Card>
     )
 }
 
-export default ClassDetailInsertPage
+export default AddInstructors

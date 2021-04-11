@@ -5,6 +5,8 @@ exports.up = function (knex) {
         table.string('information_id').notNullable().unique()
         table.string('name').notNullable()
         table.string('email').notNullable()
+        table.string('dob').notNullable()
+        table.string('phone').notNullable()
         table.enu('gender', ['Male', 'Female']).notNullable().default('Male')
         table.string('address_id').references('address_id').inTable('addresses').index()
         table.timestamps(true, true);

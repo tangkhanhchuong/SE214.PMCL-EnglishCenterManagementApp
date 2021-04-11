@@ -12,15 +12,31 @@ const GetAllAttendees = async () => {
 }
 
 const GetAllStudents = () => {
-    return db("students")
-        .join("personal_information", "students.information_id", "personal_information.information_id")
-        .select()
+    return db("students as s")
+        .join("personal_information as i", "s.information_id", "i.information_id")
+        .select("*", "joiner_id as student_id")
+}
+
+const GetStudentsDetails = (studentId) => {
+    return db("students as s")
+        .join("personal_information as i", "s.information_id", "i.information_id")
+        .join('addresses as a', 'a.address_id', 'i.address_id')
+        .select("*", "joiner_id as student_id")
+        .where(`s.joiner_id`, studentId)
 }
 
 const GetAllInstructors = () => {
     return db("instructors")
         .join("personal_information", "instructors.information_id", "personal_information.information_id")
         .select()
+}
+
+const GetInstructorsDetails = (studentId) => {
+    return db("instructors as ins")
+        .join("personal_information as info", "ins.information_id", "info.information_id")
+        .join('addresses as addr', 'addr.address_id', 'info.address_id')
+        .select("*", "joiner_id as student_id")
+        .where(`ins.joiner_id`, studentId)
 }
 
 const GetAllPersonalInformation = async () => {
@@ -56,7 +72,9 @@ const DeletePersonalInformation = async () => {
 module.exports = {
     GetAllAttendees,
     GetAllStudents,
+    GetStudentsDetails,
     GetAllInstructors,
+    GetInstructorsDetails,
     GetAllPersonalInformation,
     CreatePersonalInformation,
     UpdatePersonalInformation,

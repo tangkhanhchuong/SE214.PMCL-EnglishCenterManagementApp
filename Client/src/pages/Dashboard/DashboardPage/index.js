@@ -68,6 +68,7 @@ class DashboardPage extends React.Component {
             <Page
                 className="DashboardPage"
                 breadcrumbs={[{ name: 'Dashboard', active: true }]}
+                title="Dashboard"
             >
                 <DBStatisticCard />
 

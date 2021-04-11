@@ -12,13 +12,40 @@ const GetAllInstructors = async (req, res, next) => {
     })
 }
 
+const GetInstructorDetails = async (req, res, next) => {
+    const { instructorId } = req.params
+
+    const [instructor] = await personsServices.GetInstructorsDetails(instructorId)
+
+    console.log('Instructors');
+    HttpStatus.ok(res, {
+        message: "Successfully",
+        instructor,
+        method: req.method
+    })
+}
+
 const GetAllStudents = async (req, res, next) => {
     const students = await personsServices.GetAllStudents()
 
+    console.log('Students');
     HttpStatus.ok(res, {
         message: "Successfully",
         count: students.length,
         students,
+        method: req.method
+    })
+}
+
+const GetStudentDetails = async (req, res, next) => {
+    const { studentId } = req.params
+
+    const [student] = await personsServices.GetStudentsDetails(studentId)
+
+    console.log('Student');
+    HttpStatus.ok(res, {
+        message: "Successfully",
+        student,
         method: req.method
     })
 }
@@ -76,7 +103,9 @@ const DeletePersonalInformation = async (req, res) => {
 
 module.exports = {
     GetAllInstructors,
+    GetInstructorDetails,
     GetAllStudents,
+    GetStudentDetails,
     GetAllAttendees,
     GetAllPersonalInformation,
     CreatePersonalInformation,

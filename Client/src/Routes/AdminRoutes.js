@@ -25,7 +25,6 @@ const AdminRoutes = (props) => {
         <Switch>
           <MainLayout breakpoint={props.breakpoint}>
             <React.Suspense fallback={<PageSpinner />}>
-
               <Route path="/classes" component={ClassesPages} />
               <Route path="/students" component={StudentsPages} />
               <Route path="/payments" component={PaymentPages} />
@@ -34,9 +33,9 @@ const AdminRoutes = (props) => {
               <Route path="/notifications" component={NotificationsPages} />
               <Route exact path="/" component={DashboardPage} />
 
-              <Route path="/">
+              {/* <Route path="/">
                 <Redirect to="/" />
-              </Route>
+              </Route> */}
 
             </React.Suspense>
           </MainLayout>

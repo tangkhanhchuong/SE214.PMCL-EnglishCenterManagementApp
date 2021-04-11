@@ -20,29 +20,47 @@ const Page = ({
   const classes = bem.b('px-3', className);
 
   return (
-    <Tag className={classes} {...restProps}>
-      <div className={bem.e('header')}>
-        {title && typeof title === 'string' ? (
-          <Typography type="h1" className={bem.e('title')}>
-            {title}
-          </Typography>
-        ) : (
-          title
-        )}
-        {breadcrumbs && (
-          <Breadcrumb className={bem.e('breadcrumb')}>
-            <BreadcrumbItem>Home</BreadcrumbItem>
-            {breadcrumbs.length &&
-              breadcrumbs.map(({ name, active = true }, index) => (
-                <BreadcrumbItem key={index} active={active}>
-                  {name}
-                </BreadcrumbItem>
-              ))}
-          </Breadcrumb>
-        )}
+    <div className="m-3">
+      <div className="mr-3 ml-3">
+        <div className="mr-3 ml-3">
+          <Tag className={classes} {...restProps}>
+            <div className="mb-3">
+              {/* <div className={bem.e('header')}> */}
+              <div className="d-flex flex-row justify-content-between">
+                <div>
+                  {title && typeof title === 'string' ? (
+                    <Typography type="h1" className={bem.e('title')}>
+                      <strong>
+                        {title}
+                      </strong>
+                    </Typography>
+                  ) : (
+                    title
+                  )}
+
+                </div>
+                <div>
+                  {breadcrumbs && (
+                    <Breadcrumb className={bem.e('breadcrumb')}>
+                      <BreadcrumbItem>Home</BreadcrumbItem>
+                      {breadcrumbs.length &&
+                        breadcrumbs.map(({ name, active = true }, index) => (
+                          <BreadcrumbItem key={index} active={active}>
+                            {name}
+                          </BreadcrumbItem>
+                        ))}
+                    </Breadcrumb>
+                  )}
+                </div>
+              </div>
+            </div>
+            <hr />
+            {/* </div> */}
+            {children}
+          </Tag>
+        </div>
       </div>
-      {children}
-    </Tag>
+    </div >
   );
 };
 

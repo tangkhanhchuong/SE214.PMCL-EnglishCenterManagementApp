@@ -124,11 +124,10 @@ const GradesTab = (props) => {
     const renderScoreView = () => {
         return (
             <>
-                <h2>{`${classId} Score Table`}</h2>
                 <Row>
                     <Col>
                         <Card className="mb-3">
-                            <CardHeader>All Person</CardHeader>
+                            <CardHeader><h4>All Grades</h4></CardHeader>
                             <CardBody>
                                 <Row>
                                     <Col>
@@ -144,7 +143,6 @@ const GradesTab = (props) => {
                                                         <th>Mid Term <br /> {scoresWeight.eMidTerm1 * 100} %</th>
                                                         <th>Mid Term <br /> {scoresWeight.eMidTerm2 * 100} %</th>
                                                         <th>Final Exam <br /> {scoresWeight.eFinalExam * 100} %</th>
-
                                                         <th>Average <br /> Score</th>
                                                     </tr>
                                                 </thead>

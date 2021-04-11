@@ -2,10 +2,9 @@ import React from 'react'
 
 import {
     Form, Input, Label, FormGroup,
-    Dropdown, DropdownToggle, DropdownMenu, DropdownItem
+    Card, CardHeader, CardBody
 } from 'reactstrap';
 import Page from 'components/Page';
-import { NavLink } from 'react-router-dom';
 
 const AddStudentPage = () => {
     return (
@@ -13,102 +12,94 @@ const AddStudentPage = () => {
             <Page
                 className="allAssignments"
                 breadcrumbs={[{ name: 'Students' }]}
+                title="Add Student"
             >
-                <div className="d-flex flex-row  justify-content-around">
-                    <div className="card p-3" style={{ minWidth: "400px !important", width: "600px" }}>
-                        <Form className="p-3">
-                            <h4>Personal Information</h4>
-                            <hr />
-                            <FormGroup>
-                                <Label>First Name</Label>
-                                <Input />
+                <Card className=" d-flex  justify-content-around">
+                    <CardHeader>
+                        <h4><strong>Add Student</strong></h4>
+                    </CardHeader>
+                    <CardBody className=" d-flex flex-row  justify-content-around">
+                        <div className="flex-grow-1">
+                            <Form className="p-3">
+                                <h4><b>Personal Information</b></h4>
                                 <br />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label>Last Name</Label>
-                                <Input />
-                                <br />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label>Student Id</Label>
-                                <Input />
-                                <br />
-                            </FormGroup>
-                            <FormGroup tag="fieldset">
-                                <Label>Gender</Label>
-                                <div className="d-flex flex-row">
-                                    <FormGroup check>
-                                        <Label check>
-                                            <Input type="radio" name="radio1" />{' '}
+                                <FormGroup>
+                                    <Label><b>First Name</b></Label>
+                                    <Input />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label><b>Last Name</b></Label>
+                                    <Input />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label><b>Student Id</b></Label>
+                                    <Input />
+                                </FormGroup>
+                                <FormGroup tag="fieldset">
+                                    <Label><b>Gender</b></Label>
+                                    <div className="d-flex flex-row">
+                                        <FormGroup check>
+                                            <Label check>
+                                                <Input type="radio" name="radio1" />{' '}
                                         Male
                                     </Label>
-                                    </FormGroup>
-                                    <FormGroup check className="ml-3">
-                                        <Label>
-                                            <Input type="radio" name="radio1" />{' '}
+                                        </FormGroup>
+                                        <FormGroup check className="ml-3">
+                                            <Label>
+                                                <Input type="radio" name="radio1" />{' '}
                                         Female
                                     </Label>
-                                    </FormGroup>
-                                </div>
-                            </FormGroup>
-                            <FormGroup>
-                                <Label>Date Of Birth</Label>
-                                <Input type="date" />
+                                        </FormGroup>
+                                    </div>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label><b>Date Of Birth</b></Label>
+                                    <Input type="date" />
+                                </FormGroup>
+                            </Form >
+                        </div >
+                        <div className="flex-grow-1">
+                            <Form className="p-3">
+                                <h4><b>Contact Information</b></h4>
                                 <br />
-                            </FormGroup>
-                        </Form >
-                    </div >
-                    <div className="card p-3" style={{ minWidth: "400px !important", width: "600px" }}>
-                        <Form className="p-3">
-                            <h4>Contact Information</h4>
-                            <hr />
-
-                            <FormGroup>
-                                <Label>Phone</Label>
-                                <Input />
-                                <br />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label>Email</Label>
-                                <Input />
-                                <br />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label>Street Information</Label>
-                                <Input />
-                                <br />
-                                <Label>Province</Label>
-                                <Input />
-                                <br />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label>Ward</Label>
-                                <Input />
-                                <br />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label>District</Label>
-                                <Input />
-                                <br />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label>Province</Label>
-                                <Input />
-                                <br />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label>City</Label>
-                                <Input />
-                                <br />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label>Country</Label>
-                                <Input />
-                                <br />
-                            </FormGroup>
-                        </Form >
-                    </div >
-                </div>
+                                <FormGroup>
+                                    <Label><b>Phone</b></Label>
+                                    <Input />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label><b>Email</b></Label>
+                                    <Input />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label><b>Street Information</b></Label>
+                                    <Input />
+                                    <Label><b>Province</b></Label>
+                                    <Input />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label><b>Ward</b></Label>
+                                    <Input />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label><b>District</b></Label>
+                                    <Input />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label><b>Province</b></Label>
+                                    <Input />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label><b>City</b></Label>
+                                    <Input />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label><b>Country</b></Label>
+                                    <Input />
+                                </FormGroup>
+                            </Form >
+                        </div >
+                    </CardBody>
+                </Card>
             </Page>
         </div>
     )

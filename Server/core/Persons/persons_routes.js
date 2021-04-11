@@ -1,15 +1,19 @@
-const express = require('express');
+const express = require('express')
 
-const personsController = require('./persons_controller');
+const personsController = require('./persons_controller')
 
-const router = express.Router();
+const router = express.Router()
 
-router.get('/students', personsController.GetAllStudents);
+router.get('/students/:studentId', personsController.GetStudentDetails)
 
-router.get('/instructors', personsController.GetAllInstructors);
+router.get('/students', personsController.GetAllStudents)
 
-router.get('/attendees', personsController.GetAllAttendees);
+router.get('/instructors/:instructorId', personsController.GetInstructorDetails)
 
-router.get('/information', personsController.GetAllPersonalInformation);
+router.get('/instructors', personsController.GetAllInstructors)
 
-module.exports = router;
+router.get('/attendees', personsController.GetAllAttendees)
+
+router.get('/information', personsController.GetAllPersonalInformation)
+
+module.exports = router
