@@ -1,11 +1,14 @@
 import React, { useEffect, useState, useCallback } from 'react'
-
+import { useQuery } from 'react-query'
 import {
     Card, Table, Label,
     Button, ButtonGroup, ButtonDropdown,
     DropdownItem, DropdownToggle, DropdownMenu,
     CardHeader, CardBody
 } from 'reactstrap'
+
+import PageSpinner from 'components/PageSpinner'
+
 import Page from 'components/Page'
 import SearchInput from 'components/SearchInput'
 
@@ -48,19 +51,13 @@ const PageDropdown = (props) => {
 }
 
 const AllStudentsPage = () => {
-    const [studentsData, setStudentsData] = useState([])
-
-    const fetchStudents = useCallback(async () => {
-        const data = await Students.list()
-        setStudentsData(data.data.students)
-    }, [])
-
-    useEffect(() => {
-        fetchStudents()
-    }, [])
+    const { data, isLoading } = useQuery('students', Students.list)
 
     let getAllStudents = () => {
-        if (studentsData.length === 0) return <></>
+        if (!data) return <></>
+        const studentsData = data.data.students
+        if (!studentsData || studentsData.length === 0) return <></>
+
         return (
             studentsData.map((row, index) => {
                 return (
@@ -76,45 +73,46 @@ const AllStudentsPage = () => {
             breadcrumbs={[{ name: 'Students' }]}
             title="ALL STUDENTS"
         >
-            <Card className="pl-3 pr-3">
-                <CardHeader>
-                    <div className="d-flex flex-row justify-content-between">
-                        {/* <div>
-                            <label>Show</label>
-                            <PageDropdown className="ml-2 mr-2" />
-                            <label>entries</label>
-                        </div> */}
-                        <Label><h4><b>All Students</b></h4></Label>
-                        <ButtonGroup>
-                            <Button color="primary">Copy</Button>
-                            <Button color="primary">Pdf</Button>
-                            <Button color="primary">Csv</Button>
-                            <Button color="primary">Print</Button>
-                        </ButtonGroup>
-                        <>
-                            <SearchInput />
-                        </>
-                    </div>
-                </CardHeader>
-                <CardBody>
-                    <Table striped>
-                        <thead scope="row">
-                            <tr>
-                                {
-                                    columTitles.map((col, index) => (
-                                        <th scope="col" key={index}>{col}</th>
-                                    ))
-                                }
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                getAllStudents()
-                            }
-                        </tbody>
-                    </Table>
-                </CardBody>
-            </Card >
+            {
+                isLoading
+                    ? <PageSpinner />
+                    : (
+                        <Card className="pl-3 pr-3">
+                            <CardHeader>
+                                <div className="d-flex flex-row justify-content-between">
+                                    <Label><h4><b>All Students</b></h4></Label>
+                                    <ButtonGroup>
+                                        <Button color="primary">Copy</Button>
+                                        <Button color="primary">Pdf</Button>
+                                        <Button color="primary">Csv</Button>
+                                        <Button color="primary">Print</Button>
+                                    </ButtonGroup>
+                                    <>
+                                        <SearchInput />
+                                    </>
+                                </div>
+                            </CardHeader>
+                            <CardBody>
+                                <Table striped>
+                                    <thead scope="row">
+                                        <tr>
+                                            {
+                                                columTitles.map((col, index) => (
+                                                    <th scope="col" key={index}>{col}</th>
+                                                ))
+                                            }
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            getAllStudents()
+                                        }
+                                    </tbody>
+                                </Table>
+                            </CardBody>
+                        </Card >
+                    )
+            }
         </Page >
     )
 }

@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { Row, Col } from 'reactstrap'
 import Page from 'components/Page'
 import { NavLink } from 'react-router-dom'
+import { useQuery } from 'react-query'
 
+import { Classes } from 'core/HttpRequests'
+import PageSpinner from 'components/PageSpinner'
 import ClassCardItem from "./ClassCardItem"
 
 import classImg1 from 'assets/img/class-img/class-img-1.svg'
@@ -14,21 +17,34 @@ import classImg5 from 'assets/img/class-img/class-img-5.svg'
 import classImg6 from 'assets/img/class-img/class-img-6.svg'
 import classImg7 from 'assets/img/class-img/class-img-7.svg'
 
+const ClassesList = () => {
+    const { data, isLoading } = useQuery('all-classes', Classes.list)
+
+    if (isLoading) return <PageSpinner />
+
+    const classesData = [...data.data.classes]
+        .map(classItem => (
+            { ...classItem, instructor: "Chuong", img: classImg1 }
+        ))
+    return (
+        <Row>
+            {classesData.map((classItem, index) =>
+            (<div key={`groupCourse_${index}`}>
+                <Col key={`course_${index}`} className="mb-3">
+                    <NavLink to={`/classes/${classItem.classId}`} style={{ textDecoration: 'none' }}>
+                        <ClassCardItem classItem={classItem} />
+                    </NavLink>
+                </Col>
+            </div>)
+            )}
+        </Row>
+    )
+}
+
 const ClassesPage = () => {
-
-    const groupByKey = (list, key) => list.reduce((hash, obj) => ({ ...hash, [obj[key]]: (hash[obj[key]] || []).concat(obj) }), {})
-
     // const groupedClassesListByCourseId = Object.values(groupByKey(courseList, "courseId"))
 
-    const classes = [
-        { classId: "ENG1", className: "English1", instructor: "Chuong", description: "Hi, this is english course", img: classImg1 },
-        { classId: "ENG2", className: "English2", instructor: "Chuong", description: "Hi, this is english course", img: classImg2 },
-        { classId: "ENG3", className: "English3", instructor: "Chuong", description: "Hi, this is english course", img: classImg3 },
-        { classId: "ENG3", className: "English3", instructor: "Chuong", description: "Hi, this is english course", img: classImg4 },
-        { classId: "ENG3", className: "English3", instructor: "Chuong", description: "Hi, this is english course", img: classImg5 },
-        { classId: "ENG3", className: "English3", instructor: "Chuong", description: "Hi, this is english course", img: classImg6 },
-        { classId: "ENG3", className: "English3", instructor: "Chuong", description: "Hi, this is english course", img: classImg7 }
-    ]
+
 
     return (
         <Page
@@ -36,17 +52,7 @@ const ClassesPage = () => {
             breadcrumbs={[{ name: 'My Classes' }]}
             title="All Classes"
         >
-            <Row>
-                {classes.map((classItem, index) =>
-                (<div key={`groupCourse_${index}`}>
-                    <Col key={`course_${index}`} className="mb-3">
-                        <NavLink to={`/classes/${classItem.classId}`} style={{ textDecoration: 'none' }}>
-                            <ClassCardItem classItem={classItem} />
-                        </NavLink>
-                    </Col>
-                </div>)
-                )}
-            </Row>
+            <ClassesList />
         </Page>
     )
 }
