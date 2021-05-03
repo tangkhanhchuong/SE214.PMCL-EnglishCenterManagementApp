@@ -5,9 +5,11 @@ import Page from 'components/Page'
 import { NavLink } from 'react-router-dom'
 import { useQuery } from 'react-query'
 
+import ClassCardItem from "./ClassCardItem"
 import { Classes } from 'core/HttpRequests'
 import PageSpinner from 'components/PageSpinner'
-import ClassCardItem from "./ClassCardItem"
+import MyArray from 'utils/arrays'
+
 
 import classImg1 from 'assets/img/class-img/class-img-1.svg'
 import classImg2 from 'assets/img/class-img/class-img-2.svg'
@@ -17,6 +19,16 @@ import classImg5 from 'assets/img/class-img/class-img-5.svg'
 import classImg6 from 'assets/img/class-img/class-img-6.svg'
 import classImg7 from 'assets/img/class-img/class-img-7.svg'
 
+const classImagesList = [
+    classImg1,
+    classImg2,
+    classImg3,
+    classImg4,
+    classImg5,
+    classImg6,
+    classImg7
+]
+
 const ClassesList = () => {
     const { data, isLoading } = useQuery('all-classes', Classes.list)
 
@@ -24,8 +36,9 @@ const ClassesList = () => {
 
     const classesData = [...data.data.classes]
         .map(classItem => (
-            { ...classItem, instructor: "Chuong", img: classImg1 }
+            { ...classItem, instructor: "Chuong", img: MyArray.randomElement(classImagesList) }
         ))
+
     return (
         <Row>
             {classesData.map((classItem, index) =>

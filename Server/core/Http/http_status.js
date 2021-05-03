@@ -10,11 +10,17 @@ const error = (res, err) => {
 }
 
 const created = (res, data) => {
-    res.status(HttpStatusCode.CREATED).json(data);
+    res.status(HttpStatusCode.CREATED).json({
+        message: 'Created',
+        data
+    });
 }
 
 const ok = (res, data) => {
-    res.status(HttpStatusCode.SUCCESSFUL).json(data);
+    res.status(HttpStatusCode.SUCCESSFUL).json({
+        message: 'Success',
+        data
+    });
 }
 
 const noContent = (res) => {

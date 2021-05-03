@@ -131,27 +131,22 @@ const AddMaterial = (props) => {
 
     return (
         <Card className="flex-grow-1 ml-3" style={{ maxHeight: "440px" }}>
-            <CardHeader><h4>Add Student</h4></CardHeader>
+            <CardHeader><h4>Add Material</h4></CardHeader>
             <CardBody>
                 <Form onSubmit={handleSubmit}>
                     <FormGroup>
-                        <Label for="exampleSelectMulti">Role in class</Label>
-                        <Input disabled value="Student" />
+                        <Label>Title</Label>
+                        <Input />
                     </FormGroup>
 
                     <FormGroup>
-                        <Label>Student ID</Label>
-                        <Input invalid={personInfo.fail ? true : false} valid={personInfo.id ? true : false} value={personId} onChange={(e) => GetPersonInfo(e)} placeholder="Student ID" maxLength={8} />
+                        <Label>Content</Label>
+                        <Input />
                     </FormGroup>
-
-
-
                     <FormGroup>
-                        <Label>Full Name</Label>
-                        <Input value={personInfo.name || ""} disabled invalid={personInfo.fail ? true : false} valid={personInfo.id ? true : false} />
-                        <FormText>This field is generated automatically</FormText>
+                        <Label>Link</Label>
+                        <Input />
                     </FormGroup>
-
                     <FormGroup style={{ textAlign: 'right' }}>
                         <Button color="success">Add</Button>
                     </FormGroup>

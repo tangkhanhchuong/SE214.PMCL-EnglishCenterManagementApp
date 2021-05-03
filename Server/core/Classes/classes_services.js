@@ -19,34 +19,60 @@ const UpdateClass = (classId, updatedClass) => {
     })
 }
 
-const DeleteClass = () => {
-
-}
-
 const GetAllAttendees = (classId) => {
     return db("person_class as pc")
         .where("class_id", classId)
-        .leftJoin("personal_information as info", "info.information_id", "pc.information_id")
+        // .leftJoin("personal_information as info", "info.information_id", "pc.information_id")
+        .join("instructors as i", "i.instructor_id", "pc.instructor_id")
         .select()
 }
 
 const GetAllInstructorsInClass = (classId) => {
-    return GetAllAttendees(classId)
-        .rightJoin("instructors as i", "i.information_id", "pc.information_id")
+    return db("instructor_class as ic")
+        .where("class_id", classId)
+        .join("instructors as i", "i.instructor_id", "ic.instructor_id")
+        .join("personal_information as info", "info.info_id", "i.info_id")
+        .select()
 }
 
 const GetAllStudentsInClass = (classId) => {
-    return GetAllAttendees(classId)
-        .rightJoin("students as s", "s.information_id", "pc.information_id")
+    return db("student_class as sc")
+        .where("class_id", classId)
+        .join("students as s", "s.student_id", "sc.student_id")
+        .join("personal_information as info", "info.info_id", "s.info_id")
+        .select()
 }
 
+const AddStudentToClass = (studentId, classId) => {
+
+}
+
+const AddInstructorToClass = (instructorId, classId) => {
+
+}
+
+const GetAllMaterials = (classId) => {
+    return db('materials as m')
+        .join('classes as c', 'c.class_id', 'm.class_id')
+        .select('m.material_id', 'm.title', 'm.class_id', 'm.url', 'm.description', 'm.posted_at')
+}
+
+const CreateMaterial = () => {
+
+}
+
+const EditMaterial = () => {
+
+}
+
+const DeleteClass = () => {
+
+}
 
 module.exports = {
-    FindClasses,
-    GetAllAttendees,
-    GetAllInstructorsInClass,
-    GetAllStudentsInClass,
-    CreateClass,
-    UpdateClass
+    FindClasses, CreateClass, UpdateClass,
+    GetAllAttendees, GetAllInstructorsInClass, GetAllStudentsInClass,
+    AddStudentToClass, AddInstructorToClass,
+    GetAllMaterials, CreateMaterial, EditMaterial
 
 }

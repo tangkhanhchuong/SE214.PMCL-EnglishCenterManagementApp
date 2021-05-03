@@ -1,7 +1,6 @@
 const express = require('express')
 
 const coursesController = require('./courses_controller')
-const authToken = require('../../utils/helpers/token-decoder')
 
 const router = express.Router()
 
@@ -10,8 +9,7 @@ router.route('/')
     .post(coursesController.CreateCourse)
 
 
-
-router.route('/:courseId')
+router.route('/:id')
     .get(coursesController.GetCourseDetails)
     .patch(coursesController.UpdateCourse)
     .delete(coursesController.DeleteCourse)

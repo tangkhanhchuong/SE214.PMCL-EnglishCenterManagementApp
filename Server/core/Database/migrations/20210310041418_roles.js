@@ -1,11 +1,11 @@
 exports.up = function (knex) {
     return knex.schema.createTable('roles', (table) => {
-        table.increments();
+        table.string('role_id').unique()
         table.string('name').notNullable()
-        table.timestamps(true, true);
-    });
-};
+        table.timestamps(true, true)
+    })
+}
 
 exports.down = function (knex) {
-    return knex.schema.dropTable('roles');
-};
+    return knex.schema.dropTable('roles')
+}

@@ -1,14 +1,17 @@
 exports.up = function (knex) {
     return knex.schema.createTable('classes', (table) => {
-        table.increments();
         table.string('class_id').notNullable().unique()
-        table.string('class_name').notNullable()
+        table.string('name').notNullable()
         table.string('course_id').references('course_id').inTable('courses').index()
-        table.string('description')
-        table.timestamps(true, true);
-    });
-};
+        table.integer('max_students').notNullable()
+        table.string('schedule').notNullable()
+        table.string('time_slot').notNullable()
+        table.integer('duration').notNullable()
+        table.date('begin_at').notNullable()
+        table.timestamps(true, true)
+    })
+}
 
 exports.down = function (knex) {
-    return knex.schema.dropTable('classes');
-};
+    return knex.schema.dropTable('classes')
+}

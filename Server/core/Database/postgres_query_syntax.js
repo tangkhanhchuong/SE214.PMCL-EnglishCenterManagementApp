@@ -24,10 +24,11 @@ const Find = ({ table, queryObject }) => {
     return query
 }
 
-const Create = ({ table, createdRow }) => {
-    return db(table)
+const Create = async ({ table, createdRow }) => {
+    console.log(table, createdRow);
+    await db(table)
         .insert(createdRow)
-        .return("*")
+        .returning("*")
         .toString()
 }
 

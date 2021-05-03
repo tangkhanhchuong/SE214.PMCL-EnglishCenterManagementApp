@@ -41,7 +41,7 @@ const StudentsList = () => {
 
     return (
         <Card className="flex-grow-1 mr-3">
-            <CardHeader><h4>Instructors</h4></CardHeader>
+            <CardHeader><h4>Students</h4></CardHeader>
             <CardBody>
                 <Card body>
                     <Table >
