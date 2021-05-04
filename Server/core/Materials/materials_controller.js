@@ -1,8 +1,3 @@
-// const GetAllMaterials = (classId) => {
-//     return db('materials as m')
-//         .join('classes as c', 'c.class_id', 'm.class_id')
-//         .select('m.material_id', 'm.title', 'm.class_id', 'm.url', 'm.description', 'm.posted_at')
-// }
 const db = require('../Database/postgres_connector')
 const { HttpStatus } = require("../Http/index")
 

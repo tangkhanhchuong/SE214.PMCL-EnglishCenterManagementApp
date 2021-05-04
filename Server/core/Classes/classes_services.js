@@ -48,7 +48,26 @@ const DeleteClass = () => {
 
 }
 
+const RemoveStudentFromClass = (studentId, classId) => {
+    return db("student_class")
+        .where({
+            class_id: classId,
+            student_id: studentId
+        })
+        .del()
+}
+
+const RemoveInstructorFromClass = (instructorId, classId) => {
+    return db("instructor_class")
+        .where({
+            class_id: classId,
+            student_id: instructorId
+        })
+        .del()
+}
+
 module.exports = {
-    FindClasses, CreateClass, UpdateClass,
+    FindClasses, CreateClass, UpdateClass, DeleteClass,
     GetAllAttendees, GetAllInstructorsInClass, GetAllStudentsInClass,
+    RemoveStudentFromClass, RemoveInstructorFromClass
 }

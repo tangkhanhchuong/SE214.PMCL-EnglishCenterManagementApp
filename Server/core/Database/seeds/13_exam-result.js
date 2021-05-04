@@ -7,7 +7,7 @@ exports.seed = function (knex) {
       return knex('exam_result').insert([
         {
           result_id: 'RLT1',
-          exam_id: 'EX123',
+          exam_id: 'EX124',
           student_id: '18520010',
           result: 8,
           type: 'Good',
@@ -15,7 +15,7 @@ exports.seed = function (knex) {
         },
         {
           result_id: 'RLT2',
-          exam_id: 'EX123',
+          exam_id: 'EX125',
           student_id: '18520168',
           result: 10,
           type: 'Excellent',
@@ -23,7 +23,7 @@ exports.seed = function (knex) {
         },
         {
           result_id: 'RLT3',
-          exam_id: 'EX124',
+          exam_id: 'EX125',
           student_id: '18520010',
           result: 4,
           type: 'Bad',

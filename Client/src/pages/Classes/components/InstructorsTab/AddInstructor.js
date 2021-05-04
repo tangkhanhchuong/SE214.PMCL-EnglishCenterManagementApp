@@ -31,68 +31,67 @@ const AddInstructors = ({ classId, setInstructorsList }) => {
     let [personInfo, setPersonInfo] = useState({})
 
     useEffect(() => {
-        sendRequest(
-            `http://localhost:5000/v1/class/${classId}`,
-            'GET',
-        )
-            .then((response) => {
-                if (response.ok) {
-                    return response.json()
-                } else {
-                    throw Error("Get Person Info Failed !!")
-                }
-            })
-            .then((response) => {
-                if (response.data)
-                    kClassId = response.data.id
-                else
-                    throw Error("Get Person Info Failed !!")
+        // sendRequest(
+        //     `http://localhost:5000/v1/class/${classId}`,
+        //     'GET',
+        // )
+        //     .then((response) => {
+        //         if (response.ok) {
+        //             return response.json()
+        //         } else {
+        //             throw Error("Get Person Info Failed !!")
+        //         }
+        //     })
+        //     .then((response) => {
+        //         if (response.data)
+        //             kClassId = response.data.id
+        //         else
+        //             throw Error("Get Person Info Failed !!")
 
-            })
-            .catch((error) => {
-                console.log(error)
-            })
+        //     })
+        //     .catch((error) => {
+        //         console.log(error)
+        //     })
     }, [])
 
     let GetPersonInfo = (event) => {
-        const kPersonId = event.target.value
-        setPersonId(kPersonId)
-        if (kPersonId.length !== 8) {
-            return
-        }
-        sendRequest(`http://localhost:5000/persons/instructors/${kPersonId}`, 'GET')
-            .then((response) => {
-                if (response.ok) {
-                    return response.json()
-                } else {
-                    throw Error("Get Person Info Failed !!")
-                }
-            })
-            .then((response) => {
-                console.log(response.instructor)
-                if (response.instructor)
-                    setPersonInfo(response.instructor)
-                else
-                    throw Error("Get Person Info Failed !!")
+        // const kPersonId = event.target.value
+        // setPersonId(kPersonId)
+        // if (kPersonId.length !== 8) {
+        //     return
+        // }
+        // sendRequest(`http://localhost:5000/persons/instructors/${kPersonId}`, 'GET')
+        //     .then((response) => {
+        //         if (response.ok) {
+        //             return response.json()
+        //         } else {
+        //             throw Error("Get Person Info Failed !!")
+        //         }
+        //     })
+        //     .then((response) => {
+        //         console.log(response.instructor)
+        //         if (response.instructor)
+        //             setPersonInfo(response.instructor)
+        //         else
+        //             throw Error("Get Person Info Failed !!")
 
-            })
-            .catch((error) => {
-                console.log(error)
-                setPersonInfo({ fail: true })
-            })
-
+        //     })
+        //     .catch((error) => {
+        //         console.log(error)
+        //         setPersonInfo({ fail: true })
+        //     })
     }
 
     let handleSubmit = e => {
 
-        e.preventDefault()
+        // e.preventDefault()
 
-        if (personId.length < 8) return
+        // if (personId.length < 8) return
 
-        const id = e.target[1].value
-        const fullName = e.target[2].value
+        // const id = e.target[1].value
+        // const fullName = e.target[2].value
 
-        setInstructorsList((prev) => ([...prev, { id, fullName }]))
+        // setInstructorsList((prev) => ([...prev, { id, fullName }]))
         // setFormStatus(FORMSTATUS.LOADING)
 
         // sendRequest(

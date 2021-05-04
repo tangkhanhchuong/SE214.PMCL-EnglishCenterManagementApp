@@ -16,9 +16,11 @@ router.route('/:id')
 router.route('/:id/students')
     .get(classesController.GetStudentsInClass)
     .post(classesController.AddStudentIntoClass)
+    .patch(classesController.RemoveStudentFromClass)
 
 router.route('/:id/instructors')
     .get(classesController.GetInstructorsInClass)
     .post(classesController.AddInstructorIntoClass)
+    .patch(classesController.RemoveStudentFromClass)
 
 module.exports = router

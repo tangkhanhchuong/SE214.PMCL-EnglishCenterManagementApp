@@ -6,7 +6,6 @@ import {
     CardHeader,
     Col,
     Form,
-    FormFeedback,
     FormGroup,
     FormText,
     Input,
@@ -40,29 +39,29 @@ const AddClassPage = (props) => {
     let [personInfo, setPersonInfo] = useState({})
 
     useEffect(() => {
-        sendRequest(
-            `http://localhost:5000/v1/class/${classId}`,
-            'GET',
-        )
-            .then((response) => {
-                if (response.ok) {
-                    return response.json()
-                } else {
-                    throw Error("Get Person Info Failed !!")
-                }
-            })
-            .then((response) => {
-                console.log(response.data)
-                if (response.data)
-                    kClassId = response.data.id
-                else
-                    throw Error("Get Person Info Failed !!")
+        // sendRequest(
+        //     `http://localhost:5000/v1/class/${classId}`,
+        //     'GET',
+        // )
+        //     .then((response) => {
+        //         if (response.ok) {
+        //             return response.json()
+        //         } else {
+        //             throw Error("Get Person Info Failed !!")
+        //         }
+        //     })
+        //     .then((response) => {
+        //         console.log(response.data)
+        //         if (response.data)
+        //             kClassId = response.data.id
+        //         else
+        //             throw Error("Get Person Info Failed !!")
 
-            })
-            .catch((error) => {
-                console.log(error)
+        //     })
+        //     .catch((error) => {
+        //         console.log(error)
 
-            })
+        //     })
     }, [])
 
     let GetPersonInfo = (event) => {

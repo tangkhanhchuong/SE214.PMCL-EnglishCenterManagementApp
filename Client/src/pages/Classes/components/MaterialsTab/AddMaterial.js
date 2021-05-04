@@ -10,7 +10,6 @@ import {
     Input,
     Label,
 } from 'reactstrap'
-import { NavLink, useHistory } from 'react-router-dom'
 
 import { useHttpClient } from 'hooks/http-hook'
 
@@ -22,7 +21,7 @@ const FORMSTATUS = {
 }
 
 
-const AddInstructors = (props) => {
+const AddMaterial = (props) => {
     const { classId } = props
 
     let kClassId = 1
@@ -34,29 +33,29 @@ const AddInstructors = (props) => {
     let [personInfo, setPersonInfo] = useState({})
 
     useEffect(() => {
-        sendRequest(
-            `http://localhost:5000/v1/class/${classId}`,
-            'GET',
-        )
-            .then((response) => {
-                if (response.ok) {
-                    return response.json()
-                } else {
-                    throw Error("Get Person Info Failed !!")
-                }
-            })
-            .then((response) => {
-                console.log(response.data)
-                if (response.data)
-                    kClassId = response.data.id
-                else
-                    throw Error("Get Person Info Failed !!")
+        // sendRequest(
+        //     `http://localhost:5000/v1/class/${classId}`,
+        //     'GET',
+        // )
+        //     .then((response) => {
+        //         if (response.ok) {
+        //             return response.json()
+        //         } else {
+        //             throw Error("Get Person Info Failed !!")
+        //         }
+        //     })
+        //     .then((response) => {
+        //         console.log(response.data)
+        //         if (response.data)
+        //             kClassId = response.data.id
+        //         else
+        //             throw Error("Get Person Info Failed !!")
 
-            })
-            .catch((error) => {
-                console.log(error)
+        //     })
+        //     .catch((error) => {
+        //         console.log(error)
 
-            })
+        //     })
     }, [])
 
     let GetPersonInfo = (event) => {
@@ -132,27 +131,22 @@ const AddInstructors = (props) => {
 
     return (
         <Card className="flex-grow-1 ml-3" style={{ maxHeight: "440px" }}>
-            <CardHeader><h4>Add Student</h4></CardHeader>
+            <CardHeader><h4>Add Material</h4></CardHeader>
             <CardBody>
                 <Form onSubmit={handleSubmit}>
                     <FormGroup>
-                        <Label for="exampleSelectMulti">Role in class</Label>
-                        <Input disabled value="Student" />
+                        <Label>Title</Label>
+                        <Input />
                     </FormGroup>
 
                     <FormGroup>
-                        <Label>Student ID</Label>
-                        <Input invalid={personInfo.fail ? true : false} valid={personInfo.id ? true : false} value={personId} onChange={(e) => GetPersonInfo(e)} placeholder="Student ID" maxLength={8} />
+                        <Label>Content</Label>
+                        <Input />
                     </FormGroup>
-
-
-
                     <FormGroup>
-                        <Label>Full Name</Label>
-                        <Input value={personInfo.name || ""} disabled invalid={personInfo.fail ? true : false} valid={personInfo.id ? true : false} />
-                        <FormText>This field is generated automatically</FormText>
+                        <Label>Link</Label>
+                        <Input />
                     </FormGroup>
-
                     <FormGroup style={{ textAlign: 'right' }}>
                         <Button color="success">Add</Button>
                     </FormGroup>
@@ -163,4 +157,4 @@ const AddInstructors = (props) => {
     )
 }
 
-export default AddInstructors
+export default AddMaterial

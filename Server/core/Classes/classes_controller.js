@@ -3,6 +3,7 @@ var crypto = require("crypto");
 const db = require('../Database/postgres_connector')
 const { HttpStatus } = require("../Http/index")
 const classesServices = require("./classes_services")
+const materialServices = require("../Materials/materials_services")
 
 const GetAllClasses = async (req, res, next) => {
     const classes = await classesServices.FindClasses()
@@ -19,7 +20,7 @@ const GetClassDetails = async (req, res, next) => {
     const [classDetail] = await classesServices.FindClasses({ classId })
     const instructors = await classesServices.GetAllInstructorsInClass(classId)
     const students = await classesServices.GetAllStudentsInClass(classId)
-    const materials = await classesServices.GetAllMaterials(classId)
+    const materials = await materialServices.GetAllMaterials(classId)
 
     HttpStatus.ok(res, {
         class: {
@@ -108,7 +109,7 @@ const AddStudentIntoClass = async (req, res) => {
         })
         .returning('*')
 
-    HttpStatus.ok(res, {
+    HttpStatus.created(res, {
         newStudentClass
     })
 }
@@ -123,9 +124,25 @@ const AddInstructorIntoClass = async (req, res) => {
         })
         .returning('*')
 
-    HttpStatus.ok(res, {
+    HttpStatus.created(res, {
         newInstructorClass
     })
+}
+
+const RemoveStudentFromClass = async (req, res) => {
+    const { student_id } = req.body
+    const class_id = req.params.id
+
+    await classesServices.RemoveStudentFromClass(student_id, class_id)
+    HttpStatus.ok(res)
+}
+
+const RemoveInstructorFromClass = async (req, res) => {
+    const { instructor_id } = req.body
+    const class_id = req.params.id
+
+    await classesServices.RemoveStudentFromClass(instructor_id, class_id)
+    HttpStatus.ok(res)
 }
 
 module.exports = {
@@ -137,5 +154,7 @@ module.exports = {
     UpdateClass,
     DeleteClass,
     AddInstructorIntoClass,
-    AddStudentIntoClass
+    AddStudentIntoClass,
+    RemoveStudentFromClass,
+    RemoveInstructorFromClass
 }

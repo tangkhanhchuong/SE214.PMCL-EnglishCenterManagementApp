@@ -1,9 +1,8 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React from 'react'
 import { useQuery } from 'react-query'
 import {
     Card, Table, Label,
-    Button, ButtonGroup, ButtonDropdown,
-    DropdownItem, DropdownToggle, DropdownMenu,
+    Button, ButtonGroup,
     CardHeader, CardBody
 } from 'reactstrap'
 
@@ -18,37 +17,6 @@ import StudentRow from '../components/StudentRow'
 const columTitles = [
     "#", "Full Name", "Avatar", "Student Id", "Gender", "Is Studying", "Actions"
 ]
-
-// const PageDropdown = (props) => {
-//     const [dropdownOpen, setOpen] = useState(false);
-//     const [dropdownTitle, setDropdownTitle] = useState(1)
-
-//     const toggle = (props) => {
-//         setOpen(!dropdownOpen);
-//     }
-
-//     const onSelected = ({ target }) => {
-//         setDropdownTitle(target.innerText)
-//     }
-
-//     return (
-//         <ButtonDropdown
-//             isOpen={dropdownOpen} toggle={toggle}
-//             style={{ width: "50px" }}
-//             {...props}>
-//             <DropdownToggle caret color="primary">
-//                 {dropdownTitle}
-//             </DropdownToggle>
-//             <DropdownMenu>
-//                 <DropdownItem onClick={onSelected}>1</DropdownItem>
-//                 <DropdownItem onClick={onSelected}>2</DropdownItem>
-//                 <DropdownItem onClick={onSelected}>3</DropdownItem>
-//                 <DropdownItem onClick={onSelected}>4</DropdownItem>
-//                 <DropdownItem onClick={onSelected}>5</DropdownItem>
-//             </DropdownMenu>
-//         </ButtonDropdown>
-//     );
-// }
 
 const AllStudentsPage = () => {
     const { data, isLoading } = useQuery('students', Students.list)

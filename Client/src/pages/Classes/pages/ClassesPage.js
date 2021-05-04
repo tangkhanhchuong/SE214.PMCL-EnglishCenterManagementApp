@@ -5,11 +5,11 @@ import Page from 'components/Page'
 import { NavLink } from 'react-router-dom'
 import { useQuery } from 'react-query'
 
-import ClassCardItem from "./ClassCardItem"
 import { Classes } from 'core/HttpRequests'
 import PageSpinner from 'components/PageSpinner'
 import MyArray from 'utils/arrays'
 
+import ClassCardItem from "../components/ClassCardItem"
 
 import classImg1 from 'assets/img/class-img/class-img-1.svg'
 import classImg2 from 'assets/img/class-img/class-img-2.svg'
@@ -34,9 +34,9 @@ const ClassesList = () => {
 
     if (isLoading) return <PageSpinner />
 
-    const classesData = [...data.data.classes]
-        .map(classItem => (
-            { ...classItem, instructor: "Chuong", img: MyArray.randomElement(classImagesList) }
+    const classesData = [...data.data.data.classes]
+        .map((classItem, index) => (
+            { ...classItem, img: classImagesList[index % 7 + 1] }
         ))
 
     return (
@@ -44,7 +44,7 @@ const ClassesList = () => {
             {classesData.map((classItem, index) =>
             (<div key={`groupCourse_${index}`}>
                 <Col key={`course_${index}`} className="mb-3">
-                    <NavLink to={`/classes/${classItem.classId}`} style={{ textDecoration: 'none' }}>
+                    <NavLink to={`/classes/${classItem.class_id}`} style={{ textDecoration: 'none' }}>
                         <ClassCardItem classItem={classItem} />
                     </NavLink>
                 </Col>
@@ -55,10 +55,6 @@ const ClassesList = () => {
 }
 
 const ClassesPage = () => {
-    // const groupedClassesListByCourseId = Object.values(groupByKey(courseList, "courseId"))
-
-
-
     return (
         <Page
             className="WidgetPage"

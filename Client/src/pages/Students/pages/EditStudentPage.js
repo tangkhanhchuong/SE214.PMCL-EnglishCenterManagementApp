@@ -3,9 +3,7 @@ import { useMutation, useQuery } from "react-query";
 import { useHistory } from "react-router-dom"
 import { useRouteMatch } from 'react-router-dom'
 import { Formik, Form, FastField } from 'formik';
-import {
-    Alert, Card, CardHeader, CardBody, Button
-} from 'reactstrap';
+import { Alert, Card, CardHeader, CardBody, Button } from 'reactstrap';
 
 import PageSpinner from 'components/PageSpinner'
 import Page from 'components/Page';

@@ -4,12 +4,12 @@ import { useLocation } from 'react-router-dom'
 
 import Page from 'components/Page'
 
-const MaterialsTab = React.lazy(() => import('./MaterialsTab'))
-const StudentsTab = React.lazy(() => import('./StudentsTab'))
-const InstructorsTab = React.lazy(() => import('./InstructorsTab'))
-const GradesTab = React.lazy(() => import('./GradesTab'))
-const AssignmentsTab = React.lazy(() => import('./AssignmentsTab'))
-const DescriptionsTab = React.lazy(() => import('./DescriptionsTab'))
+const MaterialsTab = React.lazy(() => import('../components/MaterialsTab'))
+const StudentsTab = React.lazy(() => import('../components/StudentsTab'))
+const InstructorsTab = React.lazy(() => import('../components/InstructorsTab'))
+const GradesTab = React.lazy(() => import('../components/GradesTab'))
+const AssignmentsTab = React.lazy(() => import('../components/AssignmentsTab'))
+const DescriptionsTab = React.lazy(() => import('../components/DescriptionsTab'))
 
 const ClassDetailPage = (props) => {
 
@@ -21,7 +21,7 @@ const ClassDetailPage = (props) => {
             className="ClassDetailPage"
             breadcrumbs={[{ name: 'My Classes' }, { name: classId }]}
             title={`Class ${classId}`} >
-            <Tabs defaultActiveKey="materials" id="uncontrolled-tab-example">
+            <Tabs defaultActiveKey="students">
                 <Tab eventKey="students" title="Students">
                     <div className="p-3">
                         <StudentsTab classId={classId} />
@@ -42,11 +42,6 @@ const ClassDetailPage = (props) => {
                         <MaterialsTab classId={classId} />
                     </div>
                 </Tab>
-                {/* <Tab eventKey="assignments" title="Assignments">
-                    <div className="p-3">
-                        <AssignmentsTab classId={classId} />
-                    </div>
-                </Tab> */}
                 <Tab eventKey="descriptions" title="Descriptions">
                     <div className="p-3">
                         <DescriptionsTab classId={classId} />
