@@ -43,27 +43,6 @@ const GetAllStudentsInClass = (classId) => {
         .select()
 }
 
-const AddStudentToClass = (studentId, classId) => {
-
-}
-
-const AddInstructorToClass = (instructorId, classId) => {
-
-}
-
-const GetAllMaterials = (classId) => {
-    return db('materials as m')
-        .join('classes as c', 'c.class_id', 'm.class_id')
-        .select('m.material_id', 'm.title', 'm.class_id', 'm.url', 'm.description', 'm.posted_at')
-}
-
-const CreateMaterial = () => {
-
-}
-
-const EditMaterial = () => {
-
-}
 
 const DeleteClass = () => {
 
@@ -72,7 +51,4 @@ const DeleteClass = () => {
 module.exports = {
     FindClasses, CreateClass, UpdateClass,
     GetAllAttendees, GetAllInstructorsInClass, GetAllStudentsInClass,
-    AddStudentToClass, AddInstructorToClass,
-    GetAllMaterials, CreateMaterial, EditMaterial
-
 }

@@ -11,53 +11,53 @@ import PageSpinner from 'components/PageSpinner'
 
 import Page from 'components/Page'
 import SearchInput from 'components/SearchInput'
-
-import StudentRow from './StudentRow'
 import { Students } from 'core/HttpRequests'
 
+import StudentRow from '../components/StudentRow'
+
 const columTitles = [
-    "#", "Full Name", "Avatar", "Student Id", "Gender", "Status", "Actions"
+    "#", "Full Name", "Avatar", "Student Id", "Gender", "Is Studying", "Actions"
 ]
 
-const PageDropdown = (props) => {
-    const [dropdownOpen, setOpen] = useState(false);
-    const [dropdownTitle, setDropdownTitle] = useState(1)
+// const PageDropdown = (props) => {
+//     const [dropdownOpen, setOpen] = useState(false);
+//     const [dropdownTitle, setDropdownTitle] = useState(1)
 
-    const toggle = (props) => {
-        setOpen(!dropdownOpen);
-    }
+//     const toggle = (props) => {
+//         setOpen(!dropdownOpen);
+//     }
 
-    const onSelected = ({ target }) => {
-        setDropdownTitle(target.innerText)
-    }
+//     const onSelected = ({ target }) => {
+//         setDropdownTitle(target.innerText)
+//     }
 
-    return (
-        <ButtonDropdown
-            isOpen={dropdownOpen} toggle={toggle}
-            style={{ width: "50px" }}
-            {...props}>
-            <DropdownToggle caret color="primary">
-                {dropdownTitle}
-            </DropdownToggle>
-            <DropdownMenu>
-                <DropdownItem onClick={onSelected}>1</DropdownItem>
-                <DropdownItem onClick={onSelected}>2</DropdownItem>
-                <DropdownItem onClick={onSelected}>3</DropdownItem>
-                <DropdownItem onClick={onSelected}>4</DropdownItem>
-                <DropdownItem onClick={onSelected}>5</DropdownItem>
-            </DropdownMenu>
-        </ButtonDropdown>
-    );
-}
+//     return (
+//         <ButtonDropdown
+//             isOpen={dropdownOpen} toggle={toggle}
+//             style={{ width: "50px" }}
+//             {...props}>
+//             <DropdownToggle caret color="primary">
+//                 {dropdownTitle}
+//             </DropdownToggle>
+//             <DropdownMenu>
+//                 <DropdownItem onClick={onSelected}>1</DropdownItem>
+//                 <DropdownItem onClick={onSelected}>2</DropdownItem>
+//                 <DropdownItem onClick={onSelected}>3</DropdownItem>
+//                 <DropdownItem onClick={onSelected}>4</DropdownItem>
+//                 <DropdownItem onClick={onSelected}>5</DropdownItem>
+//             </DropdownMenu>
+//         </ButtonDropdown>
+//     );
+// }
 
 const AllStudentsPage = () => {
     const { data, isLoading } = useQuery('students', Students.list)
 
     let getAllStudents = () => {
         if (!data) return <></>
-        const studentsData = data.data.students
-        if (!studentsData || studentsData.length === 0) return <></>
 
+        const studentsData = data.data.data.students
+        if (!studentsData || studentsData.length === 0) return <></>
         return (
             studentsData.map((row, index) => {
                 return (

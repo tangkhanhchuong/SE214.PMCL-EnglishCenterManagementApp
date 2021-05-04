@@ -1,70 +1,39 @@
 import React from 'react'
 import { useMutation } from "react-query";
-import { Formik, Form, FastField, Field } from 'formik';
+import { useHistory } from "react-router-dom"
+import { Formik, Form, FastField } from 'formik';
 import {
-    Input, Label, FormGroup,
-    Card, CardHeader, CardBody, Button
+    Alert, Card, CardHeader, CardBody, Button
 } from 'reactstrap';
 import Page from 'components/Page';
 
 import { Students } from 'core/HttpRequests'
 
-const InputField = (props) => {
-    const { field, label, placeholder, type, disabled } = props;
-    const { value, name, onBlur, onChange } = field;
-
-    return (
-        <FormGroup>
-            {label ? <Label>{label}</Label> : ''}
-            <Input
-                id={name}
-                placeholder={placeholder}
-                type={type}
-                disabled={disabled}
-                {...field}
-            />
-        </FormGroup>
-    )
-}
-
-const RadioField = (props) => {
-    const { field, label, placeholder, type, disabled, values } = props;
-    const { value, name, onBlur, onChange } = field;
-
-    if (!values || values.length === 0) return <></>
-
-    return (
-        <FormGroup tag="fieldset">
-            {label ? <Label>{label}</Label> : ''}
-            <div>
-                {
-                    values.map(value => {
-                        return (
-                            <Label className='mr-3' key={value} >
-                                <Field type="radio" name="gender" value={value} />
-                                {value}
-                            </Label>
-                        )
-                    })
-                }
-
-            </div>
-
-        </FormGroup>
-    )
-}
+import InputField from 'components/Form/Formik/InputField'
+import RadioField from 'components/Form/Formik/RadioField'
 
 const AddStudentPage = () => {
 
+    const delayRedirectTime = 3000
+
+    const history = useHistory()
+
     const { data, isLoading, error, status, isSuccess, mutate } = useMutation(Students.add)
 
+    const onSuccess = () => {
+        setTimeout(() => {
+            history.push('/students')
+        }, delayRedirectTime)
+    }
+
     const onAdd = (values) => {
+        console.log(values);
+
         mutate(values, {
             mutationKey: 'add_student',
             onError: (err) => { console.log(err); },
-            onSuccess: (data) => { console.log(data, 'SUCCESS'); },
+            onSuccess: onSuccess
         })
-        console.log(values);
     }
 
     const initialValues = {
@@ -93,12 +62,17 @@ const AddStudentPage = () => {
                 title="Add Student"
             >
                 <Card className=" d-flex  justify-content-around">
+                    {isSuccess ?
+                        (<Alert color="success">
+                            Student was added
+                        </Alert>) : <></>
+                    }
                     <CardHeader>
                         <h4><strong>Add Student</strong></h4>
                     </CardHeader>
                     <Formik
                         initialValues={initialValues}
-                        validate={validate}
+                        // validate={validate}
                         onSubmit={onAdd}
                     >
                         <Form>
@@ -111,11 +85,6 @@ const AddStudentPage = () => {
                                         component={InputField}
                                         label='Full Name'
                                     />
-                                    {/* <FastField
-                                        name='student_id'
-                                        component={InputField}
-                                        label='Student Id'
-                                    /> */}
                                     <FastField
                                         name='gender'
                                         component={RadioField}
@@ -147,9 +116,7 @@ const AddStudentPage = () => {
                                         component={InputField}
                                         label='Address'
                                     />
-                                    <div className="d-flex justify-content-end">
-                                        <Button className="mt-3" type='submit' color="success">Add</Button>
-                                    </div>
+                                    <Button className="mt-3" type='submit' color="success">Add</Button>
                                 </div >
                             </CardBody>
                         </Form>

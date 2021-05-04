@@ -64,7 +64,7 @@ const CreateClass = async (req, res) => {
     }
 
     const { name, course_id, max_students, schedule, time_slot, duration, begin_at } = req.body
-    console.log(req.body);
+
     const class_id = await generateClassId(course_id)
 
     const [newClass] = await db('classes')

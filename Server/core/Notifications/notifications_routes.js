@@ -8,7 +8,6 @@ router.route('/')
 
 router.route('/:id')
     .get(controller.GetNotificationDetails)
-    .patch(controller.EditNotification)
     .delete(controller.RemoveNotification)
 
 module.exports = router

@@ -32,14 +32,17 @@ const GetStudentDetails = async (req, res) => {
 }
 
 const CreateStudent = async (req, res) => {
-    const { info_id, name, gender, dob, phone, email, address, avatar_url, student_id } = req.body
+    const { name, gender, dob, phone, email, address, avatar_url } = req.body
 
+    const info_id = Math.random().toString().split('.')[1].slice(0, 3) + Date.now().toString().slice(0, 3)
 
     const [newInfo] = await db('personal_information')
         .insert({
             info_id, name, gender, dob, phone, email, address, avatar_url
         })
         .returning('*')
+
+    const student_id = 'STU' + Math.random().toString().split('.')[1].slice(0, 5)
 
     const [newStudent] = await db('students')
         .insert({
@@ -59,6 +62,7 @@ const EditStudent = async (req, res) => {
     const student_id = req.params.id
 
     const { name, gender, dob, phone, email, address, avatar_url, is_studying } = req.body
+    console.log(student_id, req.body);
 
     const [updatedStudent] = await db('students')
         .where('student_id', '=', student_id)
