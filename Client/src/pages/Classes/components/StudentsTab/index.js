@@ -3,7 +3,7 @@ import React from 'react'
 import StudentsInClass from './StudentsInClass'
 import AddStudentClassForm from './AddStudentClassForm'
 
-const InstructorsTab = ({ classId }) => {
+const StudentsTab = ({ classId }) => {
 
     return (
         <div className="d-flex flex-row justify-content-between">
@@ -13,4 +13,4 @@ const InstructorsTab = ({ classId }) => {
     )
 }
 
-export default InstructorsTab
+export default StudentsTab

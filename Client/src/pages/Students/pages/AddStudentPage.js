@@ -72,7 +72,6 @@ const AddStudentPage = () => {
                     </CardHeader>
                     <Formik
                         initialValues={initialValues}
-                        // validate={validate}
                         onSubmit={onAdd}
                     >
                         <Form>
