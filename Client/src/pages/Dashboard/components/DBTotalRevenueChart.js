@@ -7,8 +7,7 @@ const DBTotalRevenueChart = () => {
     return (
         <Card>
             <CardHeader>
-                Total Revenue{' '}
-                <small className="text-muted text-capitalize">This year</small>
+                Revenue and Expense
             </CardHeader>
             <CardBody>
                 <Line data={chartjs.line.data} options={chartjs.line.options} />

@@ -5,7 +5,7 @@ import React from 'react'
 import componentQueries from 'react-component-queries'
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 
-const DashboardPage = React.lazy(() => import('pages/Dashboard/DashboardPage'))
+const DashboardPage = React.lazy(() => import('pages/Dashboard'))
 const ClassesPages = React.lazy(() => import('pages/Classes'))
 const StudentsPages = React.lazy(() => import('pages/Students'))
 

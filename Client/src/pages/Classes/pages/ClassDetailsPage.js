@@ -18,7 +18,6 @@ const ClassDetailPage = (props) => {
 
     return (
         <Page
-            className="ClassDetailPage"
             breadcrumbs={[{ name: 'My Classes' }, { name: classId }]}
             title={`Class ${classId}`} >
             <Tabs defaultActiveKey="students">

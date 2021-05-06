@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
 
-const NotificationRow = ({ noti }) => {
+const NoticeRow = ({ noti }) => {
     return (
         <Container>
             <h4><strong>{noti.title}</strong></h4>
@@ -12,4 +12,4 @@ const NotificationRow = ({ noti }) => {
     )
 }
 
-export default NotificationRow
+export default NoticeRow

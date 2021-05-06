@@ -1,10 +1,9 @@
 import React from 'react'
-import { Route, Switch, useRouteMatch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 import PageSpinner from 'components/PageSpinner'
 
-import { AllNotificationsPage } from './AllNotificationsPage'
-import AddNotificationPage from './AddNotificationPage'
+import NoticesPage from './pages/NoticesPage'
 
 const NotificationPages = () => {
 
@@ -12,8 +11,7 @@ const NotificationPages = () => {
         <div>
             <React.Suspense fallback={<PageSpinner />}>
                 <Switch>
-                    <Route exact path='/notifications' component={AllNotificationsPage} />
-                    <Route exact path='/notifications/add' component={AddNotificationPage} />
+                    <Route exact path='/notifications' component={NoticesPage} />
                 </Switch>
             </React.Suspense>
         </div>

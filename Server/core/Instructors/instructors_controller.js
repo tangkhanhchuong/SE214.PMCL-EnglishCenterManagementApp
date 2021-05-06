@@ -1,11 +1,9 @@
 const { HttpStatus } = require("../Http/index")
+const instructorsServices = require("./instructors_services")
 const db = require('../Database/postgres_connector')
 
 const GetInstructors = async (req, res) => {
-    const instructors = await db('instructors as i')
-        .join('personal_information as p', 'p.info_id', 'i.info_id')
-        .select()
-
+    const instructors = await instructorsServices.GetInstructors()
     HttpStatus.ok(res, {
         count: instructors.length,
         instructors,

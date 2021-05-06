@@ -1,1 +1,0 @@
-export { default as AllNotificationsPage } from './AllNotificationsPage'

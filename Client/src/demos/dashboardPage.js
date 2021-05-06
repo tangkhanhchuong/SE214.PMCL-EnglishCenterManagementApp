@@ -300,14 +300,14 @@ export const chartjs = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [
                 {
-                    label: 'Revenue for this year',
+                    label: 'Expense',
                     borderColor: '#6a82fb',
                     backgroundColor: '#6a82fb',
                     data: [0, 1300, 2200, 3400, 4600, 3500, 3000],
                 },
 
                 {
-                    label: 'Revenue for last year',
+                    label: 'Revenue',
                     borderColor: '#fc5c7d',
                     backgroundColor: '#fc5c7d',
                     data: [0, 1300, 2200, 3400, 4600, 3500, 3000],

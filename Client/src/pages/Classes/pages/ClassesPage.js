@@ -57,7 +57,6 @@ const ClassesList = () => {
 const ClassesPage = () => {
     return (
         <Page
-            className="WidgetPage"
             breadcrumbs={[{ name: 'My Classes' }]}
             title="All Classes"
         >

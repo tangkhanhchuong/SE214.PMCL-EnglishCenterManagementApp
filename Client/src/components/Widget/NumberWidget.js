@@ -1,73 +1,29 @@
-import React from 'react';
-import PropTypes from 'utils/propTypes';
+import React from 'react'
+import styled from 'styled-components'
 
-import { Card, CardText, CardTitle, Progress } from 'reactstrap';
-import Typography from '../Typography';
+import { Card } from 'reactstrap'
 
-const NumberWidget = ({
-  title,
-  subtitle,
-  number,
-  color,
-  progress: { value, label },
-  ...restProps
-}) => {
-  return (
-    <Card body {...restProps}>
-      <div className="d-flex justify-content-between">
-        <CardText tag="div">
-          <Typography className="mb-0">
-            <strong>{title}</strong>
-          </Typography>
-          <Typography className="mb-0 text-muted small">{subtitle}</Typography>
-        </CardText>
-        <CardTitle className={`text-${color}`}>{number}</CardTitle>
-      </div>
-      <Progress value={value} color={color} style={{ height: '8px' }} />
-      <CardText tag="div" className="d-flex justify-content-between">
-        <Typography tag="span" className="text-left text-muted small">
-          {label}
-        </Typography>
-        <Typography tag="span" className="text-right text-muted small">
-          {value}%
-        </Typography>
-      </CardText>
-    </Card>
-  );
-};
+const StatisticCardTitle = styled.div`
+    font-size: 14px;
+    margin-top: 10px;
+`
 
-NumberWidget.propTypes = {
-  title: PropTypes.string.isRequired,
-  subtitle: PropTypes.string,
-  number: PropTypes.oneOfType([
-    PropTypes.string.isRequired,
-    PropTypes.number.isRequired,
-  ]),
-  color: PropTypes.oneOf([
-    'primary',
-    'secondary',
-    'success',
-    'info',
-    'warning',
-    'danger',
-    'light',
-    'dark',
-  ]),
-  progress: PropTypes.shape({
-    value: PropTypes.number,
-    label: PropTypes.string,
-  }),
-};
+const NumberWidget = ({ title, subtitle, number, color, Icon, ...restProps }) => {
+    return (
+        <Card body {...restProps} className='d-flex flex-row align-items-center'>
+            <div className='d-flex flex-column align-items-center mr-3'>
+                <Icon size='35' color='gray' />
+                <StatisticCardTitle>{title}</StatisticCardTitle>
+            </div>
+            <div style={{
+                borderLeft: '2px solid gray',
+                height: '40px'
+            }} className='ml-3 mr-3'></div>
+            <div style={{ fontSize: '30px' }} className='ml-3'>
+                {number}
+            </div>
+        </Card>
+    )
+}
 
-NumberWidget.defaultProps = {
-  title: '',
-  subtitle: '',
-  number: 0,
-  color: 'primary',
-  progress: {
-    value: 0,
-    label: '',
-  },
-};
-
-export default NumberWidget;
+export default NumberWidget

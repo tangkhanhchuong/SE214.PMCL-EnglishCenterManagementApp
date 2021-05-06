@@ -16,6 +16,10 @@ exports.seed = function (knex) {
         {
           notification_id: '3',
           class_id: 'IE60.1',
+        },
+        {
+          notification_id: '1',
+          class_id: 'IE60.1',
         }
       ]);
     });

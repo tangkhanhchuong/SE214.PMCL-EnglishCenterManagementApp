@@ -29,23 +29,15 @@ import {
 } from 'react-icons/md'
 import InfiniteCalendar from 'react-infinite-calendar'
 import {
-    Badge,
-    Button,
-    Card,
-    CardBody,
-    CardDeck,
-    CardGroup,
-    CardHeader,
-    CardTitle,
-    Col,
-    ListGroup,
-    ListGroupItem,
-    Row,
+    Badge, Button,
+    Card, CardBody, CardDeck, CardGroup, CardHeader, CardTitle,
+    Col, Row,
+    ListGroup, ListGroupItem
 } from 'reactstrap'
 import { getColor } from 'utils/colors'
-import DBStatisticCard from './DBStatisticCard'
-import DBTotalExpenseChart from './DBTotalExpenseChart'
-import DBTotalRevenueChart from './DBTotalRevenueChart'
+import DBStatisticCard from '../components/DBStatisticCard'
+import DBTotalExpenseChart from '../components/DBTotalExpenseChart'
+import DBTotalRevenueChart from '../components/DBTotalRevenueChart'
 
 const today = new Date()
 const lastWeek = new Date(
@@ -168,7 +160,7 @@ class DashboardPage extends React.Component {
                             >
                                 <CardTitle>
                                     <MdInsertChart /> Sales
-                </CardTitle>
+                                </CardTitle>
                             </CardBody>
                         </Card>
                     </Col>
@@ -258,7 +250,7 @@ class DashboardPage extends React.Component {
                         <Card inverse className="bg-gradient-primary">
                             <CardHeader className="bg-gradient-primary">
                                 Map with bubbles
-              </CardHeader>
+                            </CardHeader>
                             <CardBody>
                                 <MapWithBubbles />
                             </CardBody>
@@ -266,7 +258,7 @@ class DashboardPage extends React.Component {
                     </Col>
                 </Row>
 
-                {/* <CardDeck style={{ marginBottom: '1rem' }}>
+                <CardDeck style={{ marginBottom: '1rem' }}>
                     <Card body style={{ overflowX: 'auto', 'paddingBottom': '15px', 'height': 'fit-content', 'paddingTop': 'inherit' }}>
                         <HorizontalAvatarList
                             avatars={avatarsData}
@@ -281,9 +273,9 @@ class DashboardPage extends React.Component {
                             reversed
                         />
                     </Card>
-                </CardDeck> */}
+                </CardDeck>
 
-                <Row>
+                {/* <Row>
                     <Col lg="4" md="12" sm="12" xs="12">
                         <AnnouncementCard
                             color="gradient-secondary"
@@ -320,7 +312,7 @@ class DashboardPage extends React.Component {
                     <Col lg="4" md="12" sm="12" xs="12">
                         <TodosCard todos={todosData} />
                     </Col>
-                </Row>
+                </Row> */}
             </Page>
         )
     }
