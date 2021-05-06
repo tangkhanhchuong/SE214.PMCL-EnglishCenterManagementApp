@@ -28,6 +28,12 @@ const InputField = (props) => {
         )
     }
 
+    const onNumberInputChange = (e) => {
+        const value = e.target.value
+        const lastChar = value[value.length - 1]
+        if (isNaN(parseInt(lastChar))) e.target.value = value.slice(0, -1)
+    }
+
     return (
         <FormGroup>
             {label ? <span className="mr-3"><Label className="mr-3">{label}</Label></span> : ''}
@@ -38,7 +44,7 @@ const InputField = (props) => {
                 disabled={disabled}
                 name={name}
                 onBlur={onBlur}
-                onChange={onChange}
+                onChange={type === 'number' ? onNumberInputChange : onChange}
                 defaultValue={value}
             />
         </FormGroup>

@@ -7,6 +7,10 @@ const coursesServices = require("./courses_services")
 
 const GetAllCourses = async (req, res, next) => {
     const courses = await coursesServices.FindCourses()
+    for (let c of courses) {
+        const classes_in_course = await classesServices.FindClasses({ course_id: c.course_id })
+        c.classes_in_course = classes_in_course
+    }
 
     HttpStatus.ok(res, {
         count: courses.length,

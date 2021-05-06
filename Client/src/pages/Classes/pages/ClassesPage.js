@@ -7,9 +7,9 @@ import { useQuery } from 'react-query'
 
 import { Classes } from 'core/HttpRequests'
 import PageSpinner from 'components/PageSpinner'
-import MyArray from 'utils/arrays'
 
 import ClassCardItem from "../components/ClassCardItem"
+import { Courses } from "core/HttpRequests"
 
 import classImg1 from 'assets/img/class-img/class-img-1.svg'
 import classImg2 from 'assets/img/class-img/class-img-2.svg'
@@ -30,27 +30,26 @@ const classImagesList = [
 ]
 
 const ClassesList = () => {
-    const { data, isLoading } = useQuery('all-classes', Classes.list)
+    const { data, isLoading } = useQuery('courses', Courses.list)
 
     if (isLoading) return <PageSpinner />
 
-    const classesData = [...data.data.data.classes]
-        .map((classItem, index) => (
-            { ...classItem, img: classImagesList[index % 7 + 1] }
-        ))
+    const coursesData = data.data.data.courses
 
     return (
-        <Row>
-            {classesData.map((classItem, index) =>
-            (<div key={`groupCourse_${index}`}>
-                <Col key={`course_${index}`} className="mb-3">
-                    <NavLink to={`/classes/${classItem.class_id}`} style={{ textDecoration: 'none' }}>
-                        <ClassCardItem classItem={classItem} />
-                    </NavLink>
-                </Col>
-            </div>)
-            )}
-        </Row>
+        coursesData.map(c => (
+            <Row key={c.course_id} className='d-flex flex-column mb-3'>
+                <div style={{ fontSize: '25px', marginBottom: '10px' }}><b>Course: </b>{c.course_id}</div>
+                {c.classes_in_course.map((classItem, index) => {
+                    classItem.img = classImagesList[index % 7 + 1]
+                    return (<Col className="mb-3" key={classItem.class_id} xl={3} lg={12} md={12}>
+                        <NavLink to={`/classes/${classItem.class_id}`} style={{ textDecoration: 'none' }}>
+                            <ClassCardItem classItem={classItem} />
+                        </NavLink>
+                    </Col>)
+                })}
+            </Row>
+        ))
     )
 }
 

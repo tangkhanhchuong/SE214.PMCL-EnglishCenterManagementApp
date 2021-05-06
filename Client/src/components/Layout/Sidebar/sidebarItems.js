@@ -86,9 +86,10 @@ const generateManagerSidebar = () => {
             ]
         },
         {
-            to: '/classes', name: 'Classes', exact: true, Icon: FaGraduationCap, children: [
+            to: '/classes', name: 'Courses', exact: true, Icon: FaGraduationCap, children: [
                 { to: '/classes', name: 'View Classes', exact: true, Icon: FaGraduationCap },
-                { to: '/classes/add', name: 'Add Class', exact: true, Icon: FaGraduationCap }
+                { to: '/classes/add', name: 'Add Class', exact: true, Icon: FaGraduationCap },
+                { to: '/classes/add-course', name: 'Add Course', exact: true, Icon: FaGraduationCap }
             ]
         },
         {
