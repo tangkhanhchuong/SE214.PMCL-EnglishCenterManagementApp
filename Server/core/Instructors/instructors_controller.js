@@ -32,27 +32,28 @@ const GetInstructorDetails = async (req, res) => {
 }
 
 const CreateInstructor = async (req, res) => {
-    const { info_id, name, gender, dob, phone, email, address, avatar_url, instructor_id } = req.body
+    const { name, gender, dob, phone, email, address, avatar_url } = req.body
+
+    const info_id = Math.random().toString().split('.')[1].slice(0, 3) + Date.now().toString().slice(0, 3)
 
     const [newInfo] = await db('personal_information')
         .insert({
-            address, avatar_url, dob, email, gender, info_id, name, phone
+            info_id, name, gender, dob, phone, email, address, avatar_url
         })
         .returning('*')
 
-    const [newInstructor] = await db('instructors')
+    const instructor_id = 'INS' + Math.random().toString().split('.')[1].slice(0, 5)
+
+    const [newStudent] = await db('instructors')
         .insert({
-            instructor_id,
-            start_working_at: new Date(Date.now()),
-            is_working: true,
-            info_id
+            info_id, instructor_id, is_working: true, start_working_at: new Date(Date.now())
         })
         .returning('*')
 
     HttpStatus.created(res, {
         new_instructor: {
             name: newInfo.name,
-            instructor_id: newInstructor.instructor_id
+            new_instructor: newStudent.instructor_id
         }
     })
 }

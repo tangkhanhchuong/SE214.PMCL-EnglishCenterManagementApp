@@ -141,7 +141,7 @@ const RemoveInstructorFromClass = async (req, res) => {
     const { instructor_id } = req.body
     const class_id = req.params.id
 
-    await classesServices.RemoveStudentFromClass(instructor_id, class_id)
+    await classesServices.RemoveInstructorFromClass(instructor_id, class_id)
     HttpStatus.ok(res)
 }
 

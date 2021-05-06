@@ -9,51 +9,51 @@ import PageSpinner from 'components/PageSpinner'
 import Page from 'components/Page'
 import InputField from 'components/Form/Formik/InputField'
 import RadioField from 'components/Form/Formik/RadioField'
-import { Students } from 'core/HttpRequests'
+import { Instructors } from 'core/HttpRequests'
 
-const EditForm = ({ student }) => {
+const EditForm = ({ instructor }) => {
     const convertDate = (date) => {
         if (!date) return
         const yourDate = new Date(date).toISOString().split('T')[0]
         return yourDate
     }
 
-    const { name, gender, dob, phone, email, address, student_id, is_studying } = student
+    const { name, gender, dob, phone, email, address, instructor_id, is_working } = instructor
 
     const delayRedirectTime = 3000
 
-    const { isSuccess, mutate } = useMutation(Students.edit)
+    const { isSuccess, mutate } = useMutation(Instructors.edit)
     const history = useHistory()
 
     const onSuccess = () => {
         setTimeout(() => {
-            history.push('/students')
+            history.push('/instructors')
         }, delayRedirectTime)
     }
 
     const onEdit = (values) => {
-        const { is_studying } = values
-        values = { ...values, is_studying: is_studying[0] === 'on' ? true : false }
-        mutate({ info: values, id: student.student_id }, {
-            mutationKey: 'edit_student',
+        const { is_working } = values
+        values = { ...values, is_working: is_working[0] === 'on' ? true : false }
+        mutate({ info: values, id: instructor.instructor_id }, {
+            mutationKey: 'edit_instructor',
             onError: (err) => { console.log(err) },
             onSuccess: onSuccess
         })
     }
 
     const initialValues = {
-        name, gender, dob, phone, email, address, student_id, is_studying
+        name, gender, dob, phone, email, address, instructor_id, is_working
     }
 
     return (
         <Card className=" d-flex  justify-content-around">
             {isSuccess ?
                 (<Alert color="success">
-                    Student's information was updated
+                    Instructor's information was updated
                 </Alert>) : <></>
             }
             <CardHeader>
-                <h4><strong>Edit Student</strong>: {student_id}</h4>
+                <h4><strong>Edit Instructor</strong>: {instructor_id}</h4>
             </CardHeader>
             <Formik
                 initialValues={initialValues}
@@ -85,11 +85,11 @@ const EditForm = ({ student }) => {
                                 value={convertDate(dob)}
                             />
                             <FastField
-                                name='is_studying'
+                                name='is_working'
                                 component={InputField}
-                                label='Is Studying'
+                                label='Is Working'
                                 type='checkbox'
-                                value={is_studying}
+                                value={is_working}
                             />
                         </div >
                         <div className="flex-grow-1 p-3">
@@ -122,24 +122,23 @@ const EditForm = ({ student }) => {
     )
 }
 
-const EditStudentPage = () => {
+const EditInstructorPage = () => {
 
-    const currentStudentId = useRouteMatch().params.studentId
+    const currentInstructorId = useRouteMatch().params.instructorId
 
-    const { data, isLoading } = useQuery('student_details', Students.details.bind(this, currentStudentId))
+    const { data, isLoading } = useQuery('instructor_details', Instructors.details.bind(this, currentInstructorId))
 
     return (
         <Page
-            className="allAssignments"
-            breadcrumbs={[{ name: 'Students' }]}
-            title="Edit Student"
+            breadcrumbs={[{ name: 'Instructors' }]}
+            title="Edit Instructor"
         >
             {
-                isLoading ? <PageSpinner /> : <EditForm student={data.data.data.student} />
+                isLoading ? <PageSpinner /> : <EditForm instructor={data.data.data.instructor} />
             }
         </Page>
     )
 }
 
-export default EditStudentPage
+export default EditInstructorPage
 

@@ -76,24 +76,25 @@ const generateManagerSidebar = () => {
             to: '/students', name: 'Students', exact: true, Icon: FaUserGraduate, children: [
                 { to: '/students', name: 'View Students', exact: true, Icon: FaUserGraduate },
                 { to: '/students/add', name: 'Add Student', exact: true, Icon: FaUserGraduate },
+                { to: '/students/pay-tuition', name: 'Pay Tuition', exact: true, Icon: FaUserGraduate }
             ]
         },
         {
             to: '/instructors', name: 'Instructors', exact: true, Icon: FaChalkboardTeacher, children: [
                 { to: '/instructors', name: 'View Instructors', exact: true, Icon: FaChalkboardTeacher },
-                { to: '/instructors/add', name: 'Add Instructor', exact: true, Icon: FaChalkboardTeacher },
+                { to: '/instructors/add', name: 'Add Instructor', exact: true, Icon: FaChalkboardTeacher }
             ]
         },
         {
             to: '/classes', name: 'Classes', exact: true, Icon: FaGraduationCap, children: [
                 { to: '/classes', name: 'View Classes', exact: true, Icon: FaGraduationCap },
-                { to: '/classes/add', name: 'Add Class', exact: true, Icon: FaGraduationCap },
+                { to: '/classes/add', name: 'Add Class', exact: true, Icon: FaGraduationCap }
             ]
         },
         {
             to: '/notifications', name: 'Notifications', exact: true, Icon: MdNotifications, children: [
                 { to: '/notifications', name: 'View Notifications', exact: true, Icon: MdBook },
-                { to: '/notifications/add', name: 'Add Notification', exact: true, Icon: MdBook },
+                { to: '/notifications/add', name: 'Add Notification', exact: true, Icon: MdBook }
             ]
         },
         { to: '/messages', name: 'Message', exact: true, Icon: MdChatBubble },

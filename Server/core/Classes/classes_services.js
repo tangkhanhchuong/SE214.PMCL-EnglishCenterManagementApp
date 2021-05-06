@@ -58,10 +58,10 @@ const RemoveStudentFromClass = (studentId, classId) => {
 }
 
 const RemoveInstructorFromClass = (instructorId, classId) => {
-    return db("instructor_class")
+    return db('instructor_class')
         .where({
             class_id: classId,
-            student_id: instructorId
+            instructor_id: instructorId
         })
         .del()
 }

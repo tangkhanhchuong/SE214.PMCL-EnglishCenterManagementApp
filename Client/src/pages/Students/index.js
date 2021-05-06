@@ -7,6 +7,7 @@ const StudentsPage = React.lazy(() => import('./pages/StudentsPage'))
 const AddStudentPage = React.lazy(() => import('./pages/AddStudentPage'))
 const StudentDetailsPage = React.lazy(() => import('./pages/StudentDetailsPage'))
 const EditStudentPage = React.lazy(() => import('./pages/EditStudentPage'))
+const PayTuitionPage = React.lazy(() => import('./pages/PayTuitionPage'))
 
 const ClassRoutes = () => {
     let { path } = useRouteMatch();
@@ -17,6 +18,7 @@ const ClassRoutes = () => {
                 <Switch>
                     <Route exact path={`${path}`} component={StudentsPage} />
                     <Route exact path={`${path}/add`} component={AddStudentPage} />
+                    <Route exact path={`${path}/pay-tuition`} component={PayTuitionPage} />
                     <Route exact path={`${path}/:studentId`} component={StudentDetailsPage} />
                     <Route exact path={`${path}/:studentId/edit`} component={EditStudentPage} />
                 </Switch>

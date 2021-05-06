@@ -7,18 +7,18 @@ import {
 import { useRouteMatch } from 'react-router-dom'
 import { useMutation } from 'react-query'
 
-import { Classes, Students } from 'core/HttpRequests'
+import { Classes, Instructors } from 'core/HttpRequests'
 
-const AddStudentClassForm = (props) => {
+const AddInstructorClassForm = (props) => {
     const classId = useRouteMatch().params.classId
-    const [studentId, setStudentId] = useState('')
+    const [instructorId, setInstructorId] = useState('')
     const [name, setName] = useState('')
 
-    const { mutate: mutateDetails } = useMutation(Students.details)
-    const { mutate: mutateAdd, isSuccess: isAddSuccess } = useMutation(Classes.addStudentToClass)
+    const { mutate: mutateDetails } = useMutation(Instructors.details)
+    const { mutate: mutateAdd, isSuccess: isAddSuccess } = useMutation(Classes.addInstructorToClass)
 
     const onFindSuccess = (data) => {
-        const name = data.data.data.student.name
+        const name = data.data.data.instructor.name
         if (name) setName(name)
     }
 
@@ -26,29 +26,29 @@ const AddStudentClassForm = (props) => {
 
     }
 
-    const getStudentNameById = (studentId) => {
-        mutateDetails(studentId, {
-            mutationKey: 'student_details',
+    const getInstructorNameById = (instructorId) => {
+        mutateDetails(instructorId, {
+            mutationKey: 'instructor_details',
             onError: (err) => { console.log(err); },
             onSuccess: onFindSuccess
         })
     }
 
-    const onStudentIdFieldChange = (e) => {
+    const onInstructorIdFieldChange = (e) => {
         const value = e.target.value
         const lastChar = value[value.length - 1]
         if (isNaN(parseInt(lastChar))) e.target.value = value.slice(0, -1)
-        setStudentId(e.target.value)
+        setInstructorId(e.target.value)
         setName('')
         if (e.target.value.length > 4) {
-            getStudentNameById(`STU-${e.target.value}`)
+            getInstructorNameById(`INS-${e.target.value}`)
         }
     }
 
-    const onAddStudentToClass = (e) => {
+    const onAddInstructorToClass = (e) => {
         e.preventDefault()
-        mutateAdd({ studentId: `STU-${studentId}`, classId }, {
-            mutationKey: 'student_details',
+        mutateAdd({ instructorId: `INS-${instructorId}`, classId }, {
+            mutationKey: 'instructor_details',
             onError: (err) => { console.log(err); },
             onSuccess: onAddSuccess
         })
@@ -57,18 +57,18 @@ const AddStudentClassForm = (props) => {
     return (
         <Card className="flex-grow-1 ml-3" style={{ maxHeight: "440px" }
         }>
-            <CardHeader><h4>Add Student</h4></CardHeader>
+            <CardHeader><h4>Add Instructor</h4></CardHeader>
             <CardBody>
-                <Form onSubmit={onAddStudentToClass}>
+                <Form onSubmit={onAddInstructorToClass}>
                     <FormGroup>
                         <Label>Role in class</Label>
-                        <Input disabled value="Student" />
+                        <Input disabled value="Instructor" />
                     </FormGroup>
                     <FormGroup>
-                        <Label>Student ID</Label>
+                        <Label>Instructor ID</Label>
                         <div className='d-flex flex-row'>
-                            <Label><i>STU - </i></Label>
-                            <Input value={studentId} onChange={onStudentIdFieldChange} maxLength={5} style={{ maxWidth: '200px', marginLeft: '5px' }} />
+                            <Label><i>INS - </i></Label>
+                            <Input value={instructorId} onChange={onInstructorIdFieldChange} maxLength={5} style={{ maxWidth: '200px', marginLeft: '5px' }} />
                         </div>
                     </FormGroup>
                     <FormGroup>
@@ -76,7 +76,7 @@ const AddStudentClassForm = (props) => {
                         <Input value={name} disabled />
                         <FormText>This field is generated automatically</FormText>
                     </FormGroup>
-                    {isAddSuccess ? <Alert color="success" >Student was added to class</Alert> : <></>}
+                    {isAddSuccess ? <Alert color="success" >Instructor was added to class</Alert> : <></>}
                     <FormGroup style={{ textAlign: 'right' }}>
                         <Button color="success" disabled={name === '' ? true : false}>Add</Button>
                     </FormGroup>
@@ -87,4 +87,4 @@ const AddStudentClassForm = (props) => {
     )
 }
 
-export default AddStudentClassForm
+export default AddInstructorClassForm

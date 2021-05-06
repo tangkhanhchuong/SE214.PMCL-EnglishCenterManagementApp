@@ -23,8 +23,10 @@ const GetStudentDetails = async (req, res) => {
     const participatedClasses = await db('student_class as sc')
         .join('students as s', 's.student_id', 'sc.student_id')
         .join('classes as c', 'c.class_id', 'sc.class_id')
+        .join('courses as co', 'co.course_id', 'c.course_id')
         .where('sc.student_id', studentId)
-        .select('c.class_id', 'c.course_id', 'c.schedule', 'c.time_slot', 'c.duration')
+        .select('c.class_id', 'c.course_id', 'c.schedule', 'c.time_slot', 'c.duration', 'sc.registered_at', 'sc.paid_at', 'co.fee')
+        .orderBy('sc.registered_at', 'desc')
 
     HttpStatus.ok(res, {
         student: { ...student, participatedClasses }
@@ -42,7 +44,7 @@ const CreateStudent = async (req, res) => {
         })
         .returning('*')
 
-    const student_id = 'STU' + Math.random().toString().split('.')[1].slice(0, 5)
+    const student_id = 'STU-' + Math.random().toString().split('.')[1].slice(0, 5)
 
     const [newStudent] = await db('students')
         .insert({
@@ -62,7 +64,6 @@ const EditStudent = async (req, res) => {
     const student_id = req.params.id
 
     const { name, gender, dob, phone, email, address, avatar_url, is_studying } = req.body
-    console.log(student_id, req.body);
 
     const [updatedStudent] = await db('students')
         .where('student_id', '=', student_id)
@@ -85,11 +86,33 @@ const RemoveStudent = (req, res) => {
 
 }
 
+const PayTuition = async (req, res) => {
+    const student_id = req.params.id
+    const { class_id } = req.body
+
+    console.log(student_id, class_id);
+
+    const updatedTuitionReceipt = await db('student_class')
+        .update({
+            paid_at: new Date(Date.now())
+        })
+        .where({
+            'student_id': student_id,
+            'class_id': class_id
+        })
+        .returning('*')
+
+    HttpStatus.ok(res, {
+        updatedTuitionReceipt
+    })
+}
+
 module.exports = {
     GetStudents,
     GetStudentDetails,
     CreateStudent,
     RemoveStudent,
-    EditStudent
+    EditStudent,
+    PayTuition
 }
 

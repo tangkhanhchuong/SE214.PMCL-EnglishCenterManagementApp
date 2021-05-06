@@ -8,6 +8,7 @@ import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 const DashboardPage = React.lazy(() => import('pages/Dashboard/DashboardPage'))
 const ClassesPages = React.lazy(() => import('pages/Classes'))
 const StudentsPages = React.lazy(() => import('pages/Students'))
+const InstructorsPages = React.lazy(() => import('pages/Instructors'))
 const NotificationsPages = React.lazy(() => import('pages/Notifications'))
 const PaymentPages = React.lazy(() => import('pages/Payments'))
 const AccountPages = React.lazy(() => import('pages/Profile'))
@@ -27,6 +28,7 @@ const AdminRoutes = (props) => {
             <React.Suspense fallback={<PageSpinner />}>
               <Route path="/classes" component={ClassesPages} />
               <Route path="/students" component={StudentsPages} />
+              <Route path="/instructors" component={InstructorsPages} />
               <Route path="/payments" component={PaymentPages} />
               <Route path="/messages" component={MessagesPages} />
               <Route path="/account" component={AccountPages} />

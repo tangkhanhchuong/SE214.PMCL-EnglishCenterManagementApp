@@ -8,4 +8,5 @@ export default {
         const { info, id } = updatedStudent
         return axiosClient.patch(`/students/${id}`, info)
     },
+    pay: ({ studentId, classId }) => axiosClient.patch(`/students/${studentId}/pay-tuition`, { class_id: classId })
 }

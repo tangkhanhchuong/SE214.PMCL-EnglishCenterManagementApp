@@ -11,4 +11,7 @@ router.route('/:id')
     .patch(controller.EditStudent)
     .delete(controller.RemoveStudent)
 
+router.route('/:id/pay-tuition')
+    .patch(controller.PayTuition)
+
 module.exports = router

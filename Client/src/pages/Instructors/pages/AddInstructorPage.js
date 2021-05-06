@@ -5,28 +5,28 @@ import { Formik, Form, FastField } from 'formik'
 import { Alert, Card, CardHeader, CardBody, Button } from 'reactstrap'
 import Page from 'components/Page'
 
-import { Students } from 'core/HttpRequests'
+import { Instructors } from 'core/HttpRequests'
 
 import InputField from 'components/Form/Formik/InputField'
 import RadioField from 'components/Form/Formik/RadioField'
 
-const AddStudentPage = () => {
+const AddInstructorPage = () => {
 
     const delayRedirectTime = 3000
 
     const history = useHistory()
 
-    const { isSuccess, mutate } = useMutation(Students.add)
+    const { isSuccess, mutate } = useMutation(Instructors.add)
 
     const onSuccess = () => {
         setTimeout(() => {
-            history.push('/students')
+            history.push('/instructors')
         }, delayRedirectTime)
     }
 
     const onAdd = (values) => {
         mutate(values, {
-            mutationKey: 'add_student',
+            mutationKey: 'add_instructor',
             onError: (err) => { console.log(err) },
             onSuccess: onSuccess
         })
@@ -41,18 +41,17 @@ const AddStudentPage = () => {
     return (
         <div>
             <Page
-                className="allAssignments"
-                breadcrumbs={[{ name: 'Students' }]}
-                title="Add Student"
+                breadcrumbs={[{ name: 'Instructors' }]}
+                title="Add Instructor"
             >
                 <Card className=" d-flex  justify-content-around">
                     {isSuccess ?
                         (<Alert color="success">
-                            Student was added
+                            Instructor was added
                         </Alert>) : <></>
                     }
                     <CardHeader>
-                        <h4><strong>Add Student</strong></h4>
+                        <h4><strong>Add Instructor</strong></h4>
                     </CardHeader>
                     <Formik
                         initialValues={initialValues}
@@ -110,5 +109,5 @@ const AddStudentPage = () => {
     )
 }
 
-export default AddStudentPage
+export default AddInstructorPage
 

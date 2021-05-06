@@ -54,95 +54,93 @@ const AddClassPage = () => {
     }
 
     return (
-        <div>
-            <Page
-                breadcrumbs={[{ name: 'Classes' }]}
-                title="Add Class"
-            >
-                <Card className=" d-flex  justify-content-around">
-                    {isSuccess ?
-                        (<Alert color="success">
-                            Class was added
-                        </Alert>) : <></>
-                    }
-                    <CardHeader>
-                        <h4><strong>Add Class</strong></h4>
-                    </CardHeader>
-                    <Formik
-                        initialValues={initialValues}
-                        onSubmit={onAdd}
-                    >
-                        <Form>
-                            <CardBody className=" d-flex flex-row  justify-content-around">
-                                <div className="flex-grow-1 p-3">
-                                    <br />
-                                    <FastField
-                                        name='name'
-                                        component={InputField}
-                                        label='Class Name: '
-                                    />
-                                    <FastField
-                                        name='course_id'
-                                        component={SelectField}
-                                        label='Course Id: '
-                                        minWidth='120px'
-                                        options={coursesData.data.data.courses.map(c => c.course_id)}
+        <Page
+            breadcrumbs={[{ name: 'Classes' }]}
+            title="Add Class"
+        >
+            <Card className=" d-flex justify-content-around">
+                {isSuccess ?
+                    (<Alert color="success">
+                        Class was added
+                    </Alert>) : <></>
+                }
+                <CardHeader>
+                    <h4><strong>Add Class</strong></h4>
+                </CardHeader>
+                <Formik
+                    initialValues={initialValues}
+                    onSubmit={onAdd}
+                >
+                    <Form>
+                        <CardBody className=" d-flex flex-row  justify-content-around">
+                            <div className="flex-grow-1 p-3">
+                                <br />
+                                <FastField
+                                    name='name'
+                                    component={InputField}
+                                    label='Class Name: '
+                                />
+                                <FastField
+                                    name='course_id'
+                                    component={SelectField}
+                                    label='Course Id: '
+                                    minWidth='120px'
+                                    options={coursesData.data.data.courses.map(c => c.course_id)}
 
-                                    />
+                                />
+                                <FastField
+                                    name='max_students'
+                                    component={SelectField}
+                                    label='Max number of students: '
+                                    options={MAX_NUM_STUDENTS}
+                                    unit='students'
+                                />
+                            </div >
+                            <div className="flex-grow-1 p-3">
+                                <br />
+                                <FastField
+                                    name='schedule'
+                                    component={SelectField}
+                                    label='Schedule: '
+                                    options={SCHEDULES}
+                                    minWidth='170px'
+                                />
+                                <div className='d-flex flex-row'>
                                     <FastField
-                                        name='max_students'
-                                        component={SelectField}
-                                        label='Max number of students: '
-                                        options={MAX_NUM_STUDENTS}
-                                        unit='students'
-                                    />
-                                </div >
-                                <div className="flex-grow-1 p-3">
-                                    <br />
-                                    <FastField
-                                        name='schedule'
-                                        component={SelectField}
-                                        label='Schedule: '
-                                        options={SCHEDULES}
-                                        minWidth='170px'
-                                    />
-                                    <div className='d-flex flex-row'>
-                                        <FastField
-                                            name='from'
-                                            component={InputField}
-                                            label='From: '
-                                            type='time'
-                                        />
-                                        <div style={{ width: '50px' }}></div>
-                                        <FastField
-                                            name='to'
-                                            component={InputField}
-                                            label='To: '
-                                            type='time'
-                                        />
-                                    </div>
-                                    <FastField
-                                        name='duration'
-                                        component={SelectField}
-                                        label='Duration: '
-                                        options={DURATIONS}
-                                        minWidth='80px'
-                                        unit='months'
-                                    />
-                                    <FastField
-                                        name='begin_at'
+                                        name='from'
                                         component={InputField}
-                                        label='Begin At: '
-                                        type='date'
+                                        label='From: '
+                                        type='time'
                                     />
-                                    <Button className="mt-3" type='submit' color="success">Add</Button>
-                                </div >
-                            </CardBody>
-                        </Form>
-                    </Formik>
-                </Card>
-            </Page>
-        </div >
+                                    <div style={{ width: '50px' }}></div>
+                                    <FastField
+                                        name='to'
+                                        component={InputField}
+                                        label='To: '
+                                        type='time'
+                                    />
+                                </div>
+                                <FastField
+                                    name='duration'
+                                    component={SelectField}
+                                    label='Duration: '
+                                    options={DURATIONS}
+                                    minWidth='80px'
+                                    unit='months'
+                                />
+                                <FastField
+                                    name='begin_at'
+                                    component={InputField}
+                                    label='Begin At: '
+                                    type='date'
+                                />
+                                <Button className="mt-3" type='submit' color="success">Add</Button>
+                            </div >
+                        </CardBody>
+                    </Form>
+                </Formik>
+            </Card>
+        </Page>
     )
 }
 
