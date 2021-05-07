@@ -35,7 +35,7 @@ const NoticesList = () => {
 
     return (
         <Card className="flex-grow-1 ml-3">
-            <CardHeader><h4>All Notices</h4></CardHeader>
+            <CardHeader><h4><b>All Notices</b></h4></CardHeader>
             <CardBody>
                 <Card body>
                     <Table >

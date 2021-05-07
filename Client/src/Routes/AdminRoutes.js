@@ -13,6 +13,7 @@ const NotificationsPages = React.lazy(() => import('pages/Notifications'))
 const PaymentPages = React.lazy(() => import('pages/Payments'))
 const AccountPages = React.lazy(() => import('pages/Profile'))
 const MessagesPages = React.lazy(() => import('pages/Messages'))
+const ExamsPages = React.lazy(() => import('pages/Exams'))
 
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`
@@ -29,10 +30,11 @@ const AdminRoutes = (props) => {
               <Route path="/classes" component={ClassesPages} />
               <Route path="/students" component={StudentsPages} />
               <Route path="/instructors" component={InstructorsPages} />
-              <Route path="/payments" component={PaymentPages} />
+              {/* <Route path="/payments" component={PaymentPages} /> */}
               <Route path="/messages" component={MessagesPages} />
               <Route path="/account" component={AccountPages} />
               <Route path="/notifications" component={NotificationsPages} />
+              <Route path="/exams" component={ExamsPages} />
               <Route exact path="/" component={DashboardPage} />
 
               {/* <Route path="/">

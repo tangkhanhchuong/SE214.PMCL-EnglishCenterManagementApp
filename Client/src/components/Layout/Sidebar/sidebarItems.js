@@ -93,10 +93,13 @@ const generateManagerSidebar = () => {
             ]
         },
         {
-            to: '/notifications', name: 'Notifications', exact: true, Icon: MdNotifications, children: [
-                { to: '/notifications', name: 'View Notifications', exact: true, Icon: MdBook },
-                { to: '/notifications/add', name: 'Add Notification', exact: true, Icon: MdBook }
+            to: '/exams', name: 'Exams', exact: true, Icon: FaChalkboardTeacher, children: [
+                { to: '/exams', name: 'View Exams', exact: true, Icon: FaChalkboardTeacher },
+                { to: '/exams/add', name: 'Add Exams', exact: true, Icon: FaChalkboardTeacher },
             ]
+        },
+        {
+            to: '/notifications', name: 'Notifications', exact: true, Icon: MdNotifications
         },
         { to: '/messages', name: 'Message', exact: true, Icon: MdChatBubble },
         { to: '/account', name: 'Account', exact: false, Icon: MdAccountCircle }

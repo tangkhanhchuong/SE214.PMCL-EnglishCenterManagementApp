@@ -31,7 +31,9 @@ const AddNoticeForm = (props) => {
 
     return (
         <Card className="flex-grow-1 ml-3">
-            <CardHeader><h4>Add Notice</h4></CardHeader>
+            <CardHeader>
+                <h4><b>Add Notice</b></h4>
+            </CardHeader>
             {isAddSuccess ? <Alert color='success'>Notice was posted</Alert> : <></>}
             <CardBody>
                 <Form onSubmit={onAddNotice}>

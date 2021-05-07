@@ -3,14 +3,12 @@ import { useMutation, useQuery } from "react-query";
 import { useHistory } from "react-router-dom"
 import { Formik, Form, FastField } from 'formik';
 import {
-    Alert, Card, CardHeader, CardBody, Button
+    Alert, Card, CardHeader, CardBody, Button, Container, Col
 } from 'reactstrap';
 import Page from 'components/Page';
-import PageSpinner from 'components/PageSpinner';
 
 import { Courses } from 'core/HttpRequests'
 import InputField from 'components/Form/Formik/InputField'
-import SelectField from 'components/Form/Formik/SelectField'
 
 import { DURATIONS, SCHEDULES, MAX_NUM_STUDENTS } from '../constants'
 
@@ -45,48 +43,50 @@ const AddCoursePage = () => {
             breadcrumbs={[{ name: 'Courses' }]}
             title="Add Course"
         >
-            <Card style={{ maxWidth: '600px' }}>
-                <CardHeader>
-                    <h4><strong>Add Course</strong></h4>
-                </CardHeader>
-                {isSuccess ?
-                    (<Alert color="success">
-                        Course was added
-                    </Alert>) : <></>
-                }
-                <Formik
-                    initialValues={initialValues}
-                    onSubmit={onAdd}
-                >
-                    <Form>
-                        <CardBody>
-                            <FastField
-                                name='course_id'
-                                component={InputField}
-                                label='Course Id: '
-                            />
-                            <FastField
-                                name='name'
-                                component={InputField}
-                                label='Course Name: '
-                            />
-                            <FastField
-                                name='fee'
-                                component={InputField}
-                                label='Fee (VND): '
-                                type='number'
-                            />
-                            <FastField
-                                name='description'
-                                component={InputField}
-                                label='Description: '
-                                type='textarea'
-                            />
-                            <Button color='success' type='submit'>Add</Button>
-                        </CardBody>
-                    </Form>
-                </Formik>
-            </Card>
+            <Col xl={6} lg={12} md={12}>
+                <Card>
+                    <CardHeader>
+                        <h4><strong>Add Course</strong></h4>
+                    </CardHeader>
+                    {isSuccess ?
+                        (<Alert color="success">
+                            Course was added
+                        </Alert>) : <></>
+                    }
+                    <Formik
+                        initialValues={initialValues}
+                        onSubmit={onAdd}
+                    >
+                        <Form>
+                            <CardBody>
+                                <FastField
+                                    name='course_id'
+                                    component={InputField}
+                                    label='Course Id: '
+                                />
+                                <FastField
+                                    name='name'
+                                    component={InputField}
+                                    label='Course Name: '
+                                />
+                                <FastField
+                                    name='fee'
+                                    component={InputField}
+                                    label='Fee (VND): '
+                                    type='number'
+                                />
+                                <FastField
+                                    name='description'
+                                    component={InputField}
+                                    label='Description: '
+                                    type='textarea'
+                                />
+                                <Button color='success' type='submit'>Add</Button>
+                            </CardBody>
+                        </Form>
+                    </Formik>
+                </Card>
+            </Col>
         </Page >
     )
 }

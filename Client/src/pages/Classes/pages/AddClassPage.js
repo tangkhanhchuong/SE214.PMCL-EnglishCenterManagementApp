@@ -3,7 +3,7 @@ import { useMutation, useQuery } from "react-query";
 import { useHistory } from "react-router-dom"
 import { Formik, Form, FastField } from 'formik';
 import {
-    Alert, Card, CardHeader, CardBody, Button
+    Alert, Card, CardHeader, CardBody, Button, Row, Col, Container
 } from 'reactstrap';
 import Page from 'components/Page';
 import PageSpinner from 'components/PageSpinner';
@@ -72,70 +72,77 @@ const AddClassPage = () => {
                     onSubmit={onAdd}
                 >
                     <Form>
-                        <CardBody className=" d-flex flex-row  justify-content-around">
-                            <div className="flex-grow-1 p-3">
-                                <br />
-                                <FastField
-                                    name='name'
-                                    component={InputField}
-                                    label='Class Name: '
-                                />
-                                <FastField
-                                    name='course_id'
-                                    component={SelectField}
-                                    label='Course Id: '
-                                    minWidth='120px'
-                                    options={coursesData.data.data.courses.map(c => c.course_id)}
+                        <CardBody>
+                            <Container>
+                                <Row>
+                                    <Col sm={5} >
+                                        <h4><b>Class Information</b></h4>
+                                        <br />
+                                        <FastField
+                                            name='name'
+                                            component={InputField}
+                                            label='Class Name: '
+                                        />
+                                        <FastField
+                                            name='course_id'
+                                            component={SelectField}
+                                            label='Course Id: '
+                                            minWidth='120px'
+                                            options={coursesData.data.data.courses.map(c => c.course_id)}
 
-                                />
-                                <FastField
-                                    name='max_students'
-                                    component={SelectField}
-                                    label='Max number of students: '
-                                    options={MAX_NUM_STUDENTS}
-                                    unit='students'
-                                />
-                            </div >
-                            <div className="flex-grow-1 p-3">
-                                <br />
-                                <FastField
-                                    name='schedule'
-                                    component={SelectField}
-                                    label='Schedule: '
-                                    options={SCHEDULES}
-                                    minWidth='170px'
-                                />
-                                <div className='d-flex flex-row'>
-                                    <FastField
-                                        name='from'
-                                        component={InputField}
-                                        label='From: '
-                                        type='time'
-                                    />
-                                    <div style={{ width: '50px' }}></div>
-                                    <FastField
-                                        name='to'
-                                        component={InputField}
-                                        label='To: '
-                                        type='time'
-                                    />
-                                </div>
-                                <FastField
-                                    name='duration'
-                                    component={SelectField}
-                                    label='Duration: '
-                                    options={DURATIONS}
-                                    minWidth='80px'
-                                    unit='months'
-                                />
-                                <FastField
-                                    name='begin_at'
-                                    component={InputField}
-                                    label='Begin At: '
-                                    type='date'
-                                />
-                                <Button className="mt-3" type='submit' color="success">Add</Button>
-                            </div >
+                                        />
+                                        <FastField
+                                            name='max_students'
+                                            component={SelectField}
+                                            label='Max number of students: '
+                                            options={MAX_NUM_STUDENTS}
+                                            unit='students'
+                                        />
+                                    </Col >
+                                    <Col sm={1}></Col>
+                                    <Col sm={6}>
+                                        <h4><b>Schedule</b></h4>
+                                        <br />
+                                        <FastField
+                                            name='schedule'
+                                            component={SelectField}
+                                            label='Days in week: '
+                                            options={SCHEDULES}
+                                            minWidth='170px'
+                                        />
+                                        <div className='d-flex flex-row'>
+                                            <FastField
+                                                name='from'
+                                                component={InputField}
+                                                label='From: '
+                                                type='time'
+                                            />
+                                            <div style={{ width: '50px' }}></div>
+                                            <FastField
+                                                name='to'
+                                                component={InputField}
+                                                label='To: '
+                                                type='time'
+                                            />
+                                        </div>
+                                        <FastField
+                                            name='duration'
+                                            component={SelectField}
+                                            label='Duration: '
+                                            options={DURATIONS}
+                                            minWidth='80px'
+                                            unit='months'
+                                        />
+                                        <FastField
+                                            name='begin_at'
+                                            component={InputField}
+                                            label='Begin At: '
+                                            type='date'
+                                        />
+                                        <Button className="mt-3" type='submit' color="success">Add</Button>
+                                    </Col >
+                                </Row>
+                            </Container>
                         </CardBody>
                     </Form>
                 </Formik>

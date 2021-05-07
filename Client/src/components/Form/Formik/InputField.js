@@ -4,14 +4,14 @@ import { FormGroup, Input, Label } from 'reactstrap'
 
 const InputField = (props) => {
 
-    const { field, label, placeholder, type, disabled, value } = props;
+    const { field, label, placeholder, type, disabled, value, width = '70px' } = props;
     const { name, onBlur, onChange } = field;
 
     const [isStudying, setIsStudying] = useState(value)
 
     if (type === 'checkbox') {
         return (
-            <FormGroup>
+            <div>
                 {label ? <span className="mr-3"><Label className="mr-3">{label}</Label></span> : ''}
                 <Input
                     id={name}
@@ -24,7 +24,7 @@ const InputField = (props) => {
                     checked={isStudying}
                     classnames={'ml-3'}
                 />
-            </FormGroup>
+            </div>
         )
     }
 

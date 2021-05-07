@@ -7,7 +7,9 @@ import {
 } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
-const DescriptionsTab = ({ classId }) => {
+const DescriptionsTab = ({ classDetails }) => {
+    const { class_id, name, course_id, duration, max_students, time_slot, students, instructors } = classDetails
+
     return (
         <Card className="flex-grow-1 mr-3">
             <CardHeader className="d-flex flex-row justify-content-between">
@@ -24,27 +26,31 @@ const DescriptionsTab = ({ classId }) => {
                         <tbody>
                             <tr>
                                 <th>Class Id:</th>
-                                <td>{classId}</td>
+                                <td>{class_id}</td>
                             </tr>
                             <tr>
                                 <th>Class Name:</th>
-                                <td>English 4.21</td>
+                                <td>{name}</td>
                             </tr>
                             <tr>
                                 <th>Course Id:</th>
-                                <td>ENG4</td>
+                                <td>{course_id}</td>
                             </tr>
                             <tr>
-                                <th>Course Name:</th>
-                                <td>English 4</td>
+                                <th>Duration:</th>
+                                <td>{duration}</td>
+                            </tr>
+                            <tr>
+                                <th>Time slot:</th>
+                                <td>{time_slot}</td>
                             </tr>
                             <tr>
                                 <th>Number of instructors:</th>
-                                <td>2</td>
+                                <td>{instructors.length}</td>
                             </tr>
                             <tr>
                                 <th>Number of students:</th>
-                                <td>10</td>
+                                <td>{students.length}</td>
                             </tr>
                         </tbody>
                     </Table>

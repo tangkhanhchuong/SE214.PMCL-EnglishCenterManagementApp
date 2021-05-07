@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import {
     Card, CardBody, CardHeader,
     Form, FormGroup, FormText,
-    Button, Input, Label, Alert
+    Button, Input, Label, Alert,
+    Container, Col
 } from 'reactstrap'
 import { useHistory } from "react-router-dom"
 import { useMutation } from 'react-query'
@@ -82,51 +83,53 @@ const PayTuitionPage = () => {
             breadcrumbs={[{ name: 'Students' }]}
             title="Pay Tuition"
         >
-            <Card className="flex-grow-1 ml-3" style={{ maxWidth: '600px' }}>
-                <CardHeader><h4>Pay Tuition</h4></CardHeader>
-                <CardBody>
-                    <Form onSubmit={onPayTuition}>
-                        {paidAt ?
-                            (<Alert color="warning">
-                                Tuition was paid {paidAt.split('T')[0]}
-                            </Alert>) : <></>
-                        }
-                        <FormGroup>
-                            <Label>Role in class</Label>
-                            <Input disabled value="Student" />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label>Student ID</Label>
-                            <Input value={studentId} onChange={onStudentIdFieldChange} maxLength={8} />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label>Full Name</Label>
-                            <Input value={name} disabled />
-                            <FormText>This field is generated automatically</FormText>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label>Course ID</Label>
-                            <Input maxLength={8} value={courseId ? courseId : ''} disabled />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label>Class ID</Label>
-                            <Input maxLength={8} value={classId ? classId : ''} disabled />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label>Tuition</Label>
-                            <Input maxLength={8} value={fee ? fee : ''} disabled />
-                        </FormGroup>
-                        <FormGroup style={{ textAlign: 'right' }}>
-                            <Button color="success" disabled={(name === '' || paidAt) ? true : false}>Pay</Button>
-                        </FormGroup>
-                        {isPaySuccess ?
-                            (<Alert color="success">
-                                Tuition was paid
-                            </Alert>) : <></>
-                        }
-                    </Form>
-                </CardBody>
-            </Card>
+            <Col xs={6}>
+                <Card>
+                    <CardHeader><h4><b>Pay Tuition</b></h4></CardHeader>
+                    <CardBody>
+                        <Form onSubmit={onPayTuition}>
+                            {paidAt ?
+                                (<Alert color="warning">
+                                    Tuition was paid {paidAt.split('T')[0]}
+                                </Alert>) : <></>
+                            }
+                            <FormGroup>
+                                <Label>Role in class</Label>
+                                <Input disabled value="Student" />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Student ID</Label>
+                                <Input value={studentId} onChange={onStudentIdFieldChange} maxLength={8} />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Full Name</Label>
+                                <Input value={name} disabled />
+                                <FormText>This field is generated automatically</FormText>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Course ID</Label>
+                                <Input maxLength={8} value={courseId ? courseId : ''} disabled />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Class ID</Label>
+                                <Input maxLength={8} value={classId ? classId : ''} disabled />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Tuition</Label>
+                                <Input maxLength={8} value={fee ? fee : ''} disabled />
+                            </FormGroup>
+                            <FormGroup style={{ textAlign: 'right' }}>
+                                <Button color="success" disabled={(name === '' || paidAt) ? true : false}>Pay</Button>
+                            </FormGroup>
+                            {isPaySuccess ?
+                                (<Alert color="success">
+                                    Tuition was paid
+                                </Alert>) : <></>
+                            }
+                        </Form>
+                    </CardBody>
+                </Card>
+            </Col>
         </Page>
     )
 }
