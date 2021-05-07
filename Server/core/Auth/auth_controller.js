@@ -1,48 +1,68 @@
 // const User = require("Database/Db/MongoDb/models/user")
+const db = require('../Database/postgres_connector')
+
 const { HttpStatusCode, HttpStatus } = require("../Http/index")
 const { throwError } = require("../Errors/error_handler")
 const { generateAuthToken, verifyToken } = require("./authentication/jwt")
 const { comparePassword, hashPassword } = require("./authentication/hashing")
 
-const Account = require("./accounts_model")
 const AuthServices = require("./auth_services")
 
 let refreshTokens = []
 
-const checkIfEmailNotExisted = async (email) => {
-    let user = await AuthServices.FindAccounts({ email })
+const _checkIfUsernameNotExisted = async (username) => {
+    let user = await AuthServices.FindAccounts({ username })
     if (user.length === 0)
-        throwError(HttpStatusCode.CONFLICT, "User with this email could not be found !")
+        throwError(HttpStatusCode.CONFLICT, "User with this username could not be found !")
     return user
 }
 
-const checkIfEmailExisted = async (email) => {
-    let user = await Account.find({ email })
+const _checkIfUsernameExisted = async (email) => {
+    let user = await Account.find({ username })
     if (user.length > 0)
-        throwError(HttpStatusCode.FORBIDDEN, "Email already exists !")
+        throwError(HttpStatusCode.FORBIDDEN, "username already exists !")
     return user
 }
 
 const logIn = async (req, res, next) => {
-    const { email, password } = req.body
-    try {
-        const [foundUser] = await checkIfEmailNotExisted(email)
-        console.log(foundUser)
-        await comparePassword(password, foundUser.password)
+    const { username, password } = req.body
 
-        const accessToken = generateAuthToken({ email, username: foundUser.username, id: foundUser._id })
-        const refreshToken = generateAuthToken({ email, username: foundUser.username, id: foundUser._id }, false)
+    try {
+        const [foundAccount] = await _checkIfUsernameNotExisted(username)
+        await comparePassword(password, foundAccount.password)
+
+        const accessToken = generateAuthToken({ username, id: foundAccount._id })
+        const refreshToken = generateAuthToken({ username, id: foundAccount._id }, false)
         refreshTokens.push(refreshToken)
+
+        const [userInfo] = await db('personal_information')
+            .where('info_id', foundAccount.info_id)
+            .select()
+
+        let id
+        switch (parseInt(foundAccount.role_id)) {
+            case 1:
+                id = 'ADMIN'
+                break;
+            case 2:
+                const [instructor] = await db('instructors').where('info_id', foundAccount.info_id).select('instructor_id')
+                id = instructor.instructor_id
+                break;
+            case 3:
+                const [student] = await db('students').where('info_id', foundAccount.info_id).select('student_id')
+                id = student.student_id
+                break;
+            default:
+                break;
+        }
 
         res.header('authorization', `Bearer ${accessToken} ${refreshToken}`)
         HttpStatus.ok(res, {
-            message: "Successfully",
-            user: {
-                accountId: foundUser._id,
-                email: foundUser.email,
-                username: foundUser.username
-            },
-            method: req.method
+            username: foundAccount.username,
+            name: userInfo.name,
+            id,
+            role_id: foundAccount.role_id,
+            token: accessToken
         })
     }
     catch (err) {
@@ -54,7 +74,7 @@ const register = async (req, res, next) => {
     const { email, username, password } = req.body
 
     try {
-        await checkIfEmailExisted(email)
+        await _checkIfUsernameExisted(email)
 
         const hashedPassword = await hashPassword(password)
         // const newUser = await Account.create({ email, username, password: hashedPassword })

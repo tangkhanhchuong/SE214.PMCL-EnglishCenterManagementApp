@@ -53,7 +53,6 @@ const Sidebar = () => {
                     {sidebarItems.map((item, index) => (
                         <CollapseTab key={index} sidebarItem={item} index={index} />
                     ))}
-
                 </Nav>
             </div>
         </aside>

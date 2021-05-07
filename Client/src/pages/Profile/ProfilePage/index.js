@@ -8,15 +8,19 @@ import InfoCards from './InfoCards'
 import './index.css'
 
 
-const AccountPage = () => {
+const ProfilePage = () => {
     return (
+        // <Page
+        //     className="TablePage"
+        //     breadcrumbs={[{ name: 'Account' }]} >
+        //     <InfoCards />
+        //     <UserCard avatarSize={80} style={{ "height": "140px" }} />
+        // </Page>
         <Page
-            className="TablePage"
-            breadcrumbs={[{ name: 'Account' }]} >
-            <InfoCards />
-            <UserCard avatarSize={80} style={{ "height": "140px" }} />
+            breadcrumbs={[{ name: 'Profile' }]} >
+            <h1>This page is under developed</h1>
         </Page>
     )
 }
 
-export default AccountPage
+export default ProfilePage

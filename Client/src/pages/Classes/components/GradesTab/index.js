@@ -18,12 +18,11 @@ const GradesTab = (props) => {
 
     let [isEdit, setIsEdit] = useState(false)
     let [scoreDetails, setScoreDetail] = useState([
-        { idStudent: 18520168, firstname: 'John', lastname: 'Evan', scores: { e15min1: 8, e15min2: 7.25, eMidTerm1: 8.5, eMidTerm2: 6.75, eFinalExam: 9 } },
-        { idStudent: 18520010, firstname: 'Kayn', lastname: 'Smith', scores: { e15min1: 8, e15min2: 7.25, eMidTerm1: 8.5, eMidTerm2: 6.75, eFinalExam: 9 } },
-        { idStudent: 18520123, firstname: 'Athena', lastname: 'Rii', scores: { e15min1: 8, e15min2: 7.25, eMidTerm1: 8.5, eMidTerm2: 6.75, eFinalExam: 9 } },
-        { idStudent: 17520812, firstname: 'Chuong', lastname: 'Tang', scores: { e15min1: 8, e15min2: 7.25, eMidTerm1: 8.5, eMidTerm2: 6.75, eFinalExam: 9 } },
-        { idStudent: 18521234, firstname: 'Thinh', lastname: 'Doan', scores: { e15min1: 8, e15min2: 7.25, eMidTerm1: 8.5, eMidTerm2: 6.75, eFinalExam: 9 } },
-        { idStudent: 18520383, firstname: 'Toan', lastname: 'Tan', scores: { e15min1: 8, e15min2: 7.25, eMidTerm1: 8.5, eMidTerm2: 6.75, eFinalExam: 9 } },
+        { student_id: 18520168, name: 'John', scores: { midterm1: 8, midterm2: 9.5, final: 10 } },
+        { student_id: 18520138, name: 'Andy', scores: { midterm1: 2, midterm2: 9.5, final: 8 } },
+        { student_id: 18520128, name: 'Chuong', scores: { midterm1: 4, midterm2: 7.5, final: 10 } },
+        { student_id: 18520158, name: 'Lisa', scores: { midterm1: 8, midterm2: 8, final: 9 } },
+        { student_id: 18520198, name: 'Jacob', scores: { midterm1: 10, midterm2: 8.5, final: 9 } },
     ])
     let [scoreEditing, setScoreEditing] = useState([])
 
@@ -39,11 +38,9 @@ const GradesTab = (props) => {
     }
 
     let scoresWeight = {
-        e15min1: 0.1,
-        e15min2: 0.1,
-        eMidTerm1: 0.2,
-        eMidTerm2: 0.2,
-        eFinalExam: 0.4
+        midterm1: 0.2,
+        midterm2: 0.3,
+        final: 0.5
     }
 
     let processTempEditing = (indexInArray, scoreColumnName, newScore) => {
@@ -53,11 +50,9 @@ const GradesTab = (props) => {
     }
 
     let calcAverageScore = (scoreData) => {
-        return (scoreData.e15min1 * scoresWeight.e15min1 +
-            scoreData.e15min2 * scoresWeight.e15min2 +
-            scoreData.eMidTerm1 * scoresWeight.eMidTerm1 +
-            scoreData.eMidTerm2 * scoresWeight.eMidTerm2 +
-            scoreData.eFinalExam * scoresWeight.eFinalExam).toFixed(2)
+        return (scoreData.midterm1 * scoresWeight.midterm1 +
+            scoreData.midterm2 * scoresWeight.midterm2 +
+            scoreData.final * scoresWeight.final).toFixed(2)
     }
 
     let compareFinalScore = (scoreData, index) => {
@@ -73,19 +68,16 @@ const GradesTab = (props) => {
         return result
     }
 
-    let renderScoreTable = () => {
+    const renderScoreTable = () => {
         if (isEdit) {
             return scoreEditing.map((scoreElm, index) => {
                 return (
                     <tr className="kTable-tr-hover" key={`scoreTableRow-${index}`}>
-                        <th scope="row">{scoreElm.idStudent}</th>
-                        <td>{scoreElm.firstname}</td>
-                        <td>{scoreElm.lastname}</td>
-                        <td><Input className="kInputScore" type="number" step="0.25" onChange={(e) => processTempEditing(index, "e15min1", e.target.value)} min={0} max={10} maxLength={4} defaultValue={scoreElm.scores.e15min1}></Input></td>
-                        <td><Input className="kInputScore" type="number" step="0.25" onChange={(e) => processTempEditing(index, "e15min2", e.target.value)} min={0} max={10} maxLength={4} defaultValue={scoreElm.scores.e15min2}></Input></td>
-                        <td><Input className="kInputScore" type="number" step="0.25" onChange={(e) => processTempEditing(index, "eMidTerm1", e.target.value)} min={0} max={10} maxLength={4} defaultValue={scoreElm.scores.eMidTerm1}></Input></td>
-                        <td><Input className="kInputScore" type="number" step="0.25" onChange={(e) => processTempEditing(index, "eMidTerm2", e.target.value)} min={0} max={10} maxLength={4} defaultValue={scoreElm.scores.eMidTerm2}></Input></td>
-                        <td><Input className="kInputScore" type="number" step="0.25" onChange={(e) => processTempEditing(index, "eFinalExam", e.target.value)} min={0} max={10} maxLength={4} defaultValue={scoreElm.scores.eFinalExam}></Input></td>
+                        <th scope="row">{scoreElm.student_id}</th>
+                        <td>{scoreElm.name}</td>
+                        <td><Input className="kInputScore" type="number" step="0.25" onChange={(e) => processTempEditing(index, "midterm1", e.target.value)} min={0} max={10} maxLength={4} defaultValue={scoreElm.scores.midterm1}></Input></td>
+                        <td><Input className="kInputScore" type="number" step="0.25" onChange={(e) => processTempEditing(index, "midterm2", e.target.value)} min={0} max={10} maxLength={4} defaultValue={scoreElm.scores.midterm2}></Input></td>
+                        <td><Input className="kInputScore" type="number" step="0.25" onChange={(e) => processTempEditing(index, "final", e.target.value)} min={0} max={10} maxLength={4} defaultValue={scoreElm.scores.final}></Input></td>
                         <td>
                             {
                                 compareFinalScore(scoreElm.scores, index)
@@ -101,14 +93,11 @@ const GradesTab = (props) => {
             return scoreDetails.map((scoreElm, index) => {
                 return (
                     <tr className="kTable-tr-hover" key={`scoreTableRow-${index}`}>
-                        <th scope="row">{scoreElm.idStudent}</th>
-                        <td>{scoreElm.firstname}</td>
-                        <td>{scoreElm.lastname}</td>
-                        <td>{scoreElm.scores.e15min1}</td>
-                        <td>{scoreElm.scores.e15min2}</td>
-                        <td>{scoreElm.scores.eMidTerm1}</td>
-                        <td>{scoreElm.scores.eMidTerm2}</td>
-                        <td>{scoreElm.scores.eFinalExam}</td>
+                        <th scope="row">{scoreElm.student_id}</th>
+                        <td>{scoreElm.name}</td>
+                        <td>{scoreElm.scores.midterm1}</td>
+                        <td>{scoreElm.scores.midterm2}</td>
+                        <td>{scoreElm.scores.final}</td>
                         <td>
                             {
                                 calcAverageScore(scoreElm.scores)
@@ -124,41 +113,31 @@ const GradesTab = (props) => {
     const renderScoreView = () => {
         return (
             <>
-                <Row>
-                    <Col>
-                        <Card className="mb-3">
-                            <CardHeader><h4>All Grades</h4></CardHeader>
-                            <CardBody>
-                                <Row>
-                                    <Col>
-                                        <Card body>
-                                            <Table className="kScoreTable">
-                                                <thead>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>First Name</th>
-                                                        <th>Last Name</th>
-                                                        <th>15 mins <br /> {scoresWeight.e15min1 * 100} %</th>
-                                                        <th>15 mins <br /> {scoresWeight.e15min2 * 100} %</th>
-                                                        <th>Mid Term <br /> {scoresWeight.eMidTerm1 * 100} %</th>
-                                                        <th>Mid Term <br /> {scoresWeight.eMidTerm2 * 100} %</th>
-                                                        <th>Final Exam <br /> {scoresWeight.eFinalExam * 100} %</th>
-                                                        <th>Average <br /> Score</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {
-                                                        renderScoreTable()
-                                                    }
-                                                </tbody>
-                                            </Table>
-                                        </Card>
-                                    </Col>
-                                </Row>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                </Row>
+                <CardBody>
+                    <Row>
+                        <Col>
+                            <Card body>
+                                <Table className="kScoreTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Student Id</th>
+                                            <th>Name</th>
+                                            <th>Middle Term 1<br /> ({scoresWeight.midterm1 * 100} %)</th>
+                                            <th>Middle Term 2<br /> ({scoresWeight.midterm2 * 100} %)</th>
+                                            <th>Final Exam <br /> ({scoresWeight.final * 100} %)</th>
+                                            <th>Average <br /> Score</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            renderScoreTable()
+                                        }
+                                    </tbody>
+                                </Table>
+                            </Card>
+                        </Col>
+                    </Row>
+                </CardBody>
             </>
         )
     }
@@ -166,23 +145,32 @@ const GradesTab = (props) => {
     // if (chartMode) return <ScoreChart classId={classId} />
 
     return (
-        <>
-            <Row>
+
+        <Card className="mb-3">
+            {/* <Row>
                 <Col md="6" sm="12" xs="12">
                 </Col>
                 <Col md="6" sm="12" xs="12" className="text-right">
-                    <Button color="primary" onClick={() => { setChartMode((prev) => !prev) }}>Chart</Button>
+                    <Button color="primary" onClick={() => { setChartMode((prev) => !prev) }}>Chart</Button> 
                     <Button outline color="success" className="kMargin-LeftRight-5 kBtn-WSize-75" onClick={toggleIsEdit}>
                         {isEdit ? "Save" : "Edit"}
                     </Button>
 
                 </Col>
-            </Row>
+            </Row>*/}
 
-            {
-                chartMode ? <GradeCharts classId={classId} /> : renderScoreView()
-            }
-        </>
+            <Row>
+                <Col>
+                    <CardHeader className='d-flex flex-row justify-content-between'>
+                        <h4>All Grades</h4>
+                        <Button outline color="success" className="kMargin-LeftRight-5 kBtn-WSize-75" onClick={toggleIsEdit}>
+                            {isEdit ? "Save" : "Edit"}
+                        </Button>
+                    </CardHeader>
+                    {renderScoreView()}
+                </Col>
+            </Row>
+        </Card>
     )
 }
 

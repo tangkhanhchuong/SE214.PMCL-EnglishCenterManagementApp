@@ -7,19 +7,19 @@ exports.seed = function (knex) {
       return knex('student_class').insert([
         {
           class_id: 'IE55.1',
-          student_id: '18520010',
+          student_id: 'STU-56032',
           registered_at: 'March 21, 2021',
           paid_at: 'March 21, 2021'
         },
         {
           class_id: 'IE55.1',
-          student_id: '18520168',
+          student_id: 'STU-56031',
           registered_at: 'March 21, 2021',
           paid_at: 'March 21, 2021'
         },
         {
           class_id: 'IE60.1',
-          student_id: '18520109',
+          student_id: 'STU-56039',
           registered_at: 'March 21, 2021',
           paid_at: 'March 21, 2021'
         }

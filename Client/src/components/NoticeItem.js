@@ -9,10 +9,10 @@ const statusMap = {
   pending: 'success',
 }
 
-const NoticeItem = ({ title, content, posted_at, ...restProps }) => {
+const NoticeItem = ({ title, content, posted_at }) => {
 
   return (
-    <div {...restProps}>
+    <div >
       <Media className="m-2">
         <Media body>
           <p className="text-muted m-0">

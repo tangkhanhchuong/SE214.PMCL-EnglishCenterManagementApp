@@ -38,17 +38,19 @@ const ClassesList = () => {
 
     return (
         coursesData.map(c => (
-            <Row key={c.course_id} className='d-flex flex-column mb-3'>
+            <div key={c.course_id} className='d-flex flex-column mb-3'>
                 <div style={{ fontSize: '25px', marginBottom: '10px' }}><b>Course: </b>{c.course_id}</div>
-                {c.classes_in_course.map((classItem, index) => {
-                    classItem.img = classImagesList[index % 7 + 1]
-                    return (<Col className="mb-3" key={classItem.class_id} xl={3} lg={12} md={12}>
-                        <NavLink to={`/classes/${classItem.class_id}`} style={{ textDecoration: 'none' }}>
-                            <ClassCardItem classItem={classItem} />
-                        </NavLink>
-                    </Col>)
-                })}
-            </Row>
+                <Row>
+                    {c.classes_in_course.map((classItem, index) => {
+                        classItem.img = classImagesList[index % 7 + 1]
+                        return (<Col className="mb-3" key={classItem.class_id} xl={3} lg={12} md={12}>
+                            <NavLink to={`/classes/${classItem.class_id}`} style={{ textDecoration: 'none' }}>
+                                <ClassCardItem classItem={classItem} />
+                            </NavLink>
+                        </Col>)
+                    })}
+                </Row>
+            </div>
         ))
     )
 }

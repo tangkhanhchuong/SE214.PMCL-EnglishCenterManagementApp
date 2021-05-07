@@ -90,7 +90,7 @@ const EditForm = ({ exam }) => {
                                     name='exam_type'
                                     component={SelectField}
                                     label='Exam Type'
-                                    options={['Weekly', 'Middle Term', 'Final Term']}
+                                    options={['Middle Term 1', 'Middle Term 2', 'Final Term']}
                                     minWidth={180}
                                 />
                                 <FastField

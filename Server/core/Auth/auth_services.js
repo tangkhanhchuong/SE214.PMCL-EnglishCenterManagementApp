@@ -1,4 +1,3 @@
-const db = require('../Database/postgres_connector')
 const KnexSyntax = require('../Database/postgres_query_syntax')
 
 const FindAccounts = (queryObject) => {

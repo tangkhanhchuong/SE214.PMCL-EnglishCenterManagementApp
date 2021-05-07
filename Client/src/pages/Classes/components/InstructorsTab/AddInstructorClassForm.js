@@ -40,7 +40,7 @@ const AddInstructorClassForm = (props) => {
         if (isNaN(parseInt(lastChar))) e.target.value = value.slice(0, -1)
         setInstructorId(e.target.value)
         setName('')
-        if (e.target.value.length > 4) {
+        if (e.target.value.length > 2) {
             getInstructorNameById(`INS-${e.target.value}`)
         }
     }

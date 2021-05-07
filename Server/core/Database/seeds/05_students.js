@@ -6,17 +6,17 @@ exports.seed = function (knex) {
       // Inserts seed entries
       return knex('students').insert([
         {
-          student_id: '18520010',
+          student_id: 'STU-56032',
           is_studying: false,
           info_id: '1'
         },
         {
-          student_id: '18520168',
+          student_id: 'STU-56031',
           is_studying: true,
           info_id: '2'
         },
         {
-          student_id: '18520109',
+          student_id: 'STU-56039',
           is_studying: true,
           info_id: '3'
         }

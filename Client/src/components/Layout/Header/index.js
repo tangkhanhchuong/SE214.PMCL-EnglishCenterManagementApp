@@ -53,6 +53,7 @@ const Header = () => {
     const dispatch = useDispatch()
 
     const userData = useSelector(state => state.userData)
+    const initStatus = useSelector(state => state.systemStatus.statusCode)
 
 
     let [state, setState] = useState({
@@ -85,17 +86,15 @@ const Header = () => {
     }
 
     let SignOut = async () => {
-        await localStorage.removeItem("userData")
+        localStorage.removeItem("userData")
         dispatch(RemoveUserData())
-
     }
 
     let GetRoleName = (roleId) => {
-        switch (roleId) {
-            case 1: return "Student"
-            case 2: return "Lecturer"
-            case 3: return "Manager"
-            case 9: return "Student"
+        switch (parseInt(roleId)) {
+            case 1: return "Manager"
+            case 2: return "Instructor"
+            case 3: return "Student"
 
             default: return "Guest"
         }
@@ -161,29 +160,28 @@ const Header = () => {
                         <PopoverBody className="p-0 border-light">
                             <UserCard
                                 title={userData.name || "CTT User"}
-                                subtitle={userData.email || "cttuser@gmail.com"}
                                 text={GetRoleName(userData.roleId || 1)}
                                 className="border-light"
                             >
                                 <ListGroup flush>
                                     <ListGroupItem tag="button" action className="border-light">
                                         <MdPersonPin /> Profile
-                    </ListGroupItem>
+                                    </ListGroupItem>
                                     <ListGroupItem tag="button" action className="border-light">
                                         <MdInsertChart /> Stats
-                    </ListGroupItem>
+                                    </ListGroupItem>
                                     <ListGroupItem tag="button" action className="border-light">
                                         <MdMessage /> Messages
-                    </ListGroupItem>
+                                    </ListGroupItem>
                                     <ListGroupItem tag="button" action className="border-light">
                                         <MdSettingsApplications /> Settings
-                    </ListGroupItem>
+                                    </ListGroupItem>
                                     <ListGroupItem tag="button" action className="border-light">
                                         <MdHelp /> Help
-                    </ListGroupItem>
+                                    </ListGroupItem>
                                     <ListGroupItem tag="button" action className="border-light" onClick={SignOut}>
                                         <MdExitToApp /> Signout
-                    </ListGroupItem>
+                                    </ListGroupItem>
                                 </ListGroup>
                             </UserCard>
                         </PopoverBody>

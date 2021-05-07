@@ -14,6 +14,7 @@ const InputField = (props) => {
             <div>
                 {label ? <span className="mr-3"><Label className="mr-3">{label}</Label></span> : ''}
                 <Input
+                    spellcheck={false}
                     id={name}
                     placeholder={placeholder}
                     type={type}

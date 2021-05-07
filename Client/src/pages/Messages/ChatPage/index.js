@@ -7,15 +7,11 @@ import Page from 'components/Page'
 const ChatPage = (props) => {
     // const [isInWorkSpace, setIsInWorkSpace] = useState(true)
 
-
     return (
-        <>
-            <Page
-                className="TablePage"
-                breadcrumbs={[{ name: 'Messages' }]} >
-                <h1>This page is under developed</h1>
-            </Page>
-        </>
+        <Page
+            breadcrumbs={[{ name: 'Messages' }]} >
+            <h1>This page is under developed</h1>
+        </Page>
     )
 }
 

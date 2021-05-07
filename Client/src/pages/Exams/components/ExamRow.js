@@ -20,7 +20,6 @@ const ExamRow = ({ exam, index }) => {
             <td >{duration}</td>
             <td >{description}</td>
             <td>
-                <Link to={`/exams/${exam_id}`} className="btn btn-success p-2"><FaEye size="25" /></Link>
                 <Link to={`/exams/${exam_id}/edit`} className="btn btn-warning p-2 ml-2 mr-2"><FaPen size="25" /></Link>
                 <Link to={`/exams/${exam_id}`} className="btn btn-danger p-2"><FaTrash size="25" /></Link>
             </td>

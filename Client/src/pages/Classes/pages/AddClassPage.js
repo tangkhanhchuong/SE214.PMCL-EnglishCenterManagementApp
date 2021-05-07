@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query"
 import { useHistory } from "react-router-dom"
-import { Formik, Form, FastField } from 'formik';
+import { Formik, Form, FastField } from 'formik'
 import {
     Alert, Card, CardHeader, CardBody, Button, Row, Col, Container
-} from 'reactstrap';
-import Page from 'components/Page';
-import PageSpinner from 'components/PageSpinner';
+} from 'reactstrap'
+import Page from 'components/Page'
+import PageSpinner from 'components/PageSpinner'
 
 import { Classes, Courses } from 'core/HttpRequests'
 import InputField from 'components/Form/Formik/InputField'
@@ -37,7 +37,7 @@ const AddClassPage = () => {
 
         mutate(values, {
             mutationKey: 'add_class',
-            onError: (err) => { console.log(err); },
+            onError: (err) => { console.log(err) },
             onSuccess: onSuccess
         })
     }

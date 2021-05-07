@@ -20,48 +20,46 @@ const AuthForm = (props) => {
     const dispatch = useDispatch()
     const { sendRequest } = useHttpClient()
 
-    let [formStatus, setFormStatus] = useState(FormStatus.DEFAULT)
+    const [formStatus, setFormStatus] = useState(FormStatus.DEFAULT)
 
-    let isLogin = () => {
+    const isLogin = () => {
         return props.authState === STATE_LOGIN
     }
 
-    let isSignup = () => {
+    const isSignup = () => {
         return props.authState === STATE_SIGNUP
     }
 
-    let changeAuthState = authState => event => {
+    const changeAuthState = authState => event => {
         event.preventDefault()
         props.onChangeAuthState(authState)
     }
 
-    let LoginSuccessfully = async (userData) => {
-
-        const fakeUserData = { ...userData, roleId: 3, userId: 1 }
-        localStorage.setItem("userData", JSON.stringify(fakeUserData))
+    const LoginSuccessfully = async (userData) => {
+        const user = userData.data
+        localStorage.setItem("userData", JSON.stringify(user))
         dispatch(UpdateUserData({
-            token: fakeUserData.token,
-            roleId: fakeUserData.roleId,
-            userId: fakeUserData.userId,
-            email: fakeUserData.user.email,
-            name: fakeUserData.user.name
+            token: user.token,
+            role_id: user.role_id,
+            user_id: user.id,
+            username: user.username,
+            name: user.name
         }))
 
         history.push('/')
     }
 
-    let handleSubmit = event => {
+    const handleSubmit = event => {
         setFormStatus(FormStatus.LOADING)
         event.preventDefault()
-        let email = event.target["email"].value
-        let password = event.target["password"].value
-        console.log(email, password)
-        let authType = isSignup() ? 'signup' : 'login'
+        const username = event.target["username"].value
+        const password = event.target["password"].value
+        const authType = isSignup() ? 'signup' : 'login'
         sendRequest(
             `${process.env.REACT_APP_SERVER_BASE_URL}/auth/${authType}`,
             'POST',
             {
-                email, password
+                username, password
             },
             {
                 'Content-Type': 'application/json'
@@ -79,12 +77,11 @@ const AuthForm = (props) => {
                 setFormStatus(FormStatus.LOGIN_SUCCESSFULLY)
             })
             .catch((error) => {
-                console.log(error)
                 setFormStatus(FormStatus.LOGIN_FAIL)
             })
     }
 
-    let renderButtonText = () => {
+    const renderButtonText = () => {
         const { buttonText } = props
 
         if (formStatus === FormStatus.LOADING)
@@ -104,8 +101,8 @@ const AuthForm = (props) => {
 
     const {
         showLogo,
-        emailLabel,
-        emailInputProps,
+        usernameLabel,
+        usernameInputProps,
         passwordLabel,
         passwordInputProps,
         confirmPasswordLabel,
@@ -129,13 +126,13 @@ const AuthForm = (props) => {
                 </div>
             )}
             <FormGroup>
-                <Label for={emailLabel}>{emailLabel}</Label>
-                <Input {...emailInputProps} />
+                <Label for={usernameLabel}>{usernameLabel}</Label>
+                <Input {...usernameInputProps} defaultValue="instructor" />
             </FormGroup>
 
             <FormGroup>
                 <Label for={passwordLabel}>{passwordLabel}</Label>
-                <Input  {...passwordInputProps} />
+                <Input  {...passwordInputProps} defaultValue="password" />
             </FormGroup>
 
             {isSignup() && (
@@ -152,7 +149,7 @@ const AuthForm = (props) => {
                 </Label>
             </FormGroup>
             <div>
-                {formStatus === FormStatus.LOGIN_FAIL && <><br /><font color="red">Email or Password is incorrect !</font></>}
+                {formStatus === FormStatus.LOGIN_FAIL && <><br /><font color="red">Username or Password is incorrect !</font></>}
                 {formStatus === FormStatus.LOGIN_SUCCESSFULLY && <><br /><font color="green">Login successfully, please wait ...</font></>}
             </div>
             <hr />
@@ -194,8 +191,8 @@ export const STATE_SIGNUP = 'SIGNUP'
 AuthForm.propTypes = {
     authState: PropTypes.oneOf([STATE_LOGIN, STATE_SIGNUP]).isRequired,
     showLogo: PropTypes.bool,
-    emailLabel: PropTypes.string,
-    emailInputProps: PropTypes.object,
+    usernameLabel: PropTypes.string,
+    usernameInputProps: PropTypes.object,
     passwordLabel: PropTypes.string,
     passwordInputProps: PropTypes.object,
     confirmPasswordLabel: PropTypes.string,
@@ -206,11 +203,11 @@ AuthForm.propTypes = {
 AuthForm.defaultProps = {
     authState: 'LOGIN',
     showLogo: true,
-    emailLabel: 'Email',
-    emailInputProps: {
-        name: "email",
+    usernameLabel: 'Username',
+    usernameInputProps: {
+        name: "username",
         type: 'text',
-        placeholder: 'Email',
+        placeholder: 'Username',
         required: true
     },
     passwordLabel: 'Password',

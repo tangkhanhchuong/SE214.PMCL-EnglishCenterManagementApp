@@ -16,7 +16,7 @@ const ClassCardItem = ({ classItem }) => {
     }
 
     return (
-        <Card >
+        <Card>
             <CardImg top src={img} style={{ height: "200px", width: "268px" }} />
             <CardBody>
                 <CardText style={{ color: "black" }}><strong>Class Name: </strong> {name}</CardText>

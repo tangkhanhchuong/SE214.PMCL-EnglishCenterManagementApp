@@ -11,8 +11,8 @@ exports.seed = function (knex) {
           class_id: 'IE55.1',
           exam_time: '17:00',
           exam_date: 'March 21, 2021',
-          duration: 15,
-          exam_type: 'Weekly',
+          duration: 45,
+          exam_type: 'Middle Term 2',
           description: ''
         },
         {
@@ -20,8 +20,8 @@ exports.seed = function (knex) {
           class_id: 'IE55.1',
           exam_time: '17:00',
           exam_date: 'March 21, 2021',
-          duration: 15,
-          exam_type: 'Weekly',
+          duration: 20,
+          exam_type: 'Middle Term 1',
           description: ''
         },
         {
@@ -29,8 +29,8 @@ exports.seed = function (knex) {
           class_id: 'IE60.1',
           exam_time: '17:00',
           exam_date: 'March 21, 2021',
-          duration: 60,
-          exam_type: 'Middle Term',
+          duration: 20,
+          exam_type: 'Middle Term 1',
           description: ''
         },
         {

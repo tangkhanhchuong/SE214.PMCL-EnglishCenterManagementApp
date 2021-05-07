@@ -1,12 +1,13 @@
 import React from 'react'
-import { useMutation } from "react-query"
 import { useHistory } from "react-router-dom"
 import { Formik, Form, FastField } from 'formik'
+import { useMutation, useQuery } from "react-query";
 import { Alert, Card, CardHeader, CardBody, Button, Col } from 'reactstrap'
+
 import Page from 'components/Page'
-
+import PageSpinner from 'components/PageSpinner'
 import { Exams } from 'core/HttpRequests'
-
+import { Classes } from 'core/HttpRequests'
 import InputField from 'components/Form/Formik/InputField'
 import SelectField from 'components/Form/Formik/SelectField'
 
@@ -17,6 +18,7 @@ const AddExamPage = () => {
     const history = useHistory()
 
     const { isSuccess, mutate } = useMutation(Exams.add)
+    const { data: classData, isLoading: fetchClassesLoading } = useQuery('classes', Classes.list)
 
     const onSuccess = () => {
         setTimeout(() => {
@@ -36,6 +38,8 @@ const AddExamPage = () => {
         exam_id: '', exam_time: '', exam_date: '', exam_type: '',
         duration: '', description: '', class_id: ''
     }
+
+    if (fetchClassesLoading) return <PageSpinner />
 
     return (
         <div>
@@ -61,9 +65,12 @@ const AddExamPage = () => {
                                 <CardBody className=" d-flex flex-row  justify-content-around">
                                     <div className="flex-grow-1 p-3">
                                         <FastField
-                                            name='name'
-                                            component={InputField}
-                                            label='Class Id'
+                                            name='class_id'
+                                            component={SelectField}
+                                            label='Class Id: '
+                                            minWidth='120px'
+                                            options={classData.data.data.classes.map(c => c.class_id)}
+
                                         />
                                         <FastField
                                             name='exam_date'
@@ -81,13 +88,13 @@ const AddExamPage = () => {
                                             name='exam_type'
                                             component={SelectField}
                                             label='Exam Type'
-                                            options={['Weekly', 'Middle Term', 'Final Term']}
+                                            options={['Middle Term 1', 'Middle Term 2', 'Final Term']}
                                             minWidth={180}
                                         />
                                         <FastField
                                             name='duration'
                                             component={InputField}
-                                            label='Duration'
+                                            label='Duration (minutes)'
                                             type='number'
                                         />
                                         <FastField
