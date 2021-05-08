@@ -1,10 +1,13 @@
+import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
+
 import Avatar from 'components/Avatar'
 import { UserCard } from 'components/Card'
 import Notifications from 'components/Notifications'
 import SearchInput from 'components/SearchInput'
 import { notificationsData } from 'demos/header'
 import withBadge from 'hocs/withBadge'
-import React, { useState } from 'react'
+
 
 import {
     MdClearAll,
@@ -51,8 +54,9 @@ const MdNotificationsActiveWithBadge = withBadge({
 
 const Header = () => {
     const dispatch = useDispatch()
+    const history = useHistory()
 
-    const userData = useSelector(state => state.userData)
+    const userData = JSON.parse(localStorage.getItem('userData'))
     const initStatus = useSelector(state => state.systemStatus.statusCode)
 
 
@@ -91,6 +95,7 @@ const Header = () => {
     }
 
     let GetRoleName = (roleId) => {
+        console.log(roleId);
         switch (parseInt(roleId)) {
             case 1: return "Manager"
             case 2: return "Instructor"
@@ -160,7 +165,7 @@ const Header = () => {
                         <PopoverBody className="p-0 border-light">
                             <UserCard
                                 title={userData.name || "CTT User"}
-                                text={GetRoleName(userData.roleId || 1)}
+                                text={GetRoleName(userData.role_id || 1)}
                                 className="border-light"
                             >
                                 <ListGroup flush>

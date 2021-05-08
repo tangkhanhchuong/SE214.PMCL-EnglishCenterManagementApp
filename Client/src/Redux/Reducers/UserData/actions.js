@@ -1,4 +1,4 @@
-import {UPDATE_USERDATA, REMOVE_USERDATA, INITIAL_STATE} from './constants';
+import { UPDATE_USERDATA, REMOVE_USERDATA, INITIAL_STATE } from './constants';
 
 export const UpdateUserData = (payload) => {
     return {
@@ -10,6 +10,6 @@ export const UpdateUserData = (payload) => {
 export const RemoveUserData = (payload) => {
     return {
         type: REMOVE_USERDATA,
-        payload : INITIAL_STATE
+        payload: INITIAL_STATE
     }
 }

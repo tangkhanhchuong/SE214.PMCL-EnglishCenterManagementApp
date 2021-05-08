@@ -18,14 +18,14 @@ export default () => {
     const initStatus = useSelector(state => state.systemStatus.statusCode)
     const userData = useSelector(state => state.userData)
 
-    console.log(initStatus);
 
     let FirstInit = async () => {
-        let userData = await Get_LocalStorage("userData")
+        console.log('first init');
+        let us = localStorage.getItem('userData')
         dispatch(InitSystemStatus(SYSTEMSTATUS.HAD_INIT))
 
-        if (userData) {
-            let usData = JSON.parse(userData)
+        if (us) {
+            let usData = JSON.parse(us)
             dispatch(UpdateUserData({
                 token: usData.token,
                 roleId: usData.role_id,
@@ -43,27 +43,36 @@ export default () => {
 
 
     let GetRoute = () => {
+
+        let us = JSON.parse(localStorage.getItem('userData'))
+        console.log(us);
         if (initStatus === SYSTEMSTATUS.NON_INIT) {
             console.log("Loading")
             return <div>Loading</div>
-
         } else {
-            if (userData.role_id == 1) {
-                console.log("Student Routes")
-                return <StudentRoutes />
-            }
-            else if (userData.role_id == 2) {
-                console.log("Instructor Routes")
-                return <InstructorRoutes />
-            }
-            else if (userData.role_id == 3) {
-                console.log("Manager Routes")
-                return <AdminRoutes />
-            }
-            else {
+            if (!us) {
                 console.log("Auth Routes")
                 return <AuthRoutes />
             }
+            else {
+                if (us.role_id == 1) {
+                    console.log("Student Routes")
+                    return <StudentRoutes />
+                }
+                else if (us.role_id == 2) {
+                    console.log("Instructor Routes")
+                    return <InstructorRoutes />
+                }
+                else if (us.role_id == 3) {
+                    console.log("Manager Routes")
+                    return <AdminRoutes />
+                }
+                else {
+                    console.log("Auth Routes")
+                    return <AuthRoutes />
+                }
+            }
+
         }
     }
 

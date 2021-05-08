@@ -1,18 +1,18 @@
-import logo200Image from 'assets/img/logo/logo_200.png';
-import sidebarBgImage from 'assets/img/sidebar/sidebar-4.jpg';
-import SourceLink from 'components/SourceLink';
-import React from 'react';
-import { FaGithub } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
+import logo200Image from 'assets/img/logo/logo_200.png'
+import sidebarBgImage from 'assets/img/sidebar/sidebar-4.jpg'
+import SourceLink from 'components/SourceLink'
+import React from 'react'
+import { FaGithub } from 'react-icons/fa'
+import { useSelector } from 'react-redux'
 
 import CollapseTab from "./CollapseTab"
 
 import {
     Nav,
     Navbar
-} from 'reactstrap';
+} from 'reactstrap'
 
-import bn from 'utils/bemnames';
+import bn from 'utils/bemnames'
 
 import { getSideBarItems } from "./sidebarItems"
 
@@ -20,16 +20,17 @@ const sidebarBackground = {
     backgroundImage: `url("${sidebarBgImage}")`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-};
+}
 
 
-const bem = bn.create('sidebar');
+const bem = bn.create('sidebar')
 
 const Sidebar = () => {
 
-    const roleId = useSelector(state => state.userData.roleId);
+    const userData = JSON.parse(localStorage.getItem('userData'))
+    const roleId = userData ? userData.role_id : null
 
-    const { sidebarItems } = getSideBarItems(roleId);
+    const { sidebarItems } = getSideBarItems(roleId)
 
     return (
         <aside className={bem.b()} data-image={sidebarBgImage}>
@@ -56,7 +57,7 @@ const Sidebar = () => {
                 </Nav>
             </div>
         </aside>
-    );
+    )
 }
 
-export default Sidebar;
+export default Sidebar

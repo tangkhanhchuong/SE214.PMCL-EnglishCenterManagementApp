@@ -36,9 +36,9 @@ const AdminRoutes = (props) => {
               <Route path="/exams" component={ExamsPages} />
               <Route exact path="/" component={DashboardPage} />
 
-              {/* <Route path="/">
+              <Route path="/">
                 <Redirect to="/" />
-              </Route> */}
+              </Route>
 
             </React.Suspense>
           </MainLayout>
