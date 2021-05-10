@@ -21,7 +21,7 @@ const EditForm = ({ classDetails }) => {
         return yourDate
     }
 
-    const { name, course_id, max_students, schedule, from, to, duration, begin_at } = classDetails
+    const { class_id, name, course_id, max_students, schedule, duration, begin_at, time_slot } = classDetails
 
 
     const delayRedirectTime = 3000
@@ -36,26 +36,21 @@ const EditForm = ({ classDetails }) => {
     }
 
     const onEdit = (values) => {
-        // const { is_working } = values
-        // values = { ...values, is_working: is_working[0] === 'on' ? true : false }
-        // mutate({ info: values, id: instructor.instructor_id }, {
-        //     mutationKey: 'edit_instructor',
-        //     onError: (err) => { console.log(err) },
-        //     onSuccess: onSuccess
-        // })
+        const { from, to } = values
+        values = { ...values, time_slot: `${from}-${to}` }
+
+        mutate({ classId: class_id, updatedClass: values }, {
+            mutationKey: 'edit_class',
+            onError: (err) => { console.log(err) },
+            onSuccess: onSuccess
+        })
     }
 
+    const [from, to] = schedule.split('-')
     const initialValues = {
-        name: '',
-        course_id: '',
-        max_students: '',
-        schedule: '',
-        from: '',
-        to: '',
-        duration: '',
-        begin_at: ''
+        name, course_id, max_students, schedule, from, to, duration, begin_at,
+        from: time_slot.split('-')[0], to: time_slot.split('-')[1]
     }
-
 
     return (
         <Card className=" d-flex justify-content-around">
@@ -79,6 +74,13 @@ const EditForm = ({ classDetails }) => {
                                     <h4><b>Class Information</b></h4>
                                     <br />
                                     <FastField
+                                        name='class_id'
+                                        component={InputField}
+                                        label='Class Id: '
+                                        value={class_id}
+                                        disabled
+                                    />
+                                    <FastField
                                         name='name'
                                         component={InputField}
                                         label='Class Name: '
@@ -91,6 +93,7 @@ const EditForm = ({ classDetails }) => {
                                         minWidth='120px'
                                         options={coursesData.data.data.courses.map(c => c.course_id)}
                                         value={course_id}
+                                        disabled={fetchCoursesLoading}
 
                                     />
                                     <FastField
@@ -120,7 +123,7 @@ const EditForm = ({ classDetails }) => {
                                             component={InputField}
                                             label='From: '
                                             type='time'
-                                            value={from}
+                                            value={time_slot.split('-')[0]}
                                         />
                                         <div style={{ width: '50px' }}></div>
                                         <FastField
@@ -128,7 +131,7 @@ const EditForm = ({ classDetails }) => {
                                             component={InputField}
                                             label='To: '
                                             type='time'
-                                            value={to}
+                                            value={time_slot.split('-')[1]}
                                         />
                                     </div>
                                     <FastField
@@ -145,7 +148,7 @@ const EditForm = ({ classDetails }) => {
                                         component={InputField}
                                         label='Begin At: '
                                         type='date'
-                                        value={begin_at}
+                                        value={convertDate(begin_at)}
                                     />
                                     <Button className="mt-3" type='submit' color="success">Edit</Button>
                                 </Col >

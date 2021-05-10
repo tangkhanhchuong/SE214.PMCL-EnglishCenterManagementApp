@@ -27,7 +27,7 @@ function SelectField(props) {
     const { errors, touched } = form;
     const showError = errors[name] && touched[name];
 
-    if (!options[0].value)
+    if (!options[0] || !options[0].value)
         options = options.map(o => ({ value: o, label: o }))
 
     const selectedOption = options.find(option => option.value === value);

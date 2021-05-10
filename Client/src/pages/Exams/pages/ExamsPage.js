@@ -43,7 +43,7 @@ const AllInstructorsPage = () => {
     return (
         <Page
             breadcrumbs={[{ name: 'Exams' }]}
-            title="ALL Exams"
+            title="All Exams"
         >
             {
                 isLoading

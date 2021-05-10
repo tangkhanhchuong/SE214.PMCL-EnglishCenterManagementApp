@@ -10,6 +10,7 @@ import { Classes } from 'core/HttpRequests'
 const StudentsTab = React.lazy(() => import('../components/StudentsTab'))
 const InstructorsTab = React.lazy(() => import('../components/InstructorsTab'))
 const GradesTab = React.lazy(() => import('../components/GradesTab'))
+const MaterialsTab = React.lazy(() => import('../components/MaterialsTab'))
 const DescriptionsTab = React.lazy(() => import('../components/DescriptionsTab'))
 
 const ClassDetailPage = (props) => {
@@ -42,6 +43,11 @@ const ClassDetailPage = (props) => {
                 <Tab eventKey="grades" title="Grades">
                     <div className="p-3">
                         <GradesTab classId={classId} />
+                    </div>
+                </Tab>
+                <Tab eventKey="materials" title="Materials">
+                    <div className="p-3">
+                        <MaterialsTab classDetails={classDetails} />
                     </div>
                 </Tab>
                 <Tab eventKey="descriptions" title="Descriptions">
