@@ -46,7 +46,6 @@ const EditForm = ({ exam }) => {
         exam_id, class_id, exam_time, exam_date, exam_type, duration, description
     }
 
-    console.log(exam);
 
     return (
         <Col xs={6}>

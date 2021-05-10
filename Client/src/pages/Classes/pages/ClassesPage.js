@@ -44,9 +44,9 @@ const ClassesList = () => {
                     {c.classes_in_course.map((classItem, index) => {
                         classItem.img = classImagesList[index % 7 + 1]
                         return (<Col className="mb-3" key={classItem.class_id} xl={3} lg={12} md={12}>
-                            <NavLink to={`/classes/${classItem.class_id}`} style={{ textDecoration: 'none' }}>
-                                <ClassCardItem classItem={classItem} />
-                            </NavLink>
+                            {/* <NavLink to={`/classes/${classItem.class_id}`} style={{ textDecoration: 'none' }}> */}
+                            <ClassCardItem classItem={classItem} />
+                            {/* </NavLink> */}
                         </Col>)
                     })}
                 </Row>

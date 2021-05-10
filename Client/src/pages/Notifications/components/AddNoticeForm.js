@@ -7,7 +7,7 @@ import {
 import { useMutation, useQuery } from 'react-query'
 
 import { Notices, Classes } from 'core/HttpRequests'
-import TagInput from './TagInput'
+import TagInput from 'components/Form/Input/TagInput/TagInput'
 
 const AddNoticeForm = (props) => {
 

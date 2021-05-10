@@ -7,12 +7,14 @@ import {
 } from 'reactstrap'
 
 import PageSpinner from 'components/PageSpinner'
-
 import Page from 'components/Page'
 import SearchInput from 'components/SearchInput'
 import { Students } from 'core/HttpRequests'
 
 import StudentRow from '../components/StudentRow'
+import { Paginate, usePaginate } from 'components/Paginate'
+
+const PER_PAGE = 3
 
 const columTitles = [
     "#", "Full Name", "Avatar", "Student Id", "Gender", "Is Studying", "Actions"
@@ -21,13 +23,14 @@ const columTitles = [
 const AllStudentsPage = () => {
     const { data, isLoading } = useQuery('students', Students.list)
 
-    let getAllStudents = () => {
-        if (!data) return <></>
+    const studentsData = data ? data.data.data.students : []
+    const { curPageData, setCurrentPage, pageCount } = usePaginate(PER_PAGE, studentsData)
 
-        const studentsData = data.data.data.students
-        if (!studentsData || studentsData.length === 0) return <></>
+
+    let getAllStudents = () => {
+        if (!curPageData || curPageData.length === 0) return <></>
         return (
-            studentsData.map((row, index) => {
+            curPageData.map((row, index) => {
                 return (
                     <StudentRow key={index} student={row} index={index} />
                 )
@@ -52,12 +55,14 @@ const AllStudentsPage = () => {
                                     <ButtonGroup>
                                         <Button color="primary">Copy</Button>
                                         <Button color="primary">Pdf</Button>
-                                        <Button color="primary">Csv</Button>
+                                        <Button color="primary" onClick={() => {
+
+                                        }}>
+                                            Csv
+                                            </Button>
                                         <Button color="primary">Print</Button>
                                     </ButtonGroup>
-                                    <>
-                                        <SearchInput />
-                                    </>
+                                    <SearchInput />
                                 </div>
                             </CardHeader>
                             <CardBody>
@@ -77,6 +82,7 @@ const AllStudentsPage = () => {
                                         }
                                     </tbody>
                                 </Table>
+                                <Paginate setCurrentPage={setCurrentPage} pageCount={pageCount} />
                             </CardBody>
                         </Card >
                     )

@@ -24,7 +24,6 @@ import {
     Button,
     ListGroup,
     ListGroupItem,
-    // NavbarToggler,
     Nav,
     Navbar,
     NavItem,

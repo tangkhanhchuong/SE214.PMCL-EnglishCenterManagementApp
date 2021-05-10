@@ -10,6 +10,7 @@ import {
 
 const StudentRow = ({ student, index }) => {
     const { student_id, name, avatar, gender, is_studying } = student
+
     return (
         <tr >
             <th scope="row" >{index + 1}</th>

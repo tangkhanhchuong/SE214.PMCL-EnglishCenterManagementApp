@@ -44,7 +44,6 @@ class TagsInput extends React.Component {
         newTags.splice(currPos, 1)
         newTags.splice(newPos, 0, tag)
 
-        // re-render
         this.setState({ tags: newTags })
     }
 
@@ -60,7 +59,8 @@ class TagsInput extends React.Component {
                     handleDrag={this.handleDrag}
                     delimiters={delimiters}
                     inputFieldPosition="top"
-                    placeholder={"Enter classes' id"}
+                    placeholder={""}
+                    autoFocus={false}
                 />
             </div>
         )

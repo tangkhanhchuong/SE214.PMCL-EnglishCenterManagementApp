@@ -62,6 +62,10 @@ const PayTuitionPage = () => {
         }
     }
 
+    const generatePdf = () => {
+
+    }
+
     const onPaySuccess = () => {
         setTimeout(() => {
             history.push(`/students/${studentId}`)
@@ -99,7 +103,7 @@ const PayTuitionPage = () => {
                             </FormGroup>
                             <FormGroup>
                                 <Label>Student ID</Label>
-                                <Input value={studentId} onChange={onStudentIdFieldChange} maxLength={8} />
+                                <Input value={studentId} onChange={onStudentIdFieldChange} maxLength={9} />
                             </FormGroup>
                             <FormGroup>
                                 <Label>Full Name</Label>
@@ -118,14 +122,21 @@ const PayTuitionPage = () => {
                                 <Label>Tuition</Label>
                                 <Input maxLength={8} value={fee ? fee : ''} disabled />
                             </FormGroup>
-                            <FormGroup style={{ textAlign: 'right' }}>
-                                <Button color="success" disabled={(name === '' || paidAt) ? true : false}>Pay</Button>
+                            <FormGroup>
+                                {isPaySuccess ?
+                                    (<Alert color="success">
+                                        Tuition was paid
+                                    </Alert>) : <></>
+                                }
                             </FormGroup>
-                            {isPaySuccess ?
-                                (<Alert color="success">
-                                    Tuition was paid
-                                </Alert>) : <></>
-                            }
+                            <FormGroup style={{ textAlign: 'right' }}>
+                                <Button className='m-2' color="success" disabled={(name === '' || paidAt) ? true : false}>Pay</Button>
+                                {paidAt ?
+                                    (<Button color="success" onClick={generatePdf}>
+                                        Generate Pdf
+                                    </Button>) : <></>
+                                }
+                            </FormGroup>
                         </Form>
                     </CardBody>
                 </Card>

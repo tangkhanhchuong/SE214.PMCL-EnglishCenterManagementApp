@@ -11,8 +11,11 @@ import PageSpinner from 'components/PageSpinner'
 import Page from 'components/Page'
 import SearchInput from 'components/SearchInput'
 import { Exams } from 'core/HttpRequests'
+import { Paginate, usePaginate } from 'components/Paginate'
 
 import ExamRow from '../components/ExamRow'
+
+const PER_PAGE = 2
 
 const columTitles = [
     'Exam Id', 'Class Id', 'Exam Time', 'Exam Date', 'Exam Type', 'Duration', 'Description', 'Actions'
@@ -21,13 +24,15 @@ const columTitles = [
 const AllInstructorsPage = () => {
     const { data, isLoading } = useQuery('exams', Exams.list)
 
+    const examsData = data ? data.data.data.exams : []
+    const { curPageData, setCurrentPage, pageCount } = usePaginate(PER_PAGE, examsData)
+
     let getAllExams = () => {
         if (!data) return <></>
 
-        const examsData = data.data.data.exams
-        if (!examsData || examsData.length === 0) return <></>
+        if (!curPageData || curPageData.length === 0) return <></>
         return (
-            examsData.map((row, index) => {
+            curPageData.map((row, index) => {
                 return (
                     <ExamRow key={index} exam={row} index={index} />
                 )
@@ -76,6 +81,7 @@ const AllInstructorsPage = () => {
                                         }
                                     </tbody>
                                 </Table>
+                                <Paginate setCurrentPage={setCurrentPage} pageCount={pageCount} />
                             </CardBody>
                         </Card >
                     )

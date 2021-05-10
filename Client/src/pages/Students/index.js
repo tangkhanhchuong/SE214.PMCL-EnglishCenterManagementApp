@@ -8,6 +8,7 @@ const AddStudentPage = React.lazy(() => import('./pages/AddStudentPage'))
 const StudentDetailsPage = React.lazy(() => import('./pages/StudentDetailsPage'))
 const EditStudentPage = React.lazy(() => import('./pages/EditStudentPage'))
 const PayTuitionPage = React.lazy(() => import('./pages/PayTuitionPage'))
+// const Ticket = React.lazy(() => import('./pages/Ticket'))
 
 const ClassRoutes = () => {
     let { path } = useRouteMatch();

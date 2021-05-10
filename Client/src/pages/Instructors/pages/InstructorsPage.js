@@ -11,8 +11,11 @@ import PageSpinner from 'components/PageSpinner'
 import Page from 'components/Page'
 import SearchInput from 'components/SearchInput'
 import { Instructors } from 'core/HttpRequests'
+import { Paginate, usePaginate } from 'components/Paginate'
 
 import InstructorRow from '../components/InstructorRow'
+
+const PER_PAGE = 2
 
 const columTitles = [
     "#", "Full Name", "Avatar", "Instructor Id", "Gender", "Is Studying", "Actions"
@@ -21,13 +24,15 @@ const columTitles = [
 const AllInstructorsPage = () => {
     const { data, isLoading } = useQuery('instructors', Instructors.list)
 
+    const instructorsData = data ? data.data.data.instructors : []
+    const { curPageData, setCurrentPage, pageCount } = usePaginate(PER_PAGE, instructorsData)
+
     let getAllInstructors = () => {
         if (!data) return <></>
 
-        const instructorsData = data.data.data.instructors
-        if (!instructorsData || instructorsData.length === 0) return <></>
+        if (!curPageData || curPageData.length === 0) return <></>
         return (
-            instructorsData.map((row, index) => {
+            curPageData.map((row, index) => {
                 return (
                     <InstructorRow key={index} instructor={row} index={index} />
                 )
@@ -76,6 +81,7 @@ const AllInstructorsPage = () => {
                                         }
                                     </tbody>
                                 </Table>
+                                <Paginate setCurrentPage={setCurrentPage} pageCount={pageCount} />
                             </CardBody>
                         </Card >
                     )
