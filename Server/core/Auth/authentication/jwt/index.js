@@ -26,7 +26,6 @@ const authenticateToken = (req, res, next) => {
     const authorizationHeader = req.headers["authorization"];
     const accessToken = authorizationHeader && authorizationHeader.split(" ")[1];
 
-    console.log(accessToken);
     if (!accessToken)
         throwError(HttpStatusCode.UNAUTHORIZED, "You are not authenticated !");
 

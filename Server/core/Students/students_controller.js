@@ -89,8 +89,6 @@ const PayTuition = async (req, res) => {
     const student_id = req.params.id
     const { class_id } = req.body
 
-    console.log(student_id, class_id);
-
     const updatedTuitionReceipt = await db('student_class')
         .update({
             paid_at: new Date(Date.now())

@@ -4,9 +4,9 @@ module.exports = {
   development: {
     client: 'postgresql',
     connection: {
-      database: 'EnglishCenter',
+      database: 'postgres',
       user: 'postgres',
-      password: 'khanhchuong',
+      password: '@tb@$h2io4',
       host: 'localhost'
     },
     migrations: {

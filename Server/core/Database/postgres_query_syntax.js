@@ -8,7 +8,6 @@ const SQLQuery = async ({ query, options }) => {
         return data.rows
     }
     catch (err) {
-        console.log(err);
         throw err
     }
 }
@@ -25,7 +24,6 @@ const Find = ({ table, queryObject }) => {
 }
 
 const Create = async ({ table, createdRow }) => {
-    console.log(table, createdRow);
     await db(table)
         .insert(createdRow)
         .returning("*")

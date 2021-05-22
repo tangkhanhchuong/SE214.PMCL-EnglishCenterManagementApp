@@ -4,7 +4,6 @@ const { HttpStatusCode } = require("../../../Http/index")
 const { throwError } = require("../../../Errors/error_handler")
 
 const comparePassword = async (rawPass, encryptedPass) => {
-    console.log(rawPass, encryptedPass);
     const validPassword = await bcrypt.compare(rawPass, encryptedPass)
     if (!validPassword) {
         throwError(HttpStatusCode.UNAUTHORIZED, "Wrong Password !")
