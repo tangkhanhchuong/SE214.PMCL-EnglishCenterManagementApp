@@ -1,6 +1,7 @@
 import logo200Image from 'assets/img/logo/logo_200.png'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
+import axios from 'axios'
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap'
 import { useDispatch } from 'react-redux'
 
@@ -21,6 +22,9 @@ const AuthForm = (props) => {
     const { sendRequest } = useHttpClient()
 
     const [formStatus, setFormStatus] = useState(FormStatus.DEFAULT)
+    const [a, setA] = useState("")
+    const [b, setB] = useState("")
+    const [c, setC] = useState("")
 
     const isLogin = () => {
         return props.authState === STATE_LOGIN
@@ -49,36 +53,27 @@ const AuthForm = (props) => {
         history.push('/')
     }
 
-    const handleSubmit = event => {
+
+    const handleSubmit = async event => {
         setFormStatus(FormStatus.LOADING)
         event.preventDefault()
-        const username = event.target["username"].value
-        const password = event.target["password"].value
+
+        const username = event.target['username']?.value
+        const password = event.target['password']?.value
         const authType = isSignup() ? 'signup' : 'login'
-        sendRequest(
-            `${process.env.REACT_APP_SERVER_BASE_URL}/auth/${authType}`,
-            'POST',
-            {
-                username, password
-            },
-            {
-                'Content-Type': 'application/json'
-            }
-        )
+        
+        axios.post(`${process.env.REACT_APP_SERVER_BASE_URL}/auth/${authType}`, { username, password})
             .then((response) => {
-                if (response.ok) {
-                    return response.json()
-                } else {
-                    throw Error("Authentication Failed !!")
-                }
+                return response.data
             })
             .then((response) => {
-                setTimeout(() => LoginSuccessfully(response), 1000)
+                LoginSuccessfully(response)
                 setFormStatus(FormStatus.LOGIN_SUCCESSFULLY)
             })
             .catch((error) => {
                 setFormStatus(FormStatus.LOGIN_FAIL)
             })
+            
     }
 
     const renderButtonText = () => {
@@ -97,7 +92,6 @@ const AuthForm = (props) => {
 
         return buttonText
     }
-
 
     const {
         showLogo,
@@ -127,12 +121,12 @@ const AuthForm = (props) => {
             )}
             <FormGroup>
                 <Label for={usernameLabel}>{usernameLabel}</Label>
-                <Input {...usernameInputProps} defaultValue="instructor" />
+                <Input {...usernameInputProps} value={a} default="admin" onChange={(e)=>{setA(e.target.value)}} />
             </FormGroup>
 
             <FormGroup>
                 <Label for={passwordLabel}>{passwordLabel}</Label>
-                <Input  {...passwordInputProps} defaultValue="password" />
+                <Input  {...passwordInputProps} value={b} default="password"  onChange={(e)=>{setB(e.target.value)}} /> 
             </FormGroup>
 
             {isSignup() && (
@@ -148,7 +142,7 @@ const AuthForm = (props) => {
                     {isSignup() ? 'Agree the terms and policy' : 'Remember me'}
                 </Label>
             </FormGroup>
-            <div>
+            <div data-testid="success-msg">
                 {formStatus === FormStatus.LOGIN_FAIL && <><br /><font color="red">Username or Password is incorrect !</font></>}
                 {formStatus === FormStatus.LOGIN_SUCCESSFULLY && <><br /><font color="green">Login successfully, please wait ...</font></>}
             </div>

@@ -25,7 +25,6 @@ class MultipleImageUpload extends Component {
 
     uploadFiles(e) {
         e.preventDefault()
-        console.log(this.state.file)
     }
 
     render() {

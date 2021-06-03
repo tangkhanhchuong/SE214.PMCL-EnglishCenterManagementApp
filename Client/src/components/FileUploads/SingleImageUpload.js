@@ -20,7 +20,6 @@ class SingleImageUpload extends Component {
 
     upload(e) {
         e.preventDefault()
-        console.log(this.state.file)
     }
 
     render() {

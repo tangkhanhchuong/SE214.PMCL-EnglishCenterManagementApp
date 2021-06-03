@@ -5,8 +5,9 @@ import 'index.scss'
 import 'styles/reduction.scss'
 
 import AppProvider from 'core/Container/AppProvider'
-
+import Hello from 'pages/Auth/AuthForm/hello'
+ 
 ReactDOM.render(
-    <AppProvider />,
+    <Hello />,
     document.getElementById('root')
 )

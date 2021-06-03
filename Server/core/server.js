@@ -14,14 +14,12 @@ const notificationsRoutes = require("./Notifications/notifications_routes")
 const statisticRoutes = require("./Statistic/statistic_routes")
 const { errorHandler } = require("./Errors/error_handler")
 
-const APP_PORT = 5000;
+const APP_PORT = process.env.PORT || 5000;
 const app = express()
-
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(morgan('dev'))
-
 
 app.use('/statistic', statisticRoutes)
 app.use("/auth", authRoutes)
@@ -31,6 +29,9 @@ app.use("/instructors", instructorRoutes)
 app.use('/students', studentRoutes)
 app.use('/exams', examsRoutes)
 app.use('/notifications', notificationsRoutes)
+app.use('/', (req, res) => {
+    res.json("Welcome")
+})
 
 app.use(errorHandler)
 

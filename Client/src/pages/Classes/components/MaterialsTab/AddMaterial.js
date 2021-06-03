@@ -75,7 +75,6 @@ const AddMaterial = (props) => {
                     }
                 })
                 .then((response) => {
-                    console.log(response.data)
                     if (response.data)
                         setPersonInfo(response.data)
                     else
@@ -83,7 +82,6 @@ const AddMaterial = (props) => {
 
                 })
                 .catch((error) => {
-                    console.log(error)
                     setPersonInfo({ fail: true })
                 })
         } else {
@@ -115,7 +113,6 @@ const AddMaterial = (props) => {
                 }
             })
             .then((response) => {
-                console.log(response)
                 setTimeout(() => {
                     setFormStatus(FORMSTATUS.REQUEST_SUCCESSFULLY)
                     alert("Insert to class successfully !")
@@ -124,7 +121,6 @@ const AddMaterial = (props) => {
 
             })
             .catch((error) => {
-                console.log(error)
                 setFormStatus(FORMSTATUS.REQUEST_FAIL)
             })
     }

@@ -1,36 +1,29 @@
-import React from 'react'
-import * as maintenanceAnimation from "assets/lotties/12366-under-construction"
+import { Component } from 'react'
 
-const maintenanceConfig = {
-  loop: true,
-  autoplay: true,
-  animationData: maintenanceAnimation.default,
-  rendererSettings: {
-    preserveAspectRatio: "xMidYMid slice"
-  }
-}
-
-export default class ErrorBoundary extends React.Component {
+class ErrorBoundary extends Component {
   constructor(props) {
-    super(props)
-    this.state = { hasError: false }
+    super(props);
+    this.state = { hasError: false };
   }
 
   static getDerivedStateFromError(error) {
-    return { hasError: true }
+    // Update state so the next render will show the fallback UI.
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    // You can also log the error to an error reporting service
+    logErrorToMyService(error, errorInfo);
   }
 
   render() {
     if (this.state.hasError) {
-      return (
-        <div className="h-100 d-flex justify-content-center align-items-center">
-          <div className="align-items-center row">
-          </div>
-          <h1>Website is under construction</h1>
-        </div>
-      )
+      // You can render any custom fallback UI
+      return <h1>Something went wrong.</h1>;
     }
 
-    return this.props.children
+    return this.props.children; 
   }
 }
+
+export default ErrorBoundary

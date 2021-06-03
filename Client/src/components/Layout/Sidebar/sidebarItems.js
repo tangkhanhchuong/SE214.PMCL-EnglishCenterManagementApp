@@ -137,7 +137,6 @@ const generateManagerSidebar = () => {
 }
 
 export const getSideBarItems = (roleId) => {
-    console.log('get side bar');
     let sidebarItems
     switch (parseInt(roleId)) {
         case RoleId.STUDENT:

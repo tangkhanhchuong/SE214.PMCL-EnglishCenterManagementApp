@@ -1,6 +1,6 @@
 import { useCallback, useRef, useEffect } from 'react';
 
-export const SYSTEM_URL = "http://localhost:5000";
+export const SYSTEM_URL = process.env.REACT_APP_SERVER_BASE_URL;
 
 export const useHttpClient = () => {
 
@@ -8,22 +8,25 @@ export const useHttpClient = () => {
 
     const sendRequest = useCallback(
         async (url, method = "GET", body = null, headers = {}) => {
-
+            console.log("Fetch")
+            
             const httpAbortCtrl = new AbortController();
             activeHttpRequests.current.push(httpAbortCtrl);
-
-            return fetch(url, {
+            
+            console.log("fetch ne", `${process.env.REACT_APP_SERVER_BASE_URL}/auth/login`)
+            const data = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/auth/login`, {
                 method,
                 body: (method !== "GET" && method !== "HEAD") ? JSON.stringify(body) : null,
                 headers: headers,
                 signal: httpAbortCtrl.signal
             });
+            console.log(data, "Data ne")
+            return data
         }, []);
 
 
     useEffect(() => {
         return () => {
-            // eslint-disable-next-line react-hooks/exhaustive-deps
             activeHttpRequests.current.forEach(abortCtrl => abortCtrl.abort());
         };
 

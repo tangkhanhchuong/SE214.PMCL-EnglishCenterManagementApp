@@ -20,7 +20,6 @@ export default () => {
 
 
     let FirstInit = async () => {
-        console.log('first init');
         let us = localStorage.getItem('userData')
         dispatch(InitSystemStatus(SYSTEMSTATUS.HAD_INIT))
 
@@ -45,9 +44,7 @@ export default () => {
     let GetRoute = () => {
 
         let us = JSON.parse(localStorage.getItem('userData'))
-        console.log(us);
         if (initStatus === SYSTEMSTATUS.NON_INIT) {
-            console.log("Loading")
             return <div>Loading</div>
         } else {
             if (!us) {

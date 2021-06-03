@@ -41,8 +41,6 @@ const AuthForm = (props) => {
     const fakeUserData = { ...userData, roleId: 2, userId: 1 }
     localStorage.setItem("userData", JSON.stringify(fakeUserData))
 
-
-    console.log("Login", "AuthForm", 45);
     dispatch(UpdateUserData({
       token: fakeUserData.token,
       roleId: fakeUserData.roleId,
@@ -51,7 +49,6 @@ const AuthForm = (props) => {
       name: fakeUserData.user.name
     }))
 
-    console.log("Login", "AuthForm", 52);
   }
 
 
@@ -60,7 +57,6 @@ const AuthForm = (props) => {
     event.preventDefault()
     let email = event.target["email"].value
     let password = event.target["password"].value
-    console.log(email, password)
     let authType = isSignup() ? 'signup' : 'login'
     sendRequest(
       `${process.env.REACT_APP_SERVER_BASE_URL}/auth/${authType}`,
@@ -84,7 +80,6 @@ const AuthForm = (props) => {
         setFormStatus(FormStatus.LOGIN_SUCCESSFULLY)
       })
       .catch((error) => {
-        console.log(error)
         setFormStatus(FormStatus.LOGIN_FAIL)
       })
   }

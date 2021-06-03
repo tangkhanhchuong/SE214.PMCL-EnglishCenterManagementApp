@@ -94,7 +94,6 @@ const Header = () => {
     }
 
     let GetRoleName = (roleId) => {
-        console.log(roleId);
         switch (parseInt(roleId)) {
             case 1: return "Manager"
             case 2: return "Instructor"

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node core/server.js",
-    "dev": "nodemon core/server.js",
+    "dev": "set NODE_ENV=dev&&nodemon core/server.js",
     "migrate": "knex migrate:latest --knexfile core/Database/knexfile.js",
     "undo-migrate": "knex migrate:rollback --knexfile core/Database/knexfile.js",
     "re-migrate": "npm run undo-migrate && npm run migrate",

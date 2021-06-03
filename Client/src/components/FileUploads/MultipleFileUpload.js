@@ -29,7 +29,6 @@ class MultipleFileUpload extends Component {
 
     uploadFiles(e) {
         e.preventDefault()
-        console.log(this.state.file)
     }
 
     generateFileName(name, maxLength = 6) {

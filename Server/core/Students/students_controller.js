@@ -3,12 +3,16 @@ const studentsServices = require("./students_services")
 const db = require('../Database/postgres_connector')
 
 const GetStudents = async (req, res) => {
-    const students = await studentsServices.GetStudents()
-
-    HttpStatus.ok(res, {
-        count: students.length,
-        students
-    })
+    try {
+        const students = await studentsServices.GetStudents()
+        HttpStatus.ok(res, {
+            count: students.length,
+            students
+        })
+    }
+    catch(err){
+        res.json(err)
+    }
 }
 
 const GetStudentDetails = async (req, res) => {
