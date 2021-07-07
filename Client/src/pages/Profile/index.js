@@ -6,7 +6,7 @@ import PageSpinner from 'components/PageSpinner'
 import AccountPage from './ProfilePage'
 
 const AccountRoutes = () => {
-    let { path } = useRouteMatch();
+    let { path } = useRouteMatch()
 
     return (
         <div>

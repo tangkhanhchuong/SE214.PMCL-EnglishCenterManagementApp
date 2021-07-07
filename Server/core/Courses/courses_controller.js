@@ -57,7 +57,11 @@ const UpdateCourse = async (req, res) => {
 }
 
 const DeleteCourse = async (req, res) => {
+    const courseId = req.params.id
 
+    await knex('courses').where('course_id', courseId).del()
+
+    HttpStatus.noContent(res)
 }
 
 module.exports = {

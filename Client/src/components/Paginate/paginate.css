@@ -1,6 +1,6 @@
 
 h1 {
-  color: #6c7ac9;
+  color: #6c83fb;
 }
 
 .pagination {
@@ -16,26 +16,34 @@ h1 {
   padding: 10px;
   margin: 10px;
   border-radius: 5px;
-  border: 1px solid #6c7ac9;
-  color: #6c7ac9;
-  width: 50px
+  border: 1px solid #6c83fb;
+  color: #6c83fb;
+  width: 50px;  
+  text-decoration: none;
 }
 
 .pagination__item{
-  min-width: 30px
+  min-width: 30px;
+  color: #6c83fb;
 }
 
 .pagination__link {
+  color: #6c83fb;
   font-weight: bold;
   width: 50px;
 }
 
 .pagination__link--active a {
   color: #fff;
-  background: #6c7ac9;;
+  background: #6c83fb;
 }
 
-.pagination__link--disabled a {
-  color: rgb(198, 197, 202);
-  border: 1px solid rgb(198, 197, 202);
+.pagination__link--disabled a:hover{
+  background-color: #6c83fb;
+  color: white
+}
+
+.pagination a:hover{
+  background-color: #6c83fb;
+  color: white
 }

@@ -1,5 +1,5 @@
-import React from 'react'
-import { Row, Col, Card, Button } from 'reactstrap'
+import React, { useState } from 'react'
+import { Row, Col, Card, Button, Modal, ModalHeader, ModalFooter } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -32,36 +32,73 @@ const CourseTitle = styled.div`
     margin-bottom: 10px
 `
 
-const CourseCardItem = ({ course: c }) => {
+const CourseCost = styled.div`
+    font-size: 25px; 
+    margin-bottom: 10px;
+`
 
-    const { curPageData, setCurrentPage, pageCount } = usePaginate(PER_PAGE, c.classes_in_course)
+const ClassInCourse = ({ classesData }) => {
+    const [classes, setClasses] = useState(classesData)
+    const { curPageData, setCurrentPage, pageCount } = usePaginate(PER_PAGE, classes)
+    const deleteClass = (id) => {
+        setClasses(classes => classes.filter(c => c.class_id !== id))
+    }
     return (
-        <Card key={c.course_id} className='d-flex flex-column mb-3 p-3'>
-            <Row>
-                <Col xs={2}>
-                    <CourseTitle><b>Course: </b>{c.course_id}</CourseTitle>
-                    {/* <CourseFee>{c.fee}</CourseFee> */}
-                </Col>
-                <Col xs={8}>
-                    <Link className='btn btn-warning mr-2' to={`/classes/edit-course/${c.course_id}`}>Edit</Link>
-                    <Button color='danger'>Delete</Button>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    {c.description}
-                </Col>
-            </Row>
+        <Col>
             <Row>
                 {curPageData.map((classItem, index) => {
                     classItem.img = classImagesList[index % 7 + 1]
 
                     return (<Col className="mb-3" key={classItem.class_id} xl={3} lg={12} md={12}>
-                        <ClassCardItem classItem={classItem} />
+                        <ClassCardItem classItem={classItem} deleteClass={() => deleteClass(classItem.class_id)}/>
                     </Col>)
                 })}
             </Row>
-            <Paginate setCurrentPage={setCurrentPage} pageCount={pageCount} />
+            <Row style={{display: 'flex', justifyContent: 'center'}}>
+                <Paginate setCurrentPage={setCurrentPage} pageCount={pageCount} />
+            </Row>
+        </Col>
+    )
+}
+
+const CourseCardItem = ({ course: c, deleteCourse }) => {
+    
+    const [modal, setModal] = useState(false);
+    const toggle = () => setModal(!modal);
+
+    const deleteAndToggle = () => {
+        deleteCourse()
+        toggle()
+    }
+
+    return (
+        <Card key={c.course_id} className='d-flex flex-column mb-3 p-3'>
+            <Row>
+                <Col xs={4}>
+                    <CourseTitle><b>COURSE: </b>{c.course_id}</CourseTitle>
+                    <CourseCost><b>Cost:</b> {c.fee}</CourseCost>
+                </Col>
+                <Col xs={8}>
+                    <Link className='btn btn-warning mr-2' to={`/classes/edit-course/${c.course_id}`}>Edit</Link>
+                    <Button color='danger' onClick={toggle}>Delete</Button>
+                    <Modal isOpen={modal} toggle={toggle}>
+                        <ModalHeader toggle={toggle}>Do you want to delete?</ModalHeader>
+                        <ModalFooter>
+                            <Button color="danger" onClick={deleteAndToggle}>Delete</Button>{' '}
+                            <Button color="warning" onClick={toggle}>Cancel</Button>
+                        </ModalFooter>
+                    </Modal>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <CourseCost><b>Description:</b></CourseCost>
+                    {c.description}
+                </Col>
+            </Row>
+            <Row>
+                <ClassInCourse classesData={c.classes_in_course} />
+            </Row>
         </Card>
     )
 }

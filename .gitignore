@@ -1,2 +1,5 @@
 Server/node_modules
 Client/node_modules
+.git
+Client/.git
+Server/.git

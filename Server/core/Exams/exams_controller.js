@@ -70,8 +70,12 @@ const EditExam = async (req, res) => {
     })
 }
 
-const RemoveExam = (req, res) => {
+const RemoveExam = async (req, res) => {
+    const examId = req.params.id
 
+    await knex('exams').where('exam_id', examId).del()
+
+    HttpStatus.noContent(res)
 }
 
 module.exports = {

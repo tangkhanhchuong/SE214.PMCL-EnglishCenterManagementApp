@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useQuery } from 'react-query'
 
 import Page from 'components/Page'
@@ -7,25 +7,30 @@ import PageSpinner from 'components/PageSpinner'
 
 import CourseCardItem from "../components/CourseCardItem"
 
-const ClassesList = () => {
-    const { data, isLoading } = useQuery('courses', Courses.list)
+const CoursesList = ({coursesData}) => {
+    const [courses, setCourses] = useState(coursesData)
 
-    if (isLoading) return <PageSpinner />
-
-    const coursesData = data.data.data.courses
+    const deleteCourse = (id) => {
+        setCourses(courses => courses.filter(c => c.course_id !== id))
+    }
 
     return (
-        coursesData.map(c => <CourseCardItem course={c} key={c.course_id} />)
+        courses.map(c => <CourseCardItem course={c} key={c.course_id} deleteCourse={() => deleteCourse(c.course_id)} />)
     )
 }
 
 const ClassesPage = () => {
+    const { data, isLoading } = useQuery('courses', Courses.list)
+    const coursesData = data ? data.data.data.courses : []
+
     return (
         <Page
             breadcrumbs={[{ name: 'My Classes' }]}
             title="All Classes"
         >
-            <ClassesList />
+            {
+                isLoading ? <PageSpinner /> : <CoursesList coursesData={coursesData} />
+            }
         </Page>
     )
 }

@@ -31,29 +31,23 @@ const generateStudentSidebar = () => {
         {
             to: '/students', name: 'Students', exact: true, Icon: FaUserGraduate, children: [
                 { to: '/students', name: 'View Students', exact: true, Icon: FaUserGraduate },
-                // { to: '/students/add', name: 'Add Student', exact: true, Icon: FaUserGraduate },
-                // { to: '/students/pay-tuition', name: 'Pay Tuition', exact: true, Icon: FaUserGraduate }
             ]
         },
         {
             to: '/instructors', name: 'Instructors', exact: true, Icon: FaChalkboardTeacher, children: [
                 { to: '/instructors', name: 'View Instructors', exact: true, Icon: FaChalkboardTeacher },
-                // { to: '/instructors/add', name: 'Add Instructor', exact: true, Icon: FaChalkboardTeacher }
             ]
         },
         {
             to: '/classes', name: 'Courses', exact: true, Icon: FaGraduationCap, children: [
                 { to: '/classes', name: 'View Classes', exact: true, Icon: FaGraduationCap },
-                // { to: '/classes/add', name: 'Add Class', exact: true, Icon: FaGraduationCap },
-                // { to: '/classes/add-course', name: 'Add Course', exact: true, Icon: FaGraduationCap }
             ]
         },
-        {
-            to: '/exams', name: 'Exams', exact: true, Icon: FaChalkboardTeacher, children: [
-                { to: '/exams', name: 'View Exams', exact: true, Icon: FaChalkboardTeacher },
-                // { to: '/exams/add', name: 'Add Exams', exact: true, Icon: FaChalkboardTeacher },
-            ]
-        },
+        // {
+        //     to: '/exams', name: 'Exams', exact: true, Icon: FaChalkboardTeacher, children: [
+        //         { to: '/exams', name: 'View Exams', exact: true, Icon: FaChalkboardTeacher },
+        //     ]
+        // },
         {
             to: '/notifications', name: 'Notifications', exact: true, Icon: MdNotifications
         },
@@ -70,23 +64,18 @@ const generateInstructorSidebar = () => {
         {
             to: '/students', name: 'Students', exact: true, Icon: FaUserGraduate, children: [
                 { to: '/students', name: 'View Students', exact: true, Icon: FaUserGraduate },
-                // { to: '/students/add', name: 'Add Student', exact: true, Icon: FaUserGraduate },
-                // { to: '/students/pay-tuition', name: 'Pay Tuition', exact: true, Icon: FaUserGraduate }
             ]
         },
         {
             to: '/classes', name: 'Courses', exact: true, Icon: FaGraduationCap, children: [
                 { to: '/classes', name: 'View Classes', exact: true, Icon: FaGraduationCap },
-                // { to: '/classes/add', name: 'Add Class', exact: true, Icon: FaGraduationCap },
-                // { to: '/classes/add-course', name: 'Add Course', exact: true, Icon: FaGraduationCap }
             ]
         },
-        {
-            to: '/exams', name: 'Exams', exact: true, Icon: FaChalkboardTeacher, children: [
-                { to: '/exams', name: 'View Exams', exact: true, Icon: FaChalkboardTeacher },
-                // { to: '/exams/add', name: 'Add Exams', exact: true, Icon: FaChalkboardTeacher },
-            ]
-        },
+        // {
+        //     to: '/exams', name: 'Exams', exact: true, Icon: FaChalkboardTeacher, children: [
+        //         { to: '/exams', name: 'View Exams', exact: true, Icon: FaChalkboardTeacher },
+        //     ]
+        // },
         {
             to: '/notifications', name: 'Notifications', exact: true, Icon: MdNotifications
         },
@@ -120,12 +109,12 @@ const generateManagerSidebar = () => {
                 { to: '/classes/add-course', name: 'Add Course', exact: true, Icon: FaGraduationCap }
             ]
         },
-        {
-            to: '/exams', name: 'Exams', exact: true, Icon: FaChalkboardTeacher, children: [
-                { to: '/exams', name: 'View Exams', exact: true, Icon: FaChalkboardTeacher },
-                { to: '/exams/add', name: 'Add Exams', exact: true, Icon: FaChalkboardTeacher },
-            ]
-        },
+        // {
+        //     to: '/exams', name: 'Exams', exact: true, Icon: FaChalkboardTeacher, children: [
+        //         { to: '/exams', name: 'View Exams', exact: true, Icon: FaChalkboardTeacher },
+        //         { to: '/exams/add', name: 'Add Exams', exact: true, Icon: FaChalkboardTeacher },
+        //     ]
+        // },
         {
             to: '/notifications', name: 'Notifications', exact: true, Icon: MdNotifications
         },

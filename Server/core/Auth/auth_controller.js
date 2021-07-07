@@ -17,15 +17,26 @@ const _checkIfUsernameNotExisted = async (username) => {
     return user
 }
 
-const _checkIfUsernameExisted = async (email) => {
-    let user = await Account.find({ username })
+const _checkIfUsernameExisted = async (username) => {
+    let user = await AuthServices.FindAccounts({ username })
     if (user.length > 0)
         throwError(HttpStatusCode.FORBIDDEN, "username already exists !")
     return user
 }
 
+const getAccounts = async (req, res) =>{
+    const userInfo = await db('accounts')
+            .select()
+    res.status(200).json(userInfo)
+}
+
 const logIn = async (req, res, next) => {
     const { username, password } = req.body
+    if(!username || !password) {
+        return res.status(401).json({
+            message: 'Invalid username or password!'
+        })
+    }
 
     try {
         const [foundAccount] = await _checkIfUsernameNotExisted(username)
@@ -71,24 +82,21 @@ const logIn = async (req, res, next) => {
 }
 
 const register = async (req, res, next) => {
-    const { email, username, password } = req.body
+    const { username, password } = req.body
 
     try {
-        await _checkIfUsernameExisted(email)
+        await _checkIfUsernameExisted(username)
 
         const hashedPassword = await hashPassword(password)
         // const newUser = await Account.create({ email, username, password: hashedPassword })
-        const newAccount = await AuthServices.CreateAccount({ email, username, password: hashedPassword })
-        HttpStatus.created(res, newUser)
-
-        // const receiverMail = ["chuongbro2104@gmail.com", "tangkhanhchuong@gmail.com"]
-        // const content = `<h1>sign in successfully</h1>`
-        // sendMail("sendgrid", {
-        //     receiverMail: receiverMail,
-        //     mailContent: content
-        // })
+        const newAccount = await db('accounts')
+            .insert({ username, password: hashedPassword, info_id: 3, role_id: 3, account_id: Math.random().toString().split('.')[1].slice(0, 5) })
+            .returning("*")
+        console.log(newAccount)
+        HttpStatus.created(res, newAccount)
     }
     catch (err) {
+        console.log(err)
         next(err)
     }
 }
@@ -108,4 +116,4 @@ const getAccessTokenByRefreshToken = (req, res) => {
     HttpStatus.ok(res, { accessToken: accessToken })
 }
 
-module.exports = { logIn, register, logout, getAccessTokenByRefreshToken }
+module.exports = { logIn, register, logout, getAccessTokenByRefreshToken, getAccounts }

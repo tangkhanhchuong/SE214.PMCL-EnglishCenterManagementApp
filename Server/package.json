@@ -4,9 +4,9 @@
   "description": "",
   "main": "./core/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node core/server.js",
     "dev": "set NODE_ENV=dev&&nodemon core/server.js",
+    "test": "npx jest",
     "migrate": "knex migrate:latest --knexfile core/Database/knexfile.js",
     "undo-migrate": "knex migrate:rollback --knexfile core/Database/knexfile.js",
     "re-migrate": "npm run undo-migrate && npm run migrate",
@@ -46,6 +46,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "nodemon": "^1.18.4"
+    "nodemon": "^1.18.4",
+    "supertest": "^6.1.3"
   }
 }

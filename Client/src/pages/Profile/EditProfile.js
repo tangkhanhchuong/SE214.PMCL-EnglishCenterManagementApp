@@ -100,7 +100,6 @@ const EditForm = ({ student }) => {
                                 component={InputField}
                                 label='Phone'
                                 value={phone}
-                                type="phone"
                             />
                             <FastField
                                 name='email'
@@ -124,6 +123,7 @@ const EditForm = ({ student }) => {
 }
 
 const EditStudentPage = () => {
+
     const currentStudentId = useRouteMatch().params.studentId
 
     const { data, isLoading } = useQuery('student_details', Students.details.bind(this, currentStudentId))

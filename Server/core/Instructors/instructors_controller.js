@@ -78,8 +78,13 @@ const EditInstructor = async (req, res) => {
     })
 }
 
-const RemoveInstructor = (req, res) => {
+const RemoveInstructor = async (req, res) => {
+    const instructorId = req.params.id
 
+    await knex('instructor_class').where('instructor_id', instructorId).del()
+    await knex('instructors').where('instructor_id', instructorId).del()
+
+    HttpStatus.noContent(res)
 }
 
 module.exports = {

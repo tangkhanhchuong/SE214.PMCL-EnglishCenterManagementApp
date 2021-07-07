@@ -18,7 +18,6 @@ const FormStatus = {
 const AuthForm = (props) => {
 
   const dispatch = useDispatch()
-  const history = useHistory()
   const { sendRequest } = useHttpClient()
 
   let [formStatus, setFormStatus] = useState(FormStatus.DEFAULT)
@@ -52,17 +51,18 @@ const AuthForm = (props) => {
   }
 
 
-  let handleSubmit = event => {
+  const handleSubmit = event => {
     setFormStatus(FormStatus.LOADING)
     event.preventDefault()
-    let email = event.target["email"].value
-    let password = event.target["password"].value
-    let authType = isSignup() ? 'signup' : 'login'
+    const email = event.target["email"]?.value
+    const password = event.target["password"]?.value
+    const username = event.target["username"]?.value
+    const authType = isSignup() ? 'signup' : 'login'
     sendRequest(
       `${process.env.REACT_APP_SERVER_BASE_URL}/auth/${authType}`,
       'POST',
       {
-        email, password
+        email, password, username
       },
       {
         'Content-Type': 'application/json'
@@ -128,10 +128,13 @@ const AuthForm = (props) => {
           />
         </div>
       )}
-      <FormGroup>
-        <Label for={emailLabel}>{emailLabel}</Label>
-        <Input {...emailInputProps} />
-      </FormGroup>
+
+      {isSignup() && (
+        <FormGroup>
+          <Label for={confirmPasswordLabel}>{confirmPasswordLabel}</Label>
+          <Input {...confirmPasswordInputProps} />
+        </FormGroup>
+      )}
 
       <FormGroup>
         <Label for={passwordLabel}>{passwordLabel}</Label>

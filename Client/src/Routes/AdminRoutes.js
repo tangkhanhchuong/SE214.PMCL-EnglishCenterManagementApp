@@ -33,7 +33,7 @@ const AdminRoutes = (props) => {
               <Route path="/messages" component={MessagesPages} />
               <Route path="/account" component={ProfilePage} />
               <Route path="/notifications" component={NotificationsPages} />
-              <Route path="/exams" component={ExamsPages} />
+              {/* <Route path="/exams" component={ExamsPages} /> */}
               <Route exact path="/" component={DashboardPage} />
 
               <Route path="/">

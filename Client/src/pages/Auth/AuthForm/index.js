@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap'
 import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import { useHistory } from 'react-router-dom'
 import { useHttpClient } from 'hooks/http-hook'
@@ -13,7 +14,10 @@ const FormStatus = {
     DEFAULT: 1,
     LOADING: 2,
     LOGIN_FAIL: 3,
-    LOGIN_SUCCESSFULLY: 4
+    LOGIN_SUCCESSFULLY: 4,
+    REGISTER_SUCCESSFULLY: 5,
+    REGISTER_FAIL: 6,
+    CONFIRM_PASSWORD_FAIL: 7,
 }
 
 const AuthForm = (props) => {
@@ -22,9 +26,6 @@ const AuthForm = (props) => {
     const { sendRequest } = useHttpClient()
 
     const [formStatus, setFormStatus] = useState(FormStatus.DEFAULT)
-    const [a, setA] = useState("")
-    const [b, setB] = useState("")
-    const [c, setC] = useState("")
 
     const isLogin = () => {
         return props.authState === STATE_LOGIN
@@ -60,20 +61,31 @@ const AuthForm = (props) => {
 
         const username = event.target['username']?.value
         const password = event.target['password']?.value
+        const confirmPw = event.target['repassword']?.value
         const authType = isSignup() ? 'signup' : 'login'
+
+        if(isSignup() && password !== confirmPw)  return setFormStatus(FormStatus.CONFIRM_PASSWORD_FAIL)
         
-        axios.post(`${process.env.REACT_APP_SERVER_BASE_URL}/auth/${authType}`, { username, password})
+        
+        axios.post(`${process.env.REACT_APP_SERVER_BASE_URL}/auth/${authType}`, { username, password, email: "khanhchuong@gmail.com" })
             .then((response) => {
                 return response.data
             })
             .then((response) => {
-                LoginSuccessfully(response)
-                setFormStatus(FormStatus.LOGIN_SUCCESSFULLY)
+                if(authType === 'login') {
+                    LoginSuccessfully(response)
+                    setFormStatus(FormStatus.LOGIN_SUCCESSFULLY)
+                    return
+                }
+                setFormStatus(FormStatus.REGISTER_SUCCESSFULLY)
             })
             .catch((error) => {
-                setFormStatus(FormStatus.LOGIN_FAIL)
-            })
-            
+                if(authType === 'login') {
+                    setFormStatus(FormStatus.LOGIN_FAIL)
+                    return
+                }
+                setFormStatus(FormStatus.REGISTER_FAIL)
+            }) 
     }
 
     const renderButtonText = () => {
@@ -120,19 +132,19 @@ const AuthForm = (props) => {
                 </div>
             )}
             <FormGroup>
-                <Label for={usernameLabel}>{usernameLabel}</Label>
-                <Input {...usernameInputProps} value={a} default="admin" onChange={(e)=>{setA(e.target.value)}} />
+                <Label for="username">{usernameLabel}</Label>
+                <Input {...usernameInputProps} default="admin" />
             </FormGroup>
 
             <FormGroup>
                 <Label for={passwordLabel}>{passwordLabel}</Label>
-                <Input  {...passwordInputProps} value={b} default="password"  onChange={(e)=>{setB(e.target.value)}} /> 
+                <Input  {...passwordInputProps} default="password" /> 
             </FormGroup>
 
             {isSignup() && (
                 <FormGroup>
-                    <Label for={confirmPasswordLabel}>{confirmPasswordLabel}</Label>
-                    <Input {...confirmPasswordInputProps} />
+                    <Label for="confirm">{confirmPasswordLabel}</Label>
+                    <Input {...confirmPasswordInputProps} default="password" />
                 </FormGroup>
             )}
 
@@ -145,6 +157,22 @@ const AuthForm = (props) => {
             <div data-testid="success-msg">
                 {formStatus === FormStatus.LOGIN_FAIL && <><br /><font color="red">Username or Password is incorrect !</font></>}
                 {formStatus === FormStatus.LOGIN_SUCCESSFULLY && <><br /><font color="green">Login successfully, please wait ...</font></>}
+                {formStatus === FormStatus.REGISTER_SUCCESSFULLY && (
+                    <div style={{display: 'flex', flexDirection: 'column'}}>
+                        <br /><font color="green">Your account are created !</font>
+                        <Link
+                            size="lg"
+                            block
+                            className="btn btn-primary"
+                            to="/login"
+                        >
+                            Return to login
+                        </Link>
+                    </div>
+                )} 
+                {formStatus === FormStatus.CONFIRM_PASSWORD_FAIL && <><br /><font color="red">Password and confirm password are different!</font></>}
+                {formStatus === FormStatus.REGISTER_FAIL && <><br /><font color="red">Invalid username or password!</font></>}
+
             </div>
             <hr />
 

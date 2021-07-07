@@ -88,6 +88,7 @@ const AddStudentPage = () => {
                                         name='phone'
                                         component={InputField}
                                         label='Phone'
+                                        type="phone"
                                     />
                                     <FastField
                                         name='email'

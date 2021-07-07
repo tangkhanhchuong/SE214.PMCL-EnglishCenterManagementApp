@@ -100,6 +100,7 @@ const EditForm = ({ instructor }) => {
                                 component={InputField}
                                 label='Phone'
                                 value={phone}
+                                type="phone"
                             />
                             <FastField
                                 name='email'

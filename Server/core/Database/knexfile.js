@@ -7,7 +7,8 @@ module.exports = {
       database: 'postgres',
       user: 'postgres',
       password: '@tb@$h2io4',
-      host: 'localhost'
+      host: 'localhost', 
+      ssl: false
     },
     migrations: {
       directory: './migrations'

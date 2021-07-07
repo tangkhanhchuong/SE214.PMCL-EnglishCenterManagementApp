@@ -15,7 +15,7 @@ const InputField = (props) => {
             <div>
                 {label ? <span className="mr-3"><Label className="mr-3">{label}</Label></span> : ''}
                 <Input
-                    spellcheck={false}
+                    spellCheck={false}
                     id={name}
                     placeholder={placeholder}
                     type={type}
@@ -33,7 +33,9 @@ const InputField = (props) => {
     const onNumberInputChange = (e) => {
         const value = e.target.value
         const lastChar = value[value.length - 1]
-        if (isNaN(parseInt(lastChar))) e.target.value = value.slice(0, -1)
+        if (isNaN(parseInt(lastChar)) || e.target.value.length > 11) {
+            e.target.value = value.slice(0, -1)
+        }
     }
 
     return (
@@ -46,7 +48,7 @@ const InputField = (props) => {
                 disabled={disabled}
                 name={name}
                 onBlur={onBlur}
-                onChange={type === 'number' ? onNumberInputChange : onChange}
+                onChange={type === 'phone' ? onNumberInputChange : onChange}
                 defaultValue={value}
             />
         </FormGroup>

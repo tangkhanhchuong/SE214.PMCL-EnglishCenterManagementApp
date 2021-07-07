@@ -67,7 +67,11 @@ const EditMaterial = async (req, res) => {
 }
 
 const DeleteMaterial = () => {
+    const materialId = req.params.id
 
+    await knex('materials').where('material_id', materialId).del()
+
+    HttpStatus.noContent(res)
 }
 
 module.exports = {

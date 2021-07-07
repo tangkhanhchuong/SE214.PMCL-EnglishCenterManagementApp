@@ -11,6 +11,7 @@ const GetStudents = async (req, res) => {
         })
     }
     catch(err){
+        console.log(err)
         res.json(err)
     }
 }
@@ -85,8 +86,13 @@ const EditStudent = async (req, res) => {
     })
 }
 
-const RemoveStudent = (req, res) => {
+const RemoveStudent = async (req, res) => {
+    const studentId = req.params.id
 
+    await knex('student_class').where('student_id', studentId).del()
+    await knex('students').where('student_id', studentId).del()
+
+    HttpStatus.noContent(res)
 }
 
 const PayTuition = async (req, res) => {

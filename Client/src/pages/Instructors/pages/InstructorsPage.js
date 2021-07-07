@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useQuery } from 'react-query'
 import {
     Card, Table, Label,
@@ -21,20 +21,20 @@ const columTitles = [
     "#", "Full Name", "Avatar", "Instructor Id", "Gender", "Is Studying", "Actions"
 ]
 
-const AllInstructorsPage = () => {
-    const { data, isLoading } = useQuery('instructors', Instructors.list)
+const AllInstructors = ({ instructorsData }) => {
+    const [instructors, setInstructors] = useState(instructorsData)
+    const { curPageData, setCurrentPage, pageCount } = usePaginate(PER_PAGE, instructors)
 
-    const instructorsData = data ? data.data.data.instructors : []
-    const { curPageData, setCurrentPage, pageCount } = usePaginate(PER_PAGE, instructorsData)
+    const deleteInstructor = (id) => {
+        setInstructors(instructors => instructors.filter(s => s.instructor_id !== id))
+    }
 
     let getAllInstructors = () => {
-        if (!data) return <></>
-
         if (!curPageData || curPageData.length === 0) return <></>
         return (
             curPageData.map((row, index) => {
                 return (
-                    <InstructorRow key={index} instructor={row} index={index} />
+                    <InstructorRow key={index} instructor={row} index={index} deleteInstructor={() => deleteInstructor(row.instructor_id) } />
                 )
             })
         )
@@ -46,9 +46,7 @@ const AllInstructorsPage = () => {
             title="ALL INSTRUCTORS"
         >
             {
-                isLoading
-                    ? <PageSpinner />
-                    : (
+                    (
                         <Card className="pl-3 pr-3">
                             <CardHeader>
                                 <div className="d-flex flex-row justify-content-between">
@@ -88,6 +86,15 @@ const AllInstructorsPage = () => {
             }
         </Page >
     )
+}
+
+const AllInstructorsPage = () => {
+    const { data, isLoading } = useQuery('instructors', Instructors.list)
+
+    const instructorsData = data ? data.data.data.instructors : []
+
+    if(isLoading)   return <PageSpinner />
+    return <AllInstructors instructorsData={instructorsData} />
 }
 
 export default AllInstructorsPage
